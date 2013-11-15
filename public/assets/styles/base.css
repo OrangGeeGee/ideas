@@ -1,0 +1,24 @@
+
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font: 10pt Segoe UI, sans-serif;
+  background: url('../images/background.jpg')
+}
+
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+body {
+  margin: 40px;
+  width: 500px;
+}

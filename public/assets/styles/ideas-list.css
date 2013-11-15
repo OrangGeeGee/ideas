@@ -1,0 +1,41 @@
+
+#ideas-list {
+  list-style: none;
+}
+
+#ideas-list > li {
+  position: relative;
+  padding-left: 90px;
+  margin-bottom: 20px;
+}
+
+#ideas-list h3:first-child {
+  margin-top: -5px;
+}
+
+.idea-author {
+  position: absolute;
+  color: #666;
+  width: 75px;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  font-size: 9pt;
+}
+
+.idea-author img {
+  display: block;
+  max-width: 50px;
+  margin: auto;
+  border-radius: 25px;
+}
+
+.idea-content {
+  background-color: #F2F0EA;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.idea-content p {
+  white-space: pre-line;
+}
