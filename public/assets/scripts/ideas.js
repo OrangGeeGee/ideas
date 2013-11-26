@@ -48,7 +48,12 @@ var IdeaView = Backbone.View.extend({
   template: _.template($('#idea-template').html()),
 
   render: function() {
-    return this.$el.html(this.template(this.model.toJSON()));
+    var randomUserId = Math.ceil(Math.random() * 4);
+
+    this.$el.html(this.template(this.model.toJSON()));
+    this.$('img').attr('src', 'assets/images/' + randomUserId + '.jpg');
+
+    return this.$el;
   }
 });
 

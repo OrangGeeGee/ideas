@@ -19,7 +19,7 @@
 
   <script type="text/html" id="idea-template">
     <div class="idea-author">
-      <img src="assets/images/user.jpg"/>
+      <img/>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="idea-content">
