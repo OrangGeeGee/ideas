@@ -5,6 +5,14 @@
   width: 49%;
 }
 
+#comment-list > li:first-child {
+  padding-left: 0px;
+}
+
+#comment-list textarea {
+  height: 100px;
+}
+
 #comment-list .entry-content {
   white-space: pre-line;
 }

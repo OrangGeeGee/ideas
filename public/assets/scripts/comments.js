@@ -44,17 +44,18 @@ var CommentListView = Backbone.View.extend({
 
   renderComment: function(comment) {
     var view = new CommentView({ model: comment });
-    view.render().prependTo(this.$el);
+    view.render().insertAfter(this.$form.parent());
   },
 
   initialize: function() {
     var modal = Modals.open('comments').empty();
 
     modal.setTitle(this.model.get('title'));
-    modal.$body
-      .append(new CommentFormView({ model: this.model }).render())
-      .append(this.$el);
+    modal.setContent(this.$el);
     modal.resize();
+
+    this.$form = new CommentFormView({ model: this.model }).render();
+    this.$form.wrap('<li>').parent().appendTo(this.$el);
 
     Comments
       .where({ idea_id: this.model.id })
