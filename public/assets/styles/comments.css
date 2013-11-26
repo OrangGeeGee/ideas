@@ -4,3 +4,7 @@
   margin: 0.5%;
   width: 49%;
 }
+
+#comment-list .entry-content {
+  white-space: pre-line;
+}
