@@ -1,5 +1,16 @@
 
+h2,
 h3 {
-  font-size: 18pt;
+  font-family: Segoe UI Light, Arial, sans-serif;
   font-weight: normal;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.1em;
 }

@@ -1,7 +1,9 @@
 
 var Ideas = new Collection('ideas', function() {
   new IdeaFormView().render().appendTo('body');
-  new IdeaListView({ collection: Ideas }).$el.appendTo('body');
+  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
+
+  $ideasList.before('<h2>Viimased ideed</h2>');
 });
 
 Ideas.comparator = function(idea1, idea2) {
