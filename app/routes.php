@@ -17,3 +17,4 @@ Route::get('/', function()
 });
 
 Route::resource('ideas', 'IdeaController');
+Route::resource('comments', 'CommentController');

@@ -1,0 +1,43 @@
+
+.entry-list {
+  list-style: none;
+}
+
+.entry-list > li {
+  position: relative;
+  padding-left: 90px;
+}
+
+.entry-list > li + li {
+  border-top: 2px dotted #777;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.entry-list h3 + p {
+  margin-top: 5px;
+}
+
+.entry-author {
+  position: absolute;
+  color: #666;
+  width: 80px;
+  left: 0px;
+  text-align: center;
+  font-size: 9pt;
+}
+
+.entry-author img {
+  display: block;
+  max-width: 50px;
+  margin: auto;
+  border-radius: 25px;
+}
+
+.entry-content {
+  padding: 10px 15px;
+}
+
+.entry-content p {
+  white-space: pre-line;
+}

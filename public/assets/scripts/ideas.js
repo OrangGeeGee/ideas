@@ -1,7 +1,7 @@
 
 var Ideas = new Collection('ideas', function() {
-  new IdeaFormView().render().appendTo('body');
-  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
+  new IdeaFormView().render().appendTo('#left-side');
+  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('#left-side');
 
   $ideasList.before('<h2>Viimased ideed</h2>');
 });
@@ -49,6 +49,16 @@ var IdeaView = Backbone.View.extend({
   tagName: 'li',
   template: _.template($('#idea-template').html()),
 
+  events: {
+    'click .entry-content': 'openIdea'
+  },
+
+  openIdea: function() {
+    var commentList = new CommentListView({ model: this.model });
+
+    commentList.$el.before('<h2>Kommentaarid</h2>')
+  },
+
   render: function() {
     var randomUserId = Math.ceil(Math.random() * 4);
 
@@ -64,6 +74,7 @@ var IdeaView = Backbone.View.extend({
 var IdeaListView = Backbone.View.extend({
   tagName: 'ul',
   id: 'ideas-list',
+  className: 'entry-list',
 
   renderIdea: function(idea) {
     var view = new IdeaView({ model: idea });
