@@ -42,7 +42,9 @@
       <img/>
       <%= moment(created_at).fromNow() %>
     </div>
-    <div class="entry-content"><%= text %></div>
+    <div class="entry-content">
+      <p><%= text %></p>
+    </div>
   </script>
 
   <!-- Dependencies -->

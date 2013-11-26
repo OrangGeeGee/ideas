@@ -50,7 +50,6 @@ var CommentListView = Backbone.View.extend({
   initialize: function() {
     var modal = Modals.open('comments').empty();
 
-    modal.setTitle(this.model.get('title'));
     modal.setContent(this.$el);
     modal.resize();
 
@@ -66,6 +65,16 @@ var CommentListView = Backbone.View.extend({
         this.renderComment(comment);
       }
     }, this);
+
+    // Set the original idea as the first comment.
+    var comment = new Comments.model({
+      text: this.model.get('description'),
+      created_at: this.model.get('created_at')
+    });
+    var $comment = new CommentView({ model: comment }).render();
+
+    $comment.find('p').before('<h3>' + this.model.get('title') + '</h3>');
+    $comment.prependTo(this.$el);
   }
 });
 
