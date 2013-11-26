@@ -22,6 +22,11 @@
     <input type="submit" value="Lisa idee"/>
   </script>
 
+  <script type="text/html" id="comment-form-template">
+    <textarea name="text" placeholder="Kommentaar"></textarea>
+    <input type="submit" value="Lisa kommentaar"/>
+  </script>
+
   <script type="text/html" id="idea-template">
     <div class="entry-author">
       <img/>

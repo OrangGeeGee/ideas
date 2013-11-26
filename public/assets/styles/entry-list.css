@@ -5,13 +5,15 @@
 
 .entry-list > li {
   position: relative;
-  padding-left: 90px;
+  padding-left: 100px;
+  min-height: 60px;
 }
 
 .entry-list > li + li {
   border-top: 2px dotted #777;
   margin-top: 20px;
   padding-top: 20px;
+  min-height: 80px;
 }
 
 .entry-list h3 + p {
@@ -20,11 +22,11 @@
 
 .entry-author {
   position: absolute;
-  color: #666;
-  width: 80px;
+  color: #444;
+  width: 100px;
   left: 0px;
   text-align: center;
-  font-size: 9pt;
+  font-size: 8pt;
 }
 
 .entry-author img {

@@ -19,7 +19,8 @@ class CommentController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$data = Input::get();
+    return Comment::create($data);
 	}
 
 	/**
