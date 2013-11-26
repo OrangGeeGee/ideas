@@ -1,7 +1,14 @@
 
+#ideas-list > li {
+  width: 32%;
+  margin: 0.5%;
+  float: left;
+}
+
 #ideas-list .entry-content {
   cursor: pointer;
-  background: #D0E0F5 no-repeat 99% 5px;
+  background-position: 99% 5px;
+  background-repeat: no-repeat;
   border-radius: 10px;
 }
 

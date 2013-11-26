@@ -6,13 +6,6 @@
 .entry-list > li {
   position: relative;
   padding-left: 100px;
-  min-height: 60px;
-}
-
-.entry-list > li + li {
-  border-top: 2px dotted #777;
-  margin-top: 20px;
-  padding-top: 20px;
   min-height: 80px;
 }
 
@@ -38,6 +31,8 @@
 
 .entry-content {
   padding: 10px 15px;
+  background-color: #D0E0F5;
+  border-radius: 10px;
 }
 
 .entry-content p {

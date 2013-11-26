@@ -48,9 +48,13 @@ var CommentListView = Backbone.View.extend({
   },
 
   initialize: function() {
-    $('#right-side').empty().append(this.$el).show();
+    var modal = Modals.open('comments').empty();
 
-    new CommentFormView({ model: this.model }).render().insertBefore(this.$el);
+    modal.setTitle(this.model.get('title'));
+    modal.$body
+      .append(new CommentFormView({ model: this.model }).render())
+      .append(this.$el);
+    modal.resize();
 
     Comments
       .where({ idea_id: this.model.id })

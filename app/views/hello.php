@@ -9,11 +9,10 @@
   <link href="assets/styles/idea-form.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/ideas-list.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/entry-list.css" type="text/css" rel="stylesheet">
+  <link href="assets/styles/comments.css" type="text/css" rel="stylesheet">
+  <link href="assets/plugins/modals/modals.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-
-  <div id="left-side"></div>
-  <div id="right-side"></div>
 
   <!-- Templates -->
   <script type="text/html" id="idea-form-template">
@@ -43,9 +42,7 @@
       <img/>
       <%= moment(created_at).fromNow() %>
     </div>
-    <div class="entry-content">
-      <%= text %>
-    </div>
+    <div class="entry-content"><%= text %></div>
   </script>
 
   <!-- Dependencies -->
@@ -56,6 +53,8 @@
   <script src="assets/scripts/backbone/underscore-1.5.2.js"></script>
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/collection.js"></script>
+  <script src="assets/plugins/modals/modals.js"></script>
+  <script src="assets/plugins/viewport.js"></script>
 
   <!-- App files -->
   <script src="assets/scripts/ideas.js"></script>

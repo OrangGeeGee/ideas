@@ -9,7 +9,8 @@
 
 body {
   font: 10pt Segoe UI, sans-serif;
-  background: url('../images/background.jpg')
+  background: url('../images/background.jpg');
+  margin: 40px;
 }
 
 input,

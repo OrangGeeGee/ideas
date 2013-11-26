@@ -1,7 +1,7 @@
 
 var Ideas = new Collection('ideas', function() {
-  new IdeaFormView().render().appendTo('#left-side');
-  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('#left-side');
+  new IdeaFormView().render().appendTo('body');
+  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
 
   $ideasList.before('<h2>Viimased ideed</h2>');
 });
@@ -55,8 +55,6 @@ var IdeaView = Backbone.View.extend({
 
   openIdea: function() {
     var commentList = new CommentListView({ model: this.model });
-
-    commentList.$el.before('<h2>Kommentaarid</h2>')
   },
 
   render: function() {
