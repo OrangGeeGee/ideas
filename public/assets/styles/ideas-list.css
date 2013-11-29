@@ -14,3 +14,21 @@
 #ideas-list .entry-content:hover {
   background-image: url('../images/right-arrow.png');
 }
+
+@media (max-width: 800px) {
+  #ideas-list > li {
+    width: 99%;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1100px) {
+  #ideas-list > li {
+    width: 49%;
+  }
+}
+
+@media (min-width: 1700px) {
+  #ideas-list > li {
+    width: 24%;
+  }
+}

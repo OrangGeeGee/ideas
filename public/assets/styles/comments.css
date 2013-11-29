@@ -15,3 +15,9 @@
 #comment-list .entry-content p {
   white-space: pre-line;
 }
+
+@media (max-width: 800px) {
+  #comment-list > li {
+    width: 99%;
+  }
+}
