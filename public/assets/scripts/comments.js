@@ -51,7 +51,12 @@ var CommentListView = Backbone.View.extend({
     var modal = Modals.open('comments').empty();
 
     modal.setContent(this.$el);
-    modal.resize();
+
+    // TODO:
+    // Find a more foolproof solution for centering the modal.
+    setTimeout(function() {
+      modal.resize();
+    });
 
     this.$form = new CommentFormView({ model: this.model }).render();
     this.$form.wrap('<li>').parent().appendTo(this.$el);
