@@ -65,6 +65,10 @@ var IdeaView = Backbone.View.extend({
     this.$el.html(this.template(data));
     this.$('img').attr('src', 'assets/images/' + randomUserId + '.jpg');
 
+    if ( this.model.get('status_id') == 1 ) {
+      this.$el.addClass('finished');
+    }
+
     return this.$el;
   }
 });
