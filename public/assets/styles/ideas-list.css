@@ -15,6 +15,22 @@
   background-image: url('../images/right-arrow.png');
 }
 
+.entry-data {
+  list-style: none;
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dotted #555;
+}
+
+.entry-data li {
+  background: no-repeat left;
+  padding-left: 30px;
+}
+
+.entry-data li.comments {
+  background-image: url('../images/comments.png');
+}
+
 @media (max-width: 800px) {
   #ideas-list > li {
     width: 99%;

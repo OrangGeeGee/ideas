@@ -59,8 +59,10 @@ var IdeaView = Backbone.View.extend({
 
   render: function() {
     var randomUserId = Math.ceil(Math.random() * 4);
+    var data = this.model.toJSON();
+    data.comments = Comments.where({ idea_id: this.model.id });
 
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(data));
     this.$('img').attr('src', 'assets/images/' + randomUserId + '.jpg');
 
     return this.$el;

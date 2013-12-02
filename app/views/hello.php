@@ -34,6 +34,9 @@
     <div class="entry-content" title="Ava kommentaarid">
       <h3><%= title %></h3>
       <p><%= description %></p>
+      <ul class="entry-data">
+        <li class="comments"><%= comments.length || 'No' %> comments</li>
+      </ul>
     </div>
   </script>
 
