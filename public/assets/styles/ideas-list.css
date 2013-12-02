@@ -6,13 +6,11 @@
 
 #ideas-list .entry-content {
   cursor: pointer;
-  background-position: 99% 5px;
-  background-repeat: no-repeat;
   border-radius: 10px;
 }
 
 #ideas-list .entry-content:hover {
-  background-image: url('../images/right-arrow.png');
+  background-color: #E4E4E2;
 }
 
 .entry-data {
