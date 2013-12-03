@@ -21,7 +21,8 @@ class IdeaController extends \BaseController {
 	{
 		$data = Input::get();
     $idea = new Idea($data);
-    $idea->save();
+
+    Auth::user()->ideas()->save($idea);
 
     return $idea;
 	}

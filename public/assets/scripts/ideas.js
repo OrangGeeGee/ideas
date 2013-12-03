@@ -58,12 +58,11 @@ var IdeaView = Backbone.View.extend({
   },
 
   render: function() {
-    var randomUserId = Math.ceil(Math.random() * 4);
     var data = this.model.toJSON();
     data.comments = Comments.where({ idea_id: this.model.id });
 
     this.$el.html(this.template(data));
-    this.$('img').attr('src', 'assets/images/' + randomUserId + '.jpg');
+    this.$('img').attr('src', USER_PROFILE_IMAGE_PATH + data.user_id + '.jpg');
 
     if ( this.model.get('status_id') == 1 ) {
       this.$el.addClass('finished');

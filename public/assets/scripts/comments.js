@@ -74,7 +74,8 @@ var CommentListView = Backbone.View.extend({
     // Set the original idea as the first comment.
     var comment = new Comments.model({
       text: this.model.get('description'),
-      created_at: this.model.get('created_at')
+      created_at: this.model.get('created_at'),
+      user_id: this.model.get('user_id')
     });
     var $comment = new CommentView({ model: comment }).render();
 
@@ -90,10 +91,10 @@ var CommentView = Backbone.View.extend({
   template: _.template($('#comment-template').html()),
 
   render: function() {
-    var randomUserId = Math.ceil(Math.random() * 4);
+    var data = this.model.toJSON();
 
-    this.$el.html(this.template(this.model.toJSON()))
-    this.$('img').attr('src', 'assets/images/' + randomUserId + '.jpg');
+    this.$el.html(this.template(data));
+    this.$('img').attr('src', USER_PROFILE_IMAGE_PATH + data.user_id + '.jpg');
 
     return this.$el;
   }

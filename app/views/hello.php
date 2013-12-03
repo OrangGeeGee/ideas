@@ -62,6 +62,7 @@
   <script src="assets/plugins/viewport.js"></script>
 
   <!-- App files -->
+  <script>USER_PROFILE_IMAGE_PATH = 'https://workspaces.swedbank.net/project/IDpicture/intranet/';</script>
   <script src="assets/scripts/ideas.js"></script>
   <script src="assets/scripts/comments.js"></script>
 </body>
