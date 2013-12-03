@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 
 class User extends Eloquent implements UserInterface {
-  protected $fillable = array('id');
+  protected $fillable = array('id', 'name', 'email');
 
 	/**
 	 * Get the unique identifier for the user.

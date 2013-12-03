@@ -19,5 +19,6 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::resource('users', 'UserController');
 Route::resource('ideas', 'IdeaController');
 Route::resource('comments', 'CommentController');

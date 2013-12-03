@@ -92,9 +92,9 @@ var CommentView = Backbone.View.extend({
 
   render: function() {
     var data = this.model.toJSON();
+    data.user = Users.get(data.user_id).toJSON();
 
     this.$el.html(this.template(data));
-    this.$('img').attr('src', USER_PROFILE_IMAGE_PATH + data.user_id + '.jpg');
 
     return this.$el;
   }

@@ -26,7 +26,7 @@
 .entry-author img {
   display: block;
   max-width: 50px;
-  margin: auto;
+  margin: auto auto 5px;
 }
 
 .entry-content {
@@ -37,21 +37,4 @@
 
 .entry-content p {
   white-space: pre-line;
-}
-
-
-/** Finished ideas */
-.finished h3 {
-  display: inline;
-  background: url('../images/mark-sign.png') no-repeat right;
-  padding-right: 40px;
-}
-
-.finished .entry-content {
-  background-color: #8FD72D;
-  background-image: linear-gradient(#8FD72D, #6E9F2B);
-}
-
-#ideas-list .finished .entry-content:hover {
-  background: #8FD72D;
 }

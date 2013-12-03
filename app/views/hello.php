@@ -28,7 +28,8 @@
 
   <script type="text/html" id="idea-template">
     <div class="entry-author">
-      <img/>
+      <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
+      <h4><%= user.name.getForename() %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content" title="Ava kommentaarid">
@@ -42,7 +43,8 @@
 
   <script type="text/html" id="comment-template">
     <div class="entry-author">
-      <img/>
+      <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
+      <h4><%= user.name.getForename() %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content">
@@ -58,11 +60,14 @@
   <script src="assets/scripts/backbone/underscore-1.5.2.js"></script>
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/collection.js"></script>
+  <script src="assets/scripts/helpers/array.js"></script>
+  <script src="assets/scripts/helpers/string.js"></script>
   <script src="assets/plugins/modals/modals.js"></script>
   <script src="assets/plugins/viewport.js"></script>
 
   <!-- App files -->
   <script>USER_PROFILE_IMAGE_PATH = 'https://workspaces.swedbank.net/project/IDpicture/intranet/';</script>
+  <script src="assets/scripts/users.js"></script>
   <script src="assets/scripts/ideas.js"></script>
   <script src="assets/scripts/comments.js"></script>
 </body>
