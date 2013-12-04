@@ -1,15 +1,21 @@
 <?php
 
-define('ERR_LDAP_CONNECT', 'Could not connect to LDAP server.');
-define('ERR_LDAP_BIND', 'Error trying to bind: ');
-define('ERR_LDAP_SEARCH', 'Error in search query: ');
+define('GLOBAL_USER_KEY', 'PHP_AUTH_USER');  # Either PHP_AUTH_USER or REMOTE_USER.
+define('LDAP_DOMAIN', '@INT.HANSA.EE');
+define('LDAP_DEFAULT_USER_ID', 'msald');  # Set this to your own for local dev.
+define('LDAP_ERR_CONNECT', 'Could not connect to LDAP server.');
+define('LDAP_ERR_BIND', 'Error trying to bind: %s');
+define('LDAP_ERR_SEARCH', 'Error in search query: %s');
+define('LDAP_ERR_USER_NOT_FOUND', 'User "%s" not found.');
+
 
 /**
  * @param string $message
+ * @param string $details
  * @param int    $code
  */
-function abort($message = '', $code = 404) {
-  App::abort($code, $message);
+function abort($message = '', $details = '', $code = 404) {
+  App::abort($code, sprintf($message, $details));
   exit;
 }
 
@@ -18,9 +24,9 @@ function abort($message = '', $code = 404) {
  * Verify the user.
  * ----------------------------------------------------------------------------
  */
-$userAccountId = ( isset($_SERVER['PHP_AUTH_USER']) )
-  ? str_replace('@INT.HANSA.EE', '', $_SERVER['PHP_AUTH_USER'])  # user@INT.HANSA.EE
-  : 'msald';  # Provide a fallback user for local development.
+$userAccountId = isset($_SERVER[GLOBAL_USER_KEY])
+  ? str_replace(LDAP_DOMAIN, '', $_SERVER[GLOBAL_USER_KEY])
+  : LDAP_DEFAULT_USER_ID;
 
 $config = (object) array(
   'server'     => 'ldap-test.int.hansa.ee',
@@ -29,17 +35,20 @@ $config = (object) array(
   'attributes' => array('displayname', 'mail')
 );
 
-$conn     = ldap_connect($config->server) or abort(ERR_LDAP_CONNECT);
-$binding = ldap_bind($conn) or abort(ERR_LDAP_BIND . ldap_error($conn));
+$conn    = ldap_connect($config->server)
+             or abort(LDAP_ERR_CONNECT);
+$binding = ldap_bind($conn)
+             or abort(LDAP_ERR_BIND, ldap_error($conn));
 $result  = ldap_search($conn, $config->tree, $config->filter, $config->attributes)
-             or abort(ERR_LDAP_SEARCH . ldap_error($conn));
+             or abort(LDAP_ERR_SEARCH, ldap_error($conn));
 $data    = ldap_get_entries($conn, $result);
 
+# Results have been fetched, no more point in keeping the connection open.
 ldap_close($conn);
 
 if ( $data['count'] == 0 )
 {
-  abort("User '$userAccountId' not found.", 301);
+  abort(LDAP_ERR_USER_NOT_FOUND, $userAccountId, 301);
 }
 
 $user = User::find($userAccountId);
@@ -54,7 +63,9 @@ if ( !$user )
   ));
 }
 
-Auth::login($user);
+if ( !Auth::user() )
+{
+  Auth::login($user);
+}
 
-# Timestamp user activity.
-$user->touch();
+$user->touch();  # Timestamp user activity.
