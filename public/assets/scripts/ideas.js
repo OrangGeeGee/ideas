@@ -6,10 +6,6 @@ var Ideas = new Collection('ideas', function() {
   $ideasList.before('<h2>Viimased ideed</h2>');
 });
 
-Ideas.comparator = function(idea1, idea2) {
-  return idea1.get('created_at') < idea2.get('created_at');
-};
-
 
 
 var IdeaFormView = Backbone.View.extend({
@@ -79,13 +75,23 @@ var IdeaListView = Backbone.View.extend({
   id: 'ideas-list',
   className: 'entry-list',
 
-  renderIdea: function(idea) {
+  /**
+   * @param {Backbone.Model} idea
+   * @param {Boolean} [animate=false]
+   */
+  renderIdea: function(idea, animate) {
     var view = new IdeaView({ model: idea });
-    this.$el.append(view.render());
+    var $view = view.render().prependTo(this.$el);
+
+    if ( animate === true ) {
+      $view.hide().show(500);
+    }
   },
 
   initialize: function() {
     this.collection.each(this.renderIdea, this);
-    this.collection.on('add', this.renderIdea, this);
+    this.collection.on('add', function(model) {
+      this.renderIdea(model, true);
+    }, this);
   }
 });
