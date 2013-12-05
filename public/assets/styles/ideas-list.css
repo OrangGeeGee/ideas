@@ -50,8 +50,8 @@
 
 /** Finished ideas */
 .finished .entry-content {
-  background-color: #8FD72D;
-  background-image: linear-gradient(#8FD72D, #6E9F2B);
+  background-color: #A1E741;
+  background-image: linear-gradient(#A1E741, #7FC521);
 }
 
 .finished .entry-content h3 {
