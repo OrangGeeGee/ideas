@@ -64,6 +64,8 @@ var IdeaView = Backbone.View.extend({
       this.$el.addClass('finished');
     }
 
+    this.model.on('change', this.render, this);
+
     return this.$el;
   }
 });

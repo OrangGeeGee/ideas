@@ -1,5 +1,9 @@
 
-var Comments = new Collection('comments');
+var Comments = new Collection('comments', function() {
+  this.on('add', function(model) {
+    Ideas.get(model.get('idea_id')).trigger('change');
+  });
+});
 
 
 

@@ -66,6 +66,5 @@ if ( !$user )
 if ( !Auth::user() )
 {
   Auth::login($user);
+  $user->touch();  # Timestamp user activity.
 }
-
-$user->touch();  # Timestamp user activity.

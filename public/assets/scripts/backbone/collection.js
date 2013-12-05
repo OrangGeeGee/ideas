@@ -13,7 +13,10 @@ function Collection(url, callback) {
   });
 
   queries.push(collection.fetch());
-  $(document).on('initial-data-loaded', callback);
+
+  if ( $.isFunction(callback) ) {
+    $(document).on('initial-data-loaded', callback.bind(collection));
+  }
 
   return collection;
 }
@@ -21,5 +24,15 @@ function Collection(url, callback) {
 $(function() {
   $.when.apply($, queries).done(function() {
     $(document).trigger('initial-data-loaded');
+
+    setInterval(function() {
+      $.getJSON('update', function(response) {
+        $.each(response, function(module, data) {
+          if ( data.length ) {
+            window[module].add(data, { merge: true });
+          }
+        });
+      });
+    }, 5000);
   });
 });

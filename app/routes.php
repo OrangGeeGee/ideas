@@ -22,3 +22,14 @@ Route::get('/', function()
 Route::resource('users', 'UserController');
 Route::resource('ideas', 'IdeaController');
 Route::resource('comments', 'CommentController');
+
+Route::get('update', function()
+{
+  $lastUpdate = Session::get('lastUpdateCheck');
+  Session::put('lastUpdateCheck', date('Y-m-d H:i:s'));
+
+  return array(
+    'Ideas' => Idea::latest($lastUpdate)->get()->toArray(),
+    'Comments' => Comment::latest($lastUpdate)->get()->toArray()
+  );
+});
