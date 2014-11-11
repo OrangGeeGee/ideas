@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<h2>Brainstorm</h2>
-	  <p>{{ $ideaAuthor->name }} just commented on your idea "{{ $comment->idea->title }}":</p>
+	  <p>{{ $user->name }} just commented on your idea "{{ $comment->idea->title }}":</p>
 	  <blockquote>{{ $comment->text }}</blockquote>
 	</body>
 </html>

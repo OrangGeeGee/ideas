@@ -29,7 +29,7 @@ class CommentController extends \BaseController {
     # Notify the author of the idea.
     if ( $user->id != $ideaAuthor->id and !empty($ideaAuthor->email) )
     {
-      Mail::send('emails.comment', compact('comment', 'ideaAuthor'), function($message) use($ideaAuthor)
+      Mail::send('emails.comment', compact('comment', 'ideaAuthor', 'user'), function($message) use($ideaAuthor)
       {
         $message
           ->to($ideaAuthor->email, $ideaAuthor->name)
