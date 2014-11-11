@@ -38,3 +38,12 @@ $.fn.center = function () {
     });
   });
 };
+
+
+/**
+ * @param {String} fieldName
+ * @return {jQuery}
+ */
+$.fn.field = function(fieldName) {
+  return this.find(':input[name="' + fieldName + '"]');
+};

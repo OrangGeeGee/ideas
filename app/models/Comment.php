@@ -12,4 +12,9 @@ class Comment extends Eloquent {
   {
     return $query->where('updated_at', '>=', $timestamp);
   }
+
+  public function idea()
+  {
+    return $this->belongsTo('Idea');
+  }
 }

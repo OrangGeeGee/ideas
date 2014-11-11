@@ -23,6 +23,9 @@ function Collection(url, callback) {
 
 $(function() {
   $.when.apply($, queries).done(function() {
+    new Router;
+    Backbone.history.start();
+
     $(document).trigger('initial-data-loaded');
 
     setInterval(function() {

@@ -1,6 +1,10 @@
 <?php
 
-require 'ldap-auth.php';
+# Disable LDAP authentication for artisan commands.
+if ( PHP_SAPI != 'cli' )
+{
+  require 'ldap-auth.php';
+}
 
 
 /*
@@ -19,9 +23,25 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('login', function()
+{
+  return View::make('login');
+});
+
+Route::post('auth', function()
+{
+  $user = User::firstOrCreate(array(
+    'name' => Input::get('name'),
+    'email' => Input::get('email', '')
+  ));
+
+  Auth::login($user);
+});
+
 Route::resource('users', 'UserController');
 Route::resource('ideas', 'IdeaController');
 Route::resource('comments', 'CommentController');
+Route::resource('categories', 'CategoryController');
 
 Route::get('update', function()
 {
@@ -32,4 +52,25 @@ Route::get('update', function()
     'Ideas' => Idea::latest($lastUpdate)->get()->toArray(),
     'Comments' => Comment::latest($lastUpdate)->get()->toArray()
   );
+});
+
+Route::get('ideas/{id}/vote', function($id)
+{
+  $user = Auth::user();
+  $idea = Idea::find($id);
+
+  # Can't vote for your own idea.
+  if ( $idea->user_id == $user->id or $user->available_votes == 0 )
+  {
+    return;
+  }
+
+  $votes = $idea->votes;
+
+  # Each idea can only be voted once.
+  if ( !$votes->contains($user->id) )
+  {
+    $idea->votes()->attach(Auth::user()->id);
+    $user->decrement('available_votes');
+  }
 });

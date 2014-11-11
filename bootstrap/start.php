@@ -27,7 +27,7 @@ $app->redirectIfTrailingSlash();
 */
 
 $env = $app->detectEnvironment(array(
-	'local' => array('localhost'),
+	'local' => array('PCEE047386'),
   'production' => array('eos.crebit.ee')
 ));
 

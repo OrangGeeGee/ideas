@@ -1,6 +1,6 @@
 
-var Modals = {},
-    $window = $(window);
+var Modals = {};
+var $window = $(window);
 
 // Cache all modal windows as jQuery objects.
 // Keys will represent modal's ID.
@@ -14,9 +14,10 @@ Modals.active = null;
  * @constructor
  * @private
  * @param {String} id
+ * @param {String|jQuery|Backbone.View} content
  * @return {Modal}
  */
-function Modal(id) {
+function Modal(id, content) {
   var modal = Modals.cache[id] = this;
   this.id = id;
   this.$ = $('#' + id);
@@ -28,6 +29,7 @@ function Modal(id) {
 
   this.$body = this.$.find('.modal-body');
   this.$title = this.$body.children('h2:first');
+  this.setContent(content).open();
 
   this.$.on('click', '.modal-close-action', function(event) {
     event.preventDefault();
@@ -111,10 +113,14 @@ Modal.prototype.setTitle = function(title) {
 
 
 /**
- * @param {Number|String|jQuery} content
+ * @param {String|jQuery|Backbone.View} content
  * @return {Modal}
  */
 Modal.prototype.setContent = function(content) {
+  if ( content instanceof Backbone.View ) {
+    content = content.render();
+  }
+
   if ( this.$title.length ) {
     this.$body.html(this.$title);
   } else {
@@ -158,6 +164,11 @@ Modal.prototype.resize = function() {
 };
 
 
+/**
+ * Empties the modal content.
+ *
+ * @return {Modal}
+ */
 Modal.prototype.empty = function() {
   return this.setTitle('').setContent('');
 };
@@ -250,7 +261,7 @@ Modals.alert = function(text) {
     var modal = Modals.create('alert-modal');
 
     modal.setTitle(text).setContent(
-      '<a href="#" class="button">' + Swedbank.Labels('ok') + '</a>'
+      '<a href="#" class="button">Ok!</a>'
     ).open();
 
     modal.$.find('.button').on('click', function() {

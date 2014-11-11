@@ -5,9 +5,10 @@
 
 .entry-list > li {
   position: relative;
-  padding-left: 100px;
+  padding-top: 30px;
+  padding-left: 45px;
   min-height: 100px;
-  margin: 0.5% 0.5% 2%;
+  margin: 0.5% 1.5% 2%;
 }
 
 .entry-list h3 + p {
@@ -17,22 +18,30 @@
 .entry-author {
   position: absolute;
   color: #444;
-  width: 100px;
-  left: 0px;
-  text-align: center;
-  font-size: 8pt;
+  left: -20px;
+  top: -15px;
+  font-size: 12px;
 }
 
 .entry-author img {
-  display: block;
-  max-width: 50px;
-  margin: auto auto 5px;
+  border-radius: 30px;
+  max-width: 65px;
+  vertical-align: middle;
+  transition: 0.33s transform;
+  cursor: pointer;
+}
+
+.entry-author img:hover {
+  transform: scale(1.1);
+}
+
+.entry-author h4 {
+  margin-left: 10px;
+  display: inline;
 }
 
 .entry-content {
   padding: 10px 15px;
-  background-color: #E4E4E2;
-  border-radius: 10px;
 }
 
 .entry-content p {

@@ -1,7 +1,35 @@
 
 #ideas-list > li {
-  width: 32%;
+  width: 30%;
   float: left;
+  position: relative;
+  background-color: white;
+}
+
+#ideas-list > li:first-child {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: white;
+  transition: 0.2s background, 0.2s border;
+  border: 1px solid transparent;
+}
+
+#ideas-list > li:first-child:hover {
+  background-color: #eee;
+  border-color: #e5e5e5;
+}
+
+#ideas-list > li:first-child img {
+  display: block;
+  margin: auto auto 5px;
+  transition: 0.2s opacity;
+  height: 85px;
+}
+
+#ideas-list > li:first-child:not(:hover) img,
+#ideas-list > li:first-child:not(:hover) h3 {
+  opacity: 0.5;
 }
 
 #ideas-list .entry-content {
@@ -9,8 +37,10 @@
   border-radius: 10px;
 }
 
-#ideas-list .entry-content:hover {
-  background-color: #E4E4E2;
+#ideas-list .vote {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .entry-data {
@@ -48,8 +78,36 @@
 }
 
 
+/** Shadow effects */
+#ideas-list > li:before,
+#ideas-list > li:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+}
+
+#ideas-list > li:before
+{
+  transform: rotate(-3deg);
+  left: 10px;
+}
+
+#ideas-list > li:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+}
+
+
 /** Finished ideas */
-.finished .entry-content {
+.finished {
   background-color: #A1E741;
   background-image: linear-gradient(#A1E741, #7FC521);
 }
@@ -58,8 +116,4 @@
   display: inline;
   background: url('../images/mark-sign.png') no-repeat right;
   padding-right: 40px;
-}
-
-#ideas-list .finished .entry-content:hover {
-  background: #8FD72D;
 }

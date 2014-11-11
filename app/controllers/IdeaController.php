@@ -9,7 +9,7 @@ class IdeaController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Idea::all();
+    return Idea::with('votes')->get();
 	}
 
 	/**

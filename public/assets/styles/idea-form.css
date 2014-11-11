@@ -1,13 +1,18 @@
 
-body > form {
-  margin-bottom: 30px;
+#new-idea {
+  width: 480px;
 }
 
 input[type="text"],
+select,
 textarea {
   width: 100%;
   display: block;
   margin-bottom: 5px;
+}
+
+textarea {
+  height: 100px;
 }
 
 input[type="submit"] {
