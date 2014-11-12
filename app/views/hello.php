@@ -17,6 +17,7 @@
 <body>
 
   <div id="filter-section">
+    <input type="text" id="searchField" placeholder="Otsi"/>
     <ul id="categories-list"></ul>
     <ul id="sorting-options-list"></ul>
   </div>

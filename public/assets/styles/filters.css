@@ -8,9 +8,6 @@
   list-style: none;
   margin-left: 20px;
   display: inline-block;
-}
-
-#filter-section ul + ul {
   border-left: 1px dotted;
   padding-left: 20px;
 }
@@ -33,4 +30,15 @@
 
 #filter-section ul > li.active a {
   background-color: greenyellow;
+}
+
+#searchField {
+  display: inline-block;
+  width: 140px;
+  transition: .33s width;
+  padding: 2px 5px;
+}
+
+#searchField:focus {
+  width: 240px;
 }

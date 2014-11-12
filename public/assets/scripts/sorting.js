@@ -46,3 +46,18 @@ SortingOptions.add([
   { id: 1, name: 'Populaarsed' },
   { id: 2, name: 'Kronoloogia' }
 ]);
+
+$(searchField).on('keyup', function(event) {
+  var searchPhrase = this.value.toLowerCase();
+
+  // Escape key.
+  if ( event.which == 27 ) {
+    $(this).val('').trigger('keyup');
+  }
+  else {
+    Ideas.filter(function(idea) {
+      var title = idea.get('title').toLowerCase();
+      idea.view.$el.toggle(!searchPhrase || title.contains(searchPhrase));
+    });
+  }
+});

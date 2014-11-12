@@ -127,6 +127,10 @@ var IdeaView = Backbone.View.extend({
     }
 
     return this.$el;
+  },
+
+  initialize: function() {
+    this.model.view = this;
   }
 });
 
