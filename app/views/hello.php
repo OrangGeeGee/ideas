@@ -17,7 +17,7 @@
 <body>
 
   <div id="filter-section">
-    <input type="text" id="searchField" placeholder="Otsi"/>
+    <input type="text" id="searchField" placeholder="Search..."/>
     <ul id="categories-list"></ul>
     <ul id="sorting-options-list"></ul>
   </div>
@@ -67,14 +67,13 @@
 
   <script type="text/html" id="new-idea-template">
     <img src="<?= url('/assets/images/pencil-icon.png') ?>"/>
-    <h3>Lisa uus idee</h3>
+    <h3>Add new idea</h3>
   </script>
 
   <!-- Dependencies -->
   <script src="assets/scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="assets/scripts/jquery/jquery.helpers.js"></script>
   <script src="assets/scripts/moment/moment-2.4.0.min.js"></script>
-  <script src="assets/scripts/moment/moment.et.js"></script>
   <script src="assets/scripts/backbone/underscore-1.5.2.js"></script>
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/model.js"></script>

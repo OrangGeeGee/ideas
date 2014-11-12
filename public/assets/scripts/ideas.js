@@ -2,7 +2,7 @@
 var Ideas = new Collection('ideas', function() {
   var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
 
-  $ideasList.before('<h2>Viimased ideed</h2>');
+  $ideasList.before('<h2>Latest ideas</h2>');
 });
 
 Ideas.model = Backbone.Model.extend({
@@ -89,9 +89,9 @@ var IdeaView = Backbone.View.extend({
     var user = Users.get(USER_ID);
 
     if ( this.model.hasBeenVotedFor() ) {
-      this.$el.prepend('<span class="vote">Hääletatud</span>');
+      this.$el.prepend('<span class="vote">Voted</span>');
     } else if ( user.hasFreeVotes() ) {
-      this.$el.prepend('<a class="vote" href="ideas/' + this.model.id + '/vote">Anna hääl</a>');
+      this.$el.prepend('<a class="vote" href="ideas/' + this.model.id + '/vote">Vote</a>');
     }
   },
 

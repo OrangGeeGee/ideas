@@ -43,8 +43,8 @@ var SortingItemView = Backbone.View.extend({
 });
 
 SortingOptions.add([
-  { id: 1, name: 'Populaarsed' },
-  { id: 2, name: 'Kronoloogia' }
+  { id: 1, name: 'Popular' },
+  { id: 2, name: 'Chronological' }
 ]);
 
 $(searchField).on('keyup', function(event) {
