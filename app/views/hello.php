@@ -24,14 +24,14 @@
 
   <!-- Templates -->
   <script type="text/html" id="idea-form-template">
-    <h2><input type="text" name="title" placeholder="Idee pealkiri"/></h2>
+    <h2><input type="text" name="title" placeholder="Idea title"/></h2>
     <select name="category_id">
     <?php foreach ( Category::all() as $category ): ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>
     <?php endforeach ?>
     </select>
-    <textarea name="description" placeholder="Kirjeldus"></textarea>
-    <input type="submit" value="Lisa idee"/>
+    <textarea name="description" placeholder="Description"></textarea>
+    <input type="submit" value="Add"/>
   </script>
 
   <script type="text/html" id="comment-form-template">
