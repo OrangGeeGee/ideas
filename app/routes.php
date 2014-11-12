@@ -70,7 +70,17 @@ Route::get('ideas/{id}/vote', function($id)
   # Each idea can only be voted once.
   if ( !$votes->contains($user->id) )
   {
-    $idea->votes()->attach(Auth::user()->id);
+    $idea->votes()->attach($user->id);
     $user->decrement('available_votes');
+
+    # Notify the author.
+    Mail::send('emails.vote', compact('idea', 'user'), function($message) use($idea)
+    {
+      $author = $idea->user;
+
+      $message
+        ->to($author->email, $author->name)
+        ->subject('[Brainstorm] Your idea gained a vote');
+    });
   }
 });
