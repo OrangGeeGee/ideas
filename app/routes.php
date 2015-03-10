@@ -54,6 +54,30 @@ Route::get('update', function()
   );
 });
 
+function createOrUpdatePivot($pivot, $idColumn, $id, $data) {
+  $existingRow = $pivot->where($idColumn, $id)->first();
+  $previousData = array();
+
+  if ( $existingRow ) {
+    $previousData = $existingRow->pivot->toArray();
+  }
+
+  $newData = array_merge($previousData, $data);
+
+  $pivot->detach($id);
+  $pivot->attach($id, $newData);
+}
+
+Route::get('ideas/{id}/read', function($id)
+{
+  $user = Auth::user();
+  $idea = Idea::find($id);
+
+  createOrUpdatePivot($idea->userData(), 'user_id', $user->id, array(
+    'seen_at' => DB::raw('NOW()')
+  ));
+});
+
 Route::get('ideas/{id}/vote', function($id)
 {
   $user = Auth::user();
@@ -65,22 +89,27 @@ Route::get('ideas/{id}/vote', function($id)
     return;
   }
 
-  $votes = $idea->votes;
+  $userData = $idea->userData;
 
   # Each idea can only be voted once.
-  if ( !$votes->contains($user->id) )
+  if ( !$idea->hasBeenVotedFor() )
   {
-    $idea->votes()->attach($user->id);
+    createOrUpdatePivot($idea->userData(), 'user_id', $user->id, array(
+      'voted_at' => DB::raw('NOW()')
+    ));
     $user->decrement('available_votes');
 
     # Notify the author.
-    Mail::send('emails.vote', compact('idea', 'user'), function($message) use($idea)
+    if ( App::environment() == 'production' )
     {
-      $author = $idea->user;
+      Mail::send('emails.vote', compact('idea', 'user'), function($message) use($idea)
+      {
+        $author = $idea->user;
 
-      $message
-        ->to($author->email, $author->name)
-        ->subject('[Brainstorm] Your idea gained a vote');
-    });
+        $message
+          ->to($author->email, $author->name)
+          ->subject('[Brainstorm] Your idea gained a vote');
+      });
+    }
   }
 });

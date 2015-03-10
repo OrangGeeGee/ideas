@@ -8,16 +8,25 @@ var Ideas = new Collection('ideas', function() {
 Ideas.model = Backbone.Model.extend({
   vote: function() {
     var user = Users.get(USER_ID);
-    this.get('votes').push(user.toJSON());
+    var data = user.toJSON();
+    data.pivot = {
+      voted_at: moment().format('YYYY-MM-DD HH:mm:ss')
+    };
+
+    this.get('userData').push(data);
     user.decrement('available_votes');
   },
 
   getVoteCount: function() {
-    return this.get('votes').length;
+    return this.get('userData').filter(function(user) {
+      return user.pivot.voted_at != '0000-00-00 00:00:00';
+    }).length;
   },
 
   hasBeenVotedFor: function() {
-    return _.where(this.get('votes'), { id: USER_ID }).length > 0;
+    return this.get('userData').filter(function(user) {
+      return user.id == USER_ID && user.pivot.voted_at != '0000-00-00 00:00:00';
+    }).length == 1;
   },
 
   matchesCategoryFilter: function() {
@@ -79,6 +88,7 @@ var IdeaView = Backbone.View.extend({
 
   openIdea: function() {
     var commentList = new CommentListView({ model: this.model });
+    $.get('ideas/' + this.model.id + '/read');
   },
 
   addVotingAction: function () {

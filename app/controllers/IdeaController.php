@@ -9,7 +9,10 @@ class IdeaController extends \BaseController {
 	 */
 	public function index()
 	{
-    return Idea::with('votes')->get();
+    return Idea::with('userData')->get()->each(function($idea)
+    {
+      $idea->userData = $idea->userData->toArray();
+    });
 	}
 
 	/**
@@ -23,6 +26,7 @@ class IdeaController extends \BaseController {
     $idea = new Idea($data);
 
     Auth::user()->ideas()->save($idea);
+    $idea->userData = $idea->userData->toArray();
 
     return $idea;
 	}

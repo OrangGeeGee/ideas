@@ -13,9 +13,18 @@ class Idea extends Eloquent {
     return $query->where('updated_at', '>=', $timestamp);
   }
 
-  public function votes()
+  public function userData()
   {
-    return $this->belongsToMany('User')->withTimestamps();
+    $pivotFields = array('voted_at', 'seen_at');
+    return $this->belongsToMany('User')->withPivot($pivotFields);
+  }
+
+  public function hasBeenVotedFor()
+  {
+    return !!$this->userData()
+      ->where('user_id', $this->id)
+      ->where('voted_at', '!=', '0000-00-00 00:00:00')
+      ->first();
   }
 
   public function user()
