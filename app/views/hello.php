@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Brainstorming</title>
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" rel="stylesheet">
+  <link href="assets/styles/fonts.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/base.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/layout.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/headings.css" type="text/css" rel="stylesheet">
