@@ -12,6 +12,10 @@ Ideas.model = Backbone.Model.extend({
     user.decrement('available_votes');
   },
 
+  getVoteCount: function() {
+    return this.get('votes').length;
+  },
+
   hasBeenVotedFor: function() {
     return _.where(this.get('votes'), { id: USER_ID }).length > 0;
   },
@@ -66,14 +70,6 @@ var IdeaView = Backbone.View.extend({
   template: _.template($('#idea-template').html()),
 
   events: {
-    'click a[href$="/vote"]': function(event) {
-      event.preventDefault();
-
-      // TODO: Rewrite. Logic should be in the model.
-      $.get(event.target.href);
-      this.model.vote();
-      this.render();
-    },
     'click .entry-content': 'openIdea',
     'click img': function() {
       var author = Users.get(this.model.get('user_id'));
@@ -86,13 +82,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   addVotingAction: function () {
-    var user = Users.get(USER_ID);
-
-    if ( this.model.hasBeenVotedFor() ) {
-      this.$el.prepend('<span class="vote">Voted</span>');
-    } else if ( user.hasFreeVotes() ) {
-      this.$el.prepend('<a class="vote" href="ideas/' + this.model.id + '/vote">Vote</a>');
-    }
+    this.$el.prepend(new VoteView({ model: this.model }).$el);
   },
 
   render: function() {
@@ -117,13 +107,6 @@ var IdeaView = Backbone.View.extend({
 
     if ( author != user && !this.model.isFinished() ) {
       this.addVotingAction();
-
-      // TODO: Callback stacks over time. Potential performance impact.
-      this.listenTo(user, 'change:available_votes', function() {
-        if ( !user.hasFreeVotes() ) {
-          view.render();
-        }
-      });
     }
 
     return this.$el;
@@ -131,8 +114,10 @@ var IdeaView = Backbone.View.extend({
 
   initialize: function() {
     this.model.view = this;
+    this.$el.attr('data-idea-id', this.model.id);
   }
 });
+
 
 
 var NewIdeaView = Backbone.View.extend({
@@ -158,6 +143,7 @@ var NewIdeaView = Backbone.View.extend({
     this.render();
   }
 });
+
 
 
 var IdeaListView = Backbone.View.extend({
@@ -193,5 +179,50 @@ var IdeaListView = Backbone.View.extend({
       this.renderIdea(model, true);
     }, this);
     this.collection.on('sort', this.render, this);
+  }
+});
+
+
+
+var VoteView = Backbone.View.extend({
+  tagName: 'a',
+  className: 'vote-link',
+
+  events: {
+    'click': function(event) {
+      var user = Users.get(USER_ID);
+      event.preventDefault();
+
+      if ( this.model.hasBeenVotedFor() || !user.hasFreeVotes() ) {
+        return;
+      }
+
+      // TODO: Rewrite. Logic should be in the model.
+      $.get(event.target.href);
+      this.model.vote();
+      this.render();
+    }
+  },
+
+  render: function() {
+    this.el.href = 'ideas/' + this.model.id + '/vote';
+    this.$el.text(this.model.getVoteCount());
+
+    if ( this.model.hasBeenVotedFor() ) {
+      this.$el.addClass('voted');
+    }
+  },
+
+  initialize: function() {
+    var user = Users.get(USER_ID);
+
+    this.render();
+
+    // TODO: Callback stacks over time. Potential performance impact.
+    this.listenTo(user, 'change:available_votes', function() {
+      if ( !user.hasFreeVotes() ) {
+        this.render();
+      }
+    }.bind(this));
   }
 });
