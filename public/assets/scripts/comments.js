@@ -63,7 +63,7 @@ var CommentListView = Backbone.View.extend({
     });
 
     this.$form = new CommentFormView({ model: this.model }).render();
-    this.$form.wrap('<li>').parent().appendTo(this.$el);
+    this.$form.wrap('<li id="commentFormContainer">').parent().appendTo(this.$el);
 
     Comments
       .where({ idea_id: this.model.id })
@@ -83,7 +83,7 @@ var CommentListView = Backbone.View.extend({
     });
     var $comment = new CommentView({ model: comment }).render();
 
-    $comment.find('p').before('<h3>' + this.model.get('title') + '</h3>');
+    $comment.find('.entry-content').prepend('<h3>' + this.model.get('title') + '</h3>');
     $comment.prependTo(this.$el);
   }
 });

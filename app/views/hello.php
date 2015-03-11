@@ -50,8 +50,13 @@
   </script>
 
   <script type="text/html" id="comment-form-template">
-    <textarea name="text" placeholder="Kommentaar"></textarea>
-    <input type="submit" value="Lisa kommentaar"/>
+    <div class="entry-author">
+      <img src="<%= USER_PROFILE_IMAGE_PATH + USER_ID %>.jpg"/>
+    </div>
+    <div class="entry-content">
+      <textarea name="text" placeholder="Kommentaar"></textarea>
+      <input type="submit" value="Lisa kommentaar"/>
+    </div>
   </script>
 
   <script type="text/html" id="idea-template">

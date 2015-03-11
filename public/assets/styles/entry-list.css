@@ -17,14 +17,14 @@
 
 .entry-author {
   position: absolute;
-  color: #444;
+  color: #777;
   left: -20px;
   top: -15px;
   font-size: 12px;
 }
 
 .entry-author img {
-  border-radius: 30px;
+  border: 1px solid #ddd;
   max-width: 65px;
   vertical-align: middle;
   transition: 0.33s transform;
@@ -36,8 +36,10 @@
 }
 
 .entry-author h4 {
-  margin-left: 10px;
+  margin: 0 5px 0 12px;
   display: inline;
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .entry-content {
