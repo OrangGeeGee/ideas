@@ -8,7 +8,7 @@
 
 #ideas-list > li:first-child {
   text-align: center;
-  padding: 10px;
+  padding: 88px 10px;
   cursor: pointer;
   background-color: white;
   transition: 0.2s background, 0.2s border;
@@ -39,6 +39,9 @@
 #ideas-list .entry-content {
   cursor: pointer;
   border-radius: 10px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
 }
 
 .entry-data {

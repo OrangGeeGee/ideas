@@ -68,10 +68,11 @@
     <div class="entry-content" title="Ava kommentaarid">
       <h3><%= title %></h3>
       <p><%= description %></p>
-      <ul class="entry-data">
-        <li class="comments"><%= comments.length || 'No' %> comments</li>
-      </ul>
+      <div class="content-fader"></div>
     </div>
+    <ul class="entry-data">
+      <li class="comments"><%= comments.length || 'No' %> comments</li>
+    </ul>
   </script>
 
   <script type="text/html" id="comment-template">

@@ -5,8 +5,7 @@
 
 .entry-list > li {
   position: relative;
-  padding-top: 30px;
-  padding-left: 45px;
+  padding: 40px 20px 20px 59px;
   min-height: 100px;
   margin: 0.5% 1.5% 2%;
 }
@@ -43,9 +42,17 @@
 }
 
 .entry-content {
-  padding: 10px 15px;
+  position: relative;
 }
 
 .entry-content p {
   white-space: pre-line;
+}
+
+.entry-content .content-fader {
+  background-image: linear-gradient(rgba(255, 255, 255, 0), white);
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
 }
