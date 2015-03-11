@@ -3,10 +3,20 @@
  * @return {Object}
  */
 $.fn.parseAsJSON = function() {
+  var $form = this;
   var data = {};
 
-  this.serializeArray().forEach(function(field) {
-    data[field.name] = field.value;
+  this.find(':input[name]').each(function() {
+    var $field = $(this);
+
+    if ( $field.is(':radio') ) {
+      if ( !(this.name in data) ) {
+        data[this.name] = $form.field(this.name).filter(':checked').val();
+      }
+    }
+    else {
+      data[this.name] = $field.is(':checkbox') ? this.checked === true : this.value;
+    }
   });
 
   return data;

@@ -29,3 +29,28 @@ Array.prototype.invoke = function(method) {
     }
   });
 };
+
+if ( !Array.prototype.forEach ) {
+  Array.prototype.forEach = function(callback, context) {
+    var array = this;
+
+    for ( var index = 0; index < array.length; index++ ) {
+      var element = array[index];
+      callback.call(context || this, element, index, array);
+    }
+  };
+}
+
+if ( !Array.prototype.filter ) {
+  Array.prototype.filter = function(callback) {
+    var filteredSet = [];
+
+    this.forEach(function(element) {
+      if ( callback.apply(this, arguments) ) {
+        filteredSet.push(element);
+      }
+    });
+
+    return filteredSet;
+  };
+}

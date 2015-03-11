@@ -79,6 +79,8 @@
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/model.js"></script>
   <script src="assets/scripts/backbone/collection.js"></script>
+  <script src="assets/scripts/helpers/browser.js"></script>
+  <script src="assets/scripts/helpers/function.js"></script>
   <script src="assets/scripts/helpers/array.js"></script>
   <script src="assets/scripts/helpers/string.js"></script>
   <script src="assets/plugins/modals/modals.js"></script>

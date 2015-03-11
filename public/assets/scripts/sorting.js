@@ -20,10 +20,14 @@ var SortingItemView = Backbone.View.extend({
 
       Ideas.comparator = function(idea1, idea2) {
         if ( sortingOption.id == 1 ) {
-          return idea1.getVoteCount() > idea2.getVoteCount();
+          var idea1votes = idea1.getVoteCount();
+          var idea2votes = idea2.getVoteCount();
+          return idea1votes > idea2votes ? 1 : idea1votes < idea2votes ? -1 : 0;
         }
         else {
-          return idea1.get('created_at') > idea2.get('created_at');
+          var idea1date = idea1.get('created_at');
+          var idea2date = idea2.get('created_at');
+          return idea1date > idea2date ? 1 : idea1date < idea2date ? -1 : 0;
         }
       };
       Ideas.sort();

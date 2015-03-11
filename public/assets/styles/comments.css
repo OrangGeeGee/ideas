@@ -1,13 +1,4 @@
 
-#comment-list > li {
-  float: left;
-  width: 49%;
-}
-
-#comment-list > li:nth-child(2) {
-  padding-left: 20px;
-}
-
 #comment-list textarea {
   height: 100px;
 }

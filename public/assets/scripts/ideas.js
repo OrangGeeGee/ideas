@@ -87,7 +87,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   openIdea: function() {
-    var commentList = new CommentListView({ model: this.model });
+    new CommentListView({ model: this.model });
     $.get('ideas/' + this.model.id + '/read');
   },
 

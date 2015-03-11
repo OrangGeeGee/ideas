@@ -23,11 +23,11 @@ input[type="submit"] {
   font-size: 1.4em;
 }
 
-input[type="submit"]:disabled {
+input[type="submit"][disabled] {
   background-color: #999;
 }
 
-input[type="submit"]:not(:disabled) {
+input[type="submit"]:not([disabled]) {
   cursor: pointer;
 }
 

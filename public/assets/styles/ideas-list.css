@@ -32,6 +32,10 @@
   opacity: 0.5;
 }
 
+#ideas-list h3 {
+  padding-right: 40px;
+}
+
 #ideas-list .entry-content {
   cursor: pointer;
   border-radius: 10px;
@@ -92,8 +96,8 @@
 
 
 /** Shadow effects */
-#ideas-list > li:before,
-#ideas-list > li:after
+.box-shadow #ideas-list > li:before,
+.box-shadow #ideas-list > li:after
 {
   z-index: -1;
   position: absolute;
@@ -106,13 +110,13 @@
   box-shadow: 0 15px 10px #777;
 }
 
-#ideas-list > li:before
+.box-shadow #ideas-list > li:before
 {
   transform: rotate(-3deg);
   left: 10px;
 }
 
-#ideas-list > li:after
+.box-shadow #ideas-list > li:after
 {
   transform: rotate(3deg);
   right: 10px;
