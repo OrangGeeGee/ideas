@@ -6,6 +6,7 @@
   margin: -40px -40px 40px;
   position: relative;
   font-size: 16px;
+  min-height: 80px;
 }
 
 #headerProfile {
