@@ -56,3 +56,7 @@
   height: 50px;
   width: 100%;
 }
+
+.finished .content-fader {
+  display: none;
+}
