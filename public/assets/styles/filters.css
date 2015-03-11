@@ -29,6 +29,10 @@
   border-radius: 5px;
 }
 
+#filter-section ul > li:not(.active) a:hover {
+  text-decoration: underline;
+}
+
 #filter-section ul > li.active a {
   background-color: orange;
   color: white;
