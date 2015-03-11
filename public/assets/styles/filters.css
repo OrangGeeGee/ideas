@@ -34,7 +34,7 @@
 }
 
 #filter-section ul > li.active a {
-  background-color: orange;
+  background-color: #f70;
   color: white;
 }
 
