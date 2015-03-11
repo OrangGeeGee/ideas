@@ -2,6 +2,7 @@
 #filter-section {
   position: absolute;
   right: 20px;
+  bottom: 20px;
 }
 
 #filter-section ul {
@@ -29,7 +30,8 @@
 }
 
 #filter-section ul > li.active a {
-  background-color: greenyellow;
+  background-color: orange;
+  color: white;
 }
 
 #searchField {

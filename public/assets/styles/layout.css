@@ -1,0 +1,29 @@
+
+#header {
+  background-color: white;
+  border-bottom: 1px solid #CCC;
+  padding: 20px 40px;
+  margin: -40px -40px 40px;
+  position: relative;
+  font-size: 16px;
+}
+
+#headerProfile {
+  display: none;
+}
+
+#headerProfile h2 {
+  margin-bottom: 0;
+}
+
+#headerProfile p {
+  line-height: 28px;
+}
+
+#freeVotesLeft {
+  background-color: orange;
+  color: white;
+  padding: 0 8px;
+  font-size: 20px;
+  border-radius: 4px;
+}

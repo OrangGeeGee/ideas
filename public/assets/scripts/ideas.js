@@ -1,8 +1,6 @@
 
 var Ideas = new Collection('ideas', function() {
   var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
-
-  $ideasList.before('<h2>Latest ideas</h2>');
 });
 
 Ideas.model = Backbone.Model.extend({

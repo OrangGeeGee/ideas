@@ -17,10 +17,15 @@
 </head>
 <body>
 
-  <div id="filter-section">
-    <input type="text" id="searchField" placeholder="Search..."/>
-    <ul id="categories-list"></ul>
-    <ul id="sorting-options-list"></ul>
+  <div id="header">
+    <div id="profile-section" style="display: none;">
+
+    </div>
+    <div id="filter-section">
+      <input type="text" id="searchField" placeholder="Search..."/>
+      <ul id="categories-list"></ul>
+      <ul id="sorting-options-list"></ul>
+    </div>
   </div>
 
   <!-- Templates -->
@@ -33,6 +38,15 @@
     </select>
     <textarea name="description" placeholder="Description"></textarea>
     <input type="submit" value="Add"/>
+  </script>
+
+  <script type="text/html" id="user-header-template">
+    <h2>Welcome, <%= name.getForename() %></h2>
+    <% if ( available_votes > 0 ) { %>
+      <p>You have <span id="freeVotesLeft"><%= available_votes %></span> votes left to give for ideas.</p>
+    <% } else { %>
+      <p>You currently have no more votes to give.</p>
+    <% } %>
   </script>
 
   <script type="text/html" id="comment-form-template">
