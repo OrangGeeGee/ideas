@@ -99,8 +99,8 @@
 
 
 /** Shadow effects */
-.box-shadow #ideas-list > li:before,
-.box-shadow #ideas-list > li:after
+.box-shadow #ideas-list > li:not(.introjs-showElement):before,
+.box-shadow #ideas-list > li:not(.introjs-showElement):after
 {
   z-index: -1;
   position: absolute;

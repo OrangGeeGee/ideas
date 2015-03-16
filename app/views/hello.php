@@ -14,6 +14,7 @@
   <link href="assets/styles/users.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/filters.css" type="text/css" rel="stylesheet">
   <link href="assets/plugins/modals/modals.css" type="text/css" rel="stylesheet">
+  <link href="assets/plugins/introjs/introjs.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
@@ -109,6 +110,7 @@
   <script src="assets/scripts/helpers/array.js"></script>
   <script src="assets/scripts/helpers/string.js"></script>
   <script src="assets/plugins/modals/modals.js"></script>
+  <script src="assets/plugins/introjs/intro.js"></script>
   <script src="assets/plugins/viewport.js"></script>
 
   <!-- App files -->
@@ -122,5 +124,6 @@
   <script src="assets/scripts/comments.js"></script>
   <script src="assets/scripts/categories.js"></script>
   <script src="assets/scripts/sorting.js"></script>
+  <script src="assets/scripts/tutorial.js"></script>
 </body>
 </html>
