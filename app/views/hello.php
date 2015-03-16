@@ -30,22 +30,22 @@
 
   <!-- Templates -->
   <script type="text/html" id="idea-form-template">
-    <h2><input type="text" name="title" placeholder="Idea title"/></h2>
+    <h2><input type="text" name="title" placeholder="Idee pealkiri"/></h2>
     <select name="category_id">
     <?php foreach ( Category::all() as $category ): ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>
     <?php endforeach ?>
     </select>
-    <textarea name="description" placeholder="Description"></textarea>
-    <input type="submit" value="Add"/>
+    <textarea name="description" placeholder="Kirjeldus"></textarea>
+    <input type="submit" value="Lisa"/>
   </script>
 
   <script type="text/html" id="user-header-template">
-    <h2>Welcome, <%= name.getForename() %></h2>
+    <h2>Hei, <%= name.getForename() %></h2>
     <% if ( available_votes > 0 ) { %>
-      <p>You have <span id="freeVotesLeft"><%= available_votes %></span> votes left to give for ideas.</p>
+      <p>Sul on veel <span id="freeVotesLeft"><%= available_votes %></span> häält ideedele andmiseks.</p>
     <% } else { %>
-      <p>You currently have no more votes to give.</p>
+      <p>Hetkel on sul vabade häälte arv ideedele andmiseks otsas.</p>
     <% } %>
   </script>
 
@@ -71,7 +71,11 @@
       <div class="content-fader"></div>
     </div>
     <ul class="entry-data">
-      <li class="comments"><%= comments.length || 'No' %> comments</li>
+      <li class="comments">
+        <% if ( comments.length == 1 ) { %>1 kommentaar<% } %>
+        <% if ( comments.length > 1 ) { %><%= comments.length %> kommentaari<% } %>
+        <% if ( !comments.length ) { %>Kommentaarid puuduvad<% } %>
+      </li>
     </ul>
   </script>
 
@@ -88,13 +92,14 @@
 
   <script type="text/html" id="new-idea-template">
     <img src="<?= url('/assets/images/pencil-icon.png') ?>"/>
-    <h3>Add new idea</h3>
+    <h3>Lisa uus idee</h3>
   </script>
 
   <!-- Dependencies -->
   <script src="assets/scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="assets/scripts/jquery/jquery.helpers.js"></script>
   <script src="assets/scripts/moment/moment-2.4.0.min.js"></script>
+  <script src="assets/scripts/moment/moment.et.js"></script>
   <script src="assets/scripts/backbone/underscore-1.5.2.js"></script>
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/model.js"></script>
