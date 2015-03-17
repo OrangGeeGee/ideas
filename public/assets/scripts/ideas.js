@@ -81,10 +81,10 @@ var IdeaView = Backbone.View.extend({
   template: _.template($('#idea-template').html()),
 
   events: {
-    'click .entry-content': 'openIdea',
+    'click': 'openIdea',
     'click img': function() {
       var author = Users.get(this.model.get('user_id'));
-      new UserProfileView({ model: author });
+      //new UserProfileView({ model: author });
     }
   },
 
