@@ -66,6 +66,10 @@ var IdeaFormView = Backbone.View.extend({
     this.$el.field('category_id').val(Categories.getActive().id);
     this.toggleSubmitButton();
 
+    if ( !('placeholder' in document.createElement('input')) ) {
+      this.$('[placeholder]').mimicPlaceholder();
+    }
+
     return this.$el;
   }
 });
@@ -136,7 +140,13 @@ var NewIdeaView = Backbone.View.extend({
   events: {
     'click': function() {
       var modal = new Modal('new-idea', new IdeaFormView);
-      modal.$.field('title').focus();
+
+      // Focus the title field only if the browser supports placeholder attribute.
+      // If it doesn't and we focus the field, then the field would be empty and
+      // the user wouldn't have any indication of the field's expected content.
+      if ( 'placeholder' in document.createElement('input') ) {
+        modal.$.field('title').focus();
+      }
 
       modal.$.on('submit', function() {
         modal.close();

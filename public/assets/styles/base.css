@@ -24,6 +24,11 @@ p {
   margin-bottom: 10px;
 }
 
+input.placeholder,
+textarea.placeholder {
+  color: #999;
+}
+
 /** Lists */
 ol.numeric-list {
   list-style: none;

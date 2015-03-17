@@ -61,4 +61,4 @@ $(searchField).on('keyup', function(event) {
       idea.view.$el.toggle(!searchPhrase || title.contains(searchPhrase));
     });
   }
-});
+}).mimicPlaceholder();

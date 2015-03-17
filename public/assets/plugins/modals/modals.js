@@ -76,9 +76,6 @@ Modal.prototype.open = function() {
     this.$.data('original-height', this.$.height());
   }
 
-  // Automatically focus the very first field if any is present.
-  this.$.find(':input:visible:first').trigger('focus');
-
   $(document).one('keyboard:escape', function() {
     modal.close();
   });

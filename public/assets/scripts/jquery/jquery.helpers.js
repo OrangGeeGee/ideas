@@ -57,3 +57,32 @@ $.fn.center = function () {
 $.fn.field = function(fieldName) {
   return this.find(':input[name="' + fieldName + '"]');
 };
+
+
+/**
+ * Mimics placeholder support for older browsers.
+ *
+ * @return {jQuery}
+ */
+$.fn.mimicPlaceholder = function() {
+  return this.each(function() {
+    var $field = $(this);
+    var placeholderText = $field.attr('placeholder');
+
+    $field.on({
+      focus: function() {
+        if ( $field.val() == placeholderText ) {
+          $field.val('').removeClass('placeholder');
+        }
+      },
+      blur: function() {
+        if ( !$field.val() ) {
+          $field.val(placeholderText).addClass('placeholder');
+        }
+      }
+    });
+
+    // Make sure the field starts with the placeholder text.
+    $field.trigger('blur');
+  });
+};
