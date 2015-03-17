@@ -19,6 +19,8 @@
 </head>
 <body>
 
+  <a href="//ee.swedbank.net/" style="">Tagasi intranetti</a>
+
   <div id="header">
     <div id="profile-section" style="display: none;">
 

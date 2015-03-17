@@ -1,9 +1,27 @@
 
+a[href="//ee.swedbank.net/"] {
+  background-color: #f70;
+  background: linear-gradient(90deg, #f70, #fb0);
+  margin: -40px -40px 0;
+  padding: 5px 20px;
+  color: white;
+  display: block;
+  font-size: 14px;
+}
+
+a[href="//ee.swedbank.net/"]:before {
+  content: "« ";
+}
+
+a[href="//ee.swedbank.net/"]:not(:hover) {
+  text-decoration: none;
+}
+
 #header {
   background-color: white;
   border-bottom: 1px solid #CCC;
   padding: 20px 40px;
-  margin: -40px -40px 40px;
+  margin: 0 -40px 40px;
   position: relative;
   font-size: 16px;
   min-height: 80px;
