@@ -1,6 +1,6 @@
 
 #new-idea {
-  width: 480px;
+  width: 540px;
 }
 
 input[type="text"],
@@ -9,6 +9,15 @@ textarea {
   width: 100%;
   display: block;
   margin-bottom: 5px;
+}
+
+#new-idea select,
+#new-idea textarea {
+  margin-top: 10px;
+}
+
+#new-idea select {
+  padding: 5px;
 }
 
 textarea {
