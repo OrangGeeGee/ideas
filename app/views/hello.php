@@ -62,7 +62,7 @@
   <script type="text/html" id="idea-template">
     <div class="entry-author">
       <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
-      <h4><%= user.name.getForename() %></h4>
+      <h4><%= user.name %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content" title="Ava kommentaarid">
@@ -82,7 +82,7 @@
   <script type="text/html" id="comment-template">
     <div class="entry-author">
       <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
-      <h4><%= user.name.getForename() %></h4>
+      <h4><%= user.name %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content">
