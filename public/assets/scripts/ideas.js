@@ -114,7 +114,8 @@ var IdeaView = Backbone.View.extend({
     });
 
     if ( author != user && !this.model.isFinished() ) {
-      this.addVotingAction();
+      // Voting will be reopened during Angaar week.
+      //this.addVotingAction();
     }
 
     return this.$el;

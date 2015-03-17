@@ -20,6 +20,7 @@
 #headerProfile p {
   display: inline-block;
   line-height: 28px;
+  width: 30%;
 }
 
 #freeVotesLeft {

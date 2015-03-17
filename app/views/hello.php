@@ -44,11 +44,7 @@
 
   <script type="text/html" id="user-header-template">
     <h2>Hei, <%= name.getForename() %></h2>
-    <% if ( available_votes > 0 ) { %>
-      <p>Sul on veel <span id="freeVotesLeft"><%= available_votes %></span> häält ideedele andmiseks.</p>
-    <% } else { %>
-      <p>Hetkel on sul vabade häälte arv ideedele andmiseks otsas.</p>
-    <% } %>
+    <p>Hetkel on ideede lisamise periood. Hääletamine algab koos Startupi nädalaga 13. aprillil.</p>
   </script>
 
   <script type="text/html" id="comment-form-template">
