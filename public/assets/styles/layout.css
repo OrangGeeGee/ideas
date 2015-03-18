@@ -37,7 +37,7 @@ a[href="//ee.swedbank.net/"]:not(:hover) {
 
 #headerProfile p {
   display: inline-block;
-  line-height: 28px;
+  /*line-height: 28px;*/
   width: 30%;
 }
 
