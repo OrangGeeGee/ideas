@@ -65,7 +65,7 @@
       <h4><%= user.name %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
-    <div class="entry-content" title="Ava kommentaarid">
+    <div class="entry-content">
       <h3><%= title %></h3>
       <p><%= description %></p>
       <div class="content-fader"></div>

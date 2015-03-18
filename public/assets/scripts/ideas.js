@@ -128,6 +128,7 @@ var IdeaView = Backbone.View.extend({
   initialize: function() {
     this.model.view = this;
     this.$el.attr('data-idea-id', this.model.id);
+    this.$el.attr('title', 'Ava kommentaarid');
   }
 });
 
