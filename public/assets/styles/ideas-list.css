@@ -131,8 +131,8 @@
 
 /** Finished ideas */
 .finished {
-  background-color: #A1E741;
-  background-image: linear-gradient(#A1E741, #7FC521);
+  background-color: #f90 !important;
+  background-image: linear-gradient(orange, #f60);
 }
 
 .finished .entry-content h3 {
