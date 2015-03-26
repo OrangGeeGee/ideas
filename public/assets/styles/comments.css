@@ -10,7 +10,7 @@
 
 #comment-list textarea {
   height: 100px;
-  resize: none;
+  resize: vertical;
 }
 
 #comment-list .entry-author {
