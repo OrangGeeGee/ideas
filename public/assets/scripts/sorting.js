@@ -1,6 +1,20 @@
 
 var SortingOptions = new Backbone.Collection;
 
+SortingOptions.model = Backbone.Model.extend({
+  activate: function() {
+    return this.set('active', true);
+  },
+
+  deactivate: function() {
+    return this.set('active', false);
+  },
+
+  isActive: function() {
+    return this.get('active');
+  }
+});
+
 SortingOptions.on('add', function(sortOption) {
   var view = new SortingItemView({ model: sortOption });
   $('#sorting-options-list').append(view.$el);
@@ -12,14 +26,14 @@ var SortingItemView = Backbone.View.extend({
 
   events: {
     'click': function() {
-      this.$el.addClass('active').siblings().removeClass('active');
+      this.model.activate().others().invoke('deactivate');
     },
     'click a': function(event) {
       event.preventDefault();
       var sortingOption = this.model;
 
       Ideas.comparator = function(idea1, idea2) {
-        if ( sortingOption.id == 1 ) {
+        if ( sortingOption.id == 2 ) {
           var idea1votes = idea1.getVoteCount();
           var idea2votes = idea2.getVoteCount();
           return idea1votes > idea2votes ? 1 : idea1votes < idea2votes ? -1 : 0;
@@ -36,16 +50,18 @@ var SortingItemView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    this.$el.toggleClass('active', this.model.get('active') === true);
   },
 
   initialize: function() {
     this.render();
+    this.model.on('change:active', this.render, this);
   }
 });
 
 SortingOptions.add([
-  { id: 1, name: 'Populaarsemad ees' },
-  { id: 2, name: 'Uuemad ees' }
+  { id: 1, name: 'Uuemad ees' },
+  { id: 2, name: 'Populaarsemad ees' }
 ]);
 
 $(searchField).on('keyup', function(event) {
