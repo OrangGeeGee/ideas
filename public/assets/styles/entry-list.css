@@ -40,6 +40,10 @@
   font-weight: normal;
 }
 
+.finished .entry-author {
+  color: #333;
+}
+
 .entry-content {
   position: relative;
 }
