@@ -65,9 +65,18 @@ $.fn.field = function(fieldName) {
  * @return {jQuery}
  */
 $.fn.mimicPlaceholder = function() {
+  var input = document.createElement('input');
+  var textarea = document.createElement('textarea');
+
   return this.each(function() {
     var $field = $(this);
     var placeholderText = $field.attr('placeholder');
+
+    // Already supported natively.
+    if ( $field.is('input') && 'placeholder' in input ||
+         $field.is('textarea') && 'placeholder' in textarea ) {
+      return;
+    }
 
     $field.on({
       focus: function() {
