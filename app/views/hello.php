@@ -26,7 +26,7 @@
 
     </div>
     <div id="filter-section">
-      <input type="text" id="searchField" placeholder="Search..."/>
+      <input type="text" id="searchField" placeholder="Otsi..."/>
       <ul id="categories-list"></ul>
       <ul id="sorting-options-list"></ul>
     </div>
@@ -46,12 +46,12 @@
 
   <script type="text/html" id="user-header-template">
     <h2>Hei, <%= name.getForename() %></h2>
-    <p>Hetkel on ideede lisamise periood. Hääletamine algab koos Startupi nädalaga 13. aprillil.</p>
+    <p>Angaari-raames saad esitada ja kommenteerida ideid ning hääletada parimate poolt 15. aprillini.</p>
   </script>
 
   <script type="text/html" id="comment-form-template">
     <div class="entry-author">
-      <img src="<%= USER_PROFILE_IMAGE_PATH + USER_ID %>.jpg"/>
+      <%= Users.get(USER_ID).generateProfileImage() %>
     </div>
     <div class="entry-content">
       <textarea name="text" placeholder="Kommentaar"></textarea>
@@ -61,8 +61,8 @@
 
   <script type="text/html" id="idea-template">
     <div class="entry-author">
-      <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
-      <h4><%= user.name %></h4>
+      <%= user.generateProfileImage() %>
+      <h4><%= user.get('name') %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content">
@@ -81,8 +81,8 @@
 
   <script type="text/html" id="comment-template">
     <div class="entry-author">
-      <img src="<%= USER_PROFILE_IMAGE_PATH + user.id %>.jpg"/>
-      <h4><%= user.name %></h4>
+      <%= user.generateProfileImage() %>
+      <h4><%= user.get('name') %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content">
@@ -116,6 +116,13 @@
   <script>
     USER_PROFILE_IMAGE_PATH = 'https://workspaces.swedbank.net/project/IDpicture/intranet/';
     USER_ID = '<?= Auth::user()->id ?>';
+
+    /**
+     * @return {boolean}
+     */
+    function isProduction() {
+      return '<?= App::environment() ?>' == 'production';
+    }
   </script>
   <script src="assets/scripts/routes.js"></script>
   <script src="assets/scripts/users.js"></script>

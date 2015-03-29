@@ -103,7 +103,7 @@ var IdeaView = Backbone.View.extend({
     var author = Users.get(this.model.get('user_id'));
     var user = Users.get(USER_ID);
     data.comments = Comments.where({ idea_id: this.model.id });
-    data.user = Users.get(data.user_id).toJSON();
+    data.user = Users.get(data.user_id);
 
     this.$el.html(this.template(data));
 

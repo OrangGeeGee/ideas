@@ -5,6 +5,16 @@ var Users = new Collection('users', function() {
 });
 
 Users.model = Backbone.Model.extend({
+  getProfileImageURL: function() {
+    return isProduction()
+      ? USER_PROFILE_IMAGE_PATH + this.id + '.jpg'
+      : '/assets/images/placeholder-avatar.jpg';
+  },
+
+  generateProfileImage: function() {
+    return '<img src="' + this.getProfileImageURL() + '"/>';
+  },
+
   getIdeas: function () {
     return Ideas.where({ user_id: String(this.id) });
   },

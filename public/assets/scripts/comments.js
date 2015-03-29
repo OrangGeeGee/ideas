@@ -96,7 +96,7 @@ var CommentView = Backbone.View.extend({
 
   render: function() {
     var data = this.model.toJSON();
-    data.user = Users.get(data.user_id).toJSON();
+    data.user = Users.get(data.user_id);
 
     this.$el.html(this.template(data));
 
