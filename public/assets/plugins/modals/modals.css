@@ -3,6 +3,7 @@
   display: none;
   position: fixed;
   background: white;
+  min-width: 480px;
   max-width: 600px;
   z-index: 2;
   transition-property: top, left;
