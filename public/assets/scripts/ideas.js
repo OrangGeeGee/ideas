@@ -15,6 +15,18 @@ Ideas.model = Backbone.Model.extend({
     user.decrement('available_votes');
   },
 
+  removeVote: function() {
+    var activeUser = Users.get(USER_ID);
+
+    if ( $.isArray(this.get('userData')) ) {
+      this.get('userData').forEach(function(user) {
+        if ( user.id == USER_ID ) {
+          user.pivot.voted_at = '0000-00-00 00:00:00';
+        }
+      });
+    }
+  },
+
   getVoteCount: function() {
     return this.get('userData').filter(function(user) {
       return user.pivot.voted_at != '0000-00-00 00:00:00';
@@ -215,24 +227,27 @@ var VoteView = Backbone.View.extend({
       var user = Users.get(USER_ID);
       event.preventDefault();
 
-      if ( this.model.hasBeenVotedFor() || !user.hasFreeVotes() ) {
-        return;
+      if ( this.model.hasBeenVotedFor() ) {
+        $.get(event.target.href);
+        this.model.removeVote();
+      }
+      else if ( user.hasFreeVotes() ) {
+        // TODO: Rewrite. Logic should be in the model.
+        $.get(event.target.href);
+        this.model.vote();
       }
 
-      // TODO: Rewrite. Logic should be in the model.
-      $.get(event.target.href);
-      this.model.vote();
       this.render();
     }
   },
 
   render: function() {
-    this.el.href = 'ideas/' + this.model.id + '/vote';
+    this.el.href = this.model.hasBeenVotedFor()
+      ? 'ideas/' + this.model.id + '/unvote'
+      : 'ideas/' + this.model.id + '/vote';
     this.$el.text(this.model.getVoteCount());
-
-    if ( this.model.hasBeenVotedFor() ) {
-      this.$el.addClass('voted');
-    }
+    this.$el.toggleClass('voted', this.model.hasBeenVotedFor());
+    this.el.title = this.model.hasBeenVotedFor() ? 'Võta oma hääl tagasi' : 'Anna oma hääl';
   },
 
   initialize: function() {

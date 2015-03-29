@@ -113,3 +113,14 @@ Route::get('ideas/{id}/vote', function($id)
     }
   }
 });
+
+Route::get('ideas/{id}/unvote', function($id)
+{
+  $user = Auth::user();
+  $idea = Idea::find($id);
+
+  DB::table('idea_user')
+    ->where('user_id', '=', Auth::user()->id)
+    ->where('idea_id', '=', $id)
+    ->delete();
+});
