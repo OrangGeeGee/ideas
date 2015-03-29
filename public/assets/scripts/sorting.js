@@ -44,8 +44,8 @@ var SortingItemView = Backbone.View.extend({
 });
 
 SortingOptions.add([
-  { id: 1, name: 'Populaarsed' },
-  { id: 2, name: 'Uusimad ees' }
+  { id: 1, name: 'Populaarsemad ees' },
+  { id: 2, name: 'Uuemad ees' }
 ]);
 
 $(searchField).on('keyup', function(event) {
@@ -58,7 +58,9 @@ $(searchField).on('keyup', function(event) {
   else {
     Ideas.filter(function(idea) {
       var title = idea.get('title').toLowerCase();
-      idea.view.$el.toggle(!searchPhrase || title.contains(searchPhrase));
+      var authorName = Users.get(idea.get('user_id')).get('name').toLowerCase();
+
+      idea.view.$el.toggle(!searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase));
     });
   }
 }).mimicPlaceholder();
