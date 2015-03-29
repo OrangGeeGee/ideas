@@ -65,15 +65,15 @@
       <h4><%= user.get('name') %></h4>
       <%= moment(created_at).fromNow() %>
     </div>
-    <div class="entry-content">
+    <div class="entry-content" title="Ava kommentaarid">
       <h3><%= title %></h3>
       <p><%= description %></p>
       <div class="content-fader"></div>
     </div>
     <ul class="entry-data">
       <li class="comments">
-        <% if ( comments.length == 1 ) { %>1 kommentaar<% } %>
-        <% if ( comments.length > 1 ) { %><%= comments.length %> kommentaari<% } %>
+        <% if ( comments.length == 1 ) { %><a href="#" title="Ava kommentaar">1 kommentaar</a><% } %>
+        <% if ( comments.length > 1 ) { %><a href="#" title="Ava kommentaarid"><%= comments.length %> kommentaari</a><% } %>
         <% if ( !comments.length ) { %>Kommentaarid puuduvad<% } %>
       </li>
     </ul>

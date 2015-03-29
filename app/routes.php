@@ -80,9 +80,6 @@ Route::get('ideas/{id}/read', function($id)
 
 Route::get('ideas/{id}/vote', function($id)
 {
-  # Voting will be reopened during Angaar week.
-  return;
-
   $user = Auth::user();
   $idea = Idea::find($id);
 

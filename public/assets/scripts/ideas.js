@@ -81,7 +81,11 @@ var IdeaView = Backbone.View.extend({
   template: _.template($('#idea-template').html()),
 
   events: {
-    'click': 'openIdea',
+    'click .entry-content': 'openIdea',
+    'click .comments a': function(event) {
+      event.preventDefault();
+      this.openIdea();
+    },
     'click img': function() {
       var author = Users.get(this.model.get('user_id'));
       //new UserProfileView({ model: author });
@@ -118,8 +122,7 @@ var IdeaView = Backbone.View.extend({
     });
 
     if ( author != user && !this.model.isFinished() ) {
-      // Voting will be reopened during Angaar week.
-      //this.addVotingAction();
+      this.addVotingAction();
     }
 
     return this.$el;
@@ -128,7 +131,6 @@ var IdeaView = Backbone.View.extend({
   initialize: function() {
     this.model.view = this;
     this.$el.attr('data-idea-id', this.model.id);
-    this.$el.attr('title', 'Ava kommentaarid');
   }
 });
 

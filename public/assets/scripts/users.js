@@ -20,7 +20,9 @@ Users.model = Backbone.Model.extend({
   },
 
   hasFreeVotes: function() {
-    return this.get('available_votes') > 0;
+    //return this.get('available_votes') > 0;
+    // TEMP: For the moment, users can vote for every idea there is.
+    return true;
   }
 });
 
