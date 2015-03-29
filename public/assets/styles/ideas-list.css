@@ -12,6 +12,7 @@
   background-color: white;
   transition: 0.2s background, 0.2s border;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 #ideas-list > li:first-child:hover {
@@ -56,11 +57,16 @@
 
 .entry-data li {
   background: no-repeat left;
-  padding-left: 30px;
+  padding-left: 28px;
+  display: inline-block;
+}
+
+.entry-data li + li {
+  margin-left: 10px;
 }
 
 .entry-data a {
-  color: inherit;
+  color: #d33e00;
   text-decoration: none;
 }
 
@@ -70,6 +76,11 @@
 
 .entry-data li.comments {
   background-image: url('../images/comments.png');
+}
+
+.entry-data li.delete {
+  background-image: url('../images/delete.png');
+  padding-left: 22px;
 }
 
 @media (max-width: 800px) {

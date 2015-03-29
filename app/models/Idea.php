@@ -2,6 +2,7 @@
 
 class Idea extends Eloquent {
   protected $fillable = array('category_id', 'title', 'description');
+  protected $softDelete = true;
 
   /**
    * @param Builder $query

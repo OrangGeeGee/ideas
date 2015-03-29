@@ -76,6 +76,11 @@
         <% if ( comments.length > 1 ) { %><a href="#" title="Ava kommentaarid"><%= comments.length %> kommentaari</a><% } %>
         <% if ( !comments.length ) { %>Kommentaarid puuduvad<% } %>
       </li>
+      <% if ( user_id == USER_ID ) { %>
+      <li class="delete">
+        <a href="ideas/<%= id %>/delete" title="Kustuta oma idee">Kustuta</a>
+      </li>
+      <% } %>
     </ul>
   </script>
 

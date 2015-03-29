@@ -124,3 +124,14 @@ Route::get('ideas/{id}/unvote', function($id)
     ->where('idea_id', '=', $id)
     ->delete();
 });
+
+Route::get('ideas/{id}/delete', function($id)
+{
+  $user = Auth::user();
+  $idea = Idea::find($id);
+
+  if ( $idea->user_id == $user->id )
+  {
+    $idea->delete();
+  }
+});

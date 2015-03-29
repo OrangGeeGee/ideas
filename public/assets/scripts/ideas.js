@@ -98,6 +98,10 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
       this.openIdea();
     },
+    'click .delete a': function(event) {
+      event.preventDefault();
+      this.deleteIdea();
+    },
     'click img': function() {
       var author = Users.get(this.model.get('user_id'));
       //new UserProfileView({ model: author });
@@ -107,6 +111,13 @@ var IdeaView = Backbone.View.extend({
   openIdea: function() {
     new CommentListView({ model: this.model });
     $.get('ideas/' + this.model.id + '/read');
+  },
+
+  deleteIdea: function() {
+    if ( confirm('Oled sa kindel, et soovid oma idee kustutada?') ) {
+      $.get('ideas/' + this.model.id + '/delete');
+      this.remove();
+    }
   },
 
   addVotingAction: function () {
