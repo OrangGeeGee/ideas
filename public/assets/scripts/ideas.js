@@ -109,8 +109,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   openIdea: function() {
-    new CommentListView({ model: this.model });
-    $.get('ideas/' + this.model.id + '/read');
+    location.href = '#ideas/' + this.model.id;
   },
 
   deleteIdea: function() {

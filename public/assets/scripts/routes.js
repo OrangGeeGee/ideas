@@ -1,11 +1,13 @@
 
 var Router = Backbone.Router.extend({
   routes: {
-    'categories/:id': function(id) {
-      Categories.get(id).activate().others().invoke('deactivate');
-    },
-    '*index': function() {
-      Categories.first().activate();
+    'ideas/:id': function(id) {
+      new CommentListView({ model: Ideas.get(id) });
+      $.get('ideas/' + id + '/read');
     }
+  },
+
+  initialize: function() {
+    Categories.first().activate();
   }
 });

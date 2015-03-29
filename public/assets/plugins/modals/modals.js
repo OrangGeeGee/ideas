@@ -95,6 +95,9 @@ Modal.prototype.close = function() {
   // Allow callbacks to be queued to the event.
   this.$.trigger('modal-close', [this]);
 
+  // Remove opened idea's ID from the URL.
+  location.href = '#';
+
   return this;
 };
 

@@ -40,7 +40,14 @@ var CategoriesListView = Backbone.View.extend({
 
 var CategoryView = Backbone.View.extend({
   tagName: 'li',
-  template: _.template('<a href="#categories/<%= id %>"><%= name %></a>'),
+  template: _.template('<a href="#"><%= name %></a>'),
+
+  events: {
+    'click a': function(event) {
+      event.preventDefault();
+      this.model.activate().others().invoke('deactivate');
+    }
+  },
 
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
