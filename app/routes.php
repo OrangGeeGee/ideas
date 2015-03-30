@@ -84,7 +84,7 @@ Route::get('ideas/{id}/vote', function($id)
   $idea = Idea::find($id);
 
   # Can't vote for your own idea.
-  if ( $idea->user_id == $user->id or $user->available_votes == 0 )
+  if ( $idea->user_id == $user->id or !$user->hasFreeVotes() )
   {
     return;
   }

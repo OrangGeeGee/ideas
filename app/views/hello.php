@@ -81,6 +81,17 @@
         <a href="ideas/<%= id %>/delete" title="Kustuta oma idee">Kustuta</a>
       </li>
       <% } %>
+      <% if ( user_id != USER_ID ) { %>
+        <% if ( hasBeenVotedFor ) { %>
+          <li class="vote">
+            Hääletatud – <a href="ideas/<%= id %>/unvote">Kustuta hääl</a>
+          </li>
+        <% } else if ( user.hasFreeVotes() ) { %>
+          <li class="vote">
+            <a href="ideas/<%= id %>/vote">Anna hääl</a>
+          </li>
+        <% } %>
+      <% } %>
     </ul>
   </script>
 

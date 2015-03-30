@@ -87,6 +87,10 @@
   padding-left: 22px;
 }
 
+.entry-data li.vote {
+  background-image: url('../images/thumbs-up.png');
+}
+
 @media (max-width: 800px) {
   #ideas-list > li {
     width: 99%;
@@ -107,7 +111,7 @@
 
 
 /** Votes */
-.vote-link {
+.vote-count {
   position: absolute;
   top: 0;
   right: 0;
@@ -119,8 +123,8 @@
   font: 22px/64px Open Sans;
 }
 
-.vote-link.voted {
-  background: url('../images/yellow-star.png');
+.popular .vote-count {
+  background-image: url(../images/yellow-star.png);
 }
 
 

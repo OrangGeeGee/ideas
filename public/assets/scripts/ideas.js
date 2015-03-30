@@ -102,6 +102,21 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
       this.deleteIdea();
     },
+    'click .vote a': function(event) {
+      event.preventDefault();
+
+      if ( this.model.hasBeenVotedFor() ) {
+        $.get(event.target.href);
+        this.model.removeVote();
+      }
+      else if ( Users.get(USER_ID).hasFreeVotes() ) {
+        // TODO: Rewrite. Logic should be in the model.
+        $.get(event.target.href);
+        this.model.vote();
+      }
+
+      this.render();
+    },
     'click img': function() {
       var author = Users.get(this.model.get('user_id'));
       //new UserProfileView({ model: author });
@@ -119,10 +134,6 @@ var IdeaView = Backbone.View.extend({
     }
   },
 
-  addVotingAction: function () {
-    this.$el.prepend(new VoteView({ model: this.model }).$el);
-  },
-
   render: function() {
     var view = this;
     var data = this.model.toJSON();
@@ -130,12 +141,13 @@ var IdeaView = Backbone.View.extend({
     var user = Users.get(USER_ID);
     data.comments = Comments.where({ idea_id: this.model.id });
     data.user = Users.get(data.user_id);
+    data.hasBeenVotedFor = this.model.hasBeenVotedFor();
 
     this.$el.html(this.template(data));
+    this.$el.prepend(new VoteCountView({ model: this.model }).$el);
 
-    if ( this.model.isFinished() ) {
-      this.$el.addClass('finished');
-    }
+    this.$el.toggleClass('finished', this.model.isFinished());
+    this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
 
     this.model.on('change', this.render, this);
 
@@ -143,9 +155,6 @@ var IdeaView = Backbone.View.extend({
       view.$el.toggle(view.model.matchesCategoryFilter());
     });
 
-    if ( author != user && !this.model.isFinished() ) {
-      this.addVotingAction();
-    }
 
     return this.$el;
   },
@@ -228,48 +237,15 @@ var IdeaListView = Backbone.View.extend({
 
 
 
-var VoteView = Backbone.View.extend({
-  tagName: 'a',
-  className: 'vote-link',
-
-  events: {
-    'click': function(event) {
-      var user = Users.get(USER_ID);
-      event.preventDefault();
-
-      if ( this.model.hasBeenVotedFor() ) {
-        $.get(event.target.href);
-        this.model.removeVote();
-      }
-      else if ( user.hasFreeVotes() ) {
-        // TODO: Rewrite. Logic should be in the model.
-        $.get(event.target.href);
-        this.model.vote();
-      }
-
-      this.render();
-    }
-  },
+var VoteCountView = Backbone.View.extend({
+  className: 'vote-count',
 
   render: function() {
-    this.el.href = this.model.hasBeenVotedFor()
-      ? 'ideas/' + this.model.id + '/unvote'
-      : 'ideas/' + this.model.id + '/vote';
-    this.$el.text(this.model.getVoteCount());
-    this.$el.toggleClass('voted', this.model.hasBeenVotedFor());
-    this.el.title = this.model.hasBeenVotedFor() ? 'Võta oma hääl tagasi' : 'Anna oma hääl';
+    var voteCount = this.model.getVoteCount();
+    this.$el.text(voteCount).toggle(voteCount > 0);
   },
 
   initialize: function() {
-    var user = Users.get(USER_ID);
-
     this.render();
-
-    // TODO: Callback stacks over time. Potential performance impact.
-    this.listenTo(user, 'change:available_votes', function() {
-      if ( !user.hasFreeVotes() ) {
-        this.render();
-      }
-    }.bind(this));
   }
 });

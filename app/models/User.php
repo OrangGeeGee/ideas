@@ -34,6 +34,14 @@ class User extends Eloquent implements UserInterface {
   {
     return $this->hasMany('Comment');
   }
+
+  public function hasFreeVotes()
+  {
+    #return $this->available_votes > 0;
+    # TEMP: For the moment, users can vote for every idea there is.
+    return true;
+  }
+
   /**
    * Get the token value for the "remember me" session.
    *
