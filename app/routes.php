@@ -20,6 +20,11 @@ if ( PHP_SAPI != 'cli' )
 
 Route::get('/', function()
 {
+  require '../app/UserAgentParser.php';
+  $logData = parse_user_agent();
+  $logData['user_id'] = Auth::user()->id;
+  RequestLog::create($logData);
+
 	return View::make('hello');
 });
 
