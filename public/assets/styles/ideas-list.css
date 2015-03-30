@@ -111,17 +111,16 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: url(../images/hollow-star.png) no-repeat 8px 9px;
+  background: url(../images/grey-star.png) no-repeat;
   width: 64px;
   color: black;
   text-decoration: none;
   text-align: center;
-  font: 22px/72px Open Sans;
+  font: 22px/64px Open Sans;
 }
 
 .vote-link.voted {
   background: url('../images/yellow-star.png');
-  line-height: 64px;
 }
 
 
