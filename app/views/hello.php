@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Brainstorming</title>
+  <title>Angaar</title>
   <link href="assets/styles/fonts.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/base.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/layout.css" type="text/css" rel="stylesheet">
