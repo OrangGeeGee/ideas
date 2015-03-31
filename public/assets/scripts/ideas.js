@@ -4,6 +4,10 @@ var Ideas = new Collection('ideas', function() {
 });
 
 Ideas.model = Backbone.Model.extend({
+  defaults: {
+    userData: []
+  },
+
   vote: function() {
     var user = Users.get(USER_ID);
     var data = user.toJSON();
@@ -16,15 +20,11 @@ Ideas.model = Backbone.Model.extend({
   },
 
   removeVote: function() {
-    var activeUser = Users.get(USER_ID);
-
-    if ( $.isArray(this.get('userData')) ) {
-      this.get('userData').forEach(function(user) {
-        if ( user.id == USER_ID ) {
-          user.pivot.voted_at = '0000-00-00 00:00:00';
-        }
-      });
-    }
+    this.get('userData').forEach(function(user) {
+      if ( user.id == USER_ID ) {
+        user.pivot.voted_at = '0000-00-00 00:00:00';
+      }
+    });
   },
 
   getVoteCount: function() {

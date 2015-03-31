@@ -54,6 +54,7 @@ Route::get('update', function()
   Session::put('lastUpdateCheck', date('Y-m-d H:i:s'));
 
   return array(
+    'Users' => User::newest($lastUpdate)->get()->toArray(),
     'Ideas' => Idea::latest($lastUpdate)->get()->toArray(),
     'Comments' => Comment::latest($lastUpdate)->get()->toArray()
   );

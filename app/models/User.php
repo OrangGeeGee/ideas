@@ -43,6 +43,16 @@ class User extends Eloquent implements UserInterface {
   }
 
   /**
+   * @param Builder $query
+   * @param string $timestamp
+   * @return Collection
+   */
+  public function scopeNewest($query, $timestamp = '')
+  {
+    return $query->where('created_at', '>=', $timestamp);
+  }
+
+  /**
    * Get the token value for the "remember me" session.
    *
    * @return string
