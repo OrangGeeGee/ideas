@@ -140,3 +140,19 @@ Route::get('ideas/{id}/delete', function($id)
     $idea->delete();
   }
 });
+
+Route::get('whoami', function()
+{
+  return Auth::user()->id;
+});
+
+if ( App::environment() == 'local' )
+{
+  Route::get('become/{id}', function($id)
+  {
+    $user = User::find($id);
+    Auth::login($user);
+
+    return Redirect::to('whoami');
+  });
+}
