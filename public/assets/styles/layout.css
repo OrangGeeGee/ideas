@@ -25,20 +25,17 @@ a[href="//ee.swedbank.net/"]:not(:hover) {
   position: relative;
   font-size: 16px;
   min-height: 80px;
+  overflow: hidden;
 }
 
 #headerProfile {
   display: none;
+  float: left;
+  width: 30%;
 }
 
 #headerProfile h2 {
   margin-bottom: 0;
-}
-
-#headerProfile p {
-  display: inline-block;
-  /*line-height: 28px;*/
-  width: 30%;
 }
 
 #freeVotesLeft {

@@ -12,6 +12,7 @@ body {
   background: url('../images/background.jpg');
   margin: 40px;
   overflow-y: scroll;
+  min-width: 600px;
 }
 
 input,

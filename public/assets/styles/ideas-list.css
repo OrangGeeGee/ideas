@@ -91,21 +91,33 @@
   background-image: url('../images/thumbs-up.png');
 }
 
+/** Single column layout */
 @media (max-width: 800px) {
   #ideas-list > li {
-    width: 99%;
+    margin-bottom: 7%;
+    width: 100%;
   }
 }
 
+/** Two-column layout */
 @media (min-width: 801px) and (max-width: 1100px) {
   #ideas-list > li {
-    width: 49%;
+    margin: .5% 2% 4%;
+    width: 46%;
+  }
+}
+
+/** Three-column layout */
+@media (min-width: 801px) and (max-width: 1550px), (min-width: 1700px) {
+  .entry-data li {
+    display: block;
+    margin: 0 !important;
   }
 }
 
 @media (min-width: 1700px) {
   #ideas-list > li {
-    width: 24%;
+    width: 22%;
   }
 }
 
