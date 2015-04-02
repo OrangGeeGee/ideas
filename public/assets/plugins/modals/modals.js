@@ -95,8 +95,10 @@ Modal.prototype.close = function() {
   // Allow callbacks to be queued to the event.
   this.$.trigger('modal-close', [this]);
 
-  // Remove opened idea's ID from the URL.
+  // Remove opened idea's ID from the URL. Avoid scrolling the page back to the top.
+  var scrollPosition = $('html').scrollTop() || $('body').scrollTop();
   location.href = '#';
+  $('html, body').scrollTop(scrollPosition);
 
   return this;
 };
