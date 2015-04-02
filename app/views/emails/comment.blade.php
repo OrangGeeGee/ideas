@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h2>Brainstorm</h2>
-	  <p>{{ $user->name }} just commented on your idea "{{ $comment->idea->title }}":</p>
+		<h2>Angaar</h2>
+	  <p>{{ $user->name }} lisas kommentaari sinu ideele <a href="http://eos.crebit.ee/brainstorm/#ideas/{{ $idea->id }}" target="_blank">"{{ $idea->title }}"</a>:</p>
 	  <blockquote>{{ $comment->text }}</blockquote>
 	</body>
 </html>
