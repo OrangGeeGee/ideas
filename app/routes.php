@@ -114,7 +114,7 @@ Route::get('ideas/{id}/vote', function($id)
 
         $message
           ->to($author->email, $author->name)
-          ->subject('[Brainstorm] Your idea gained a vote');
+          ->subject('[Angaar] Sinu idee sai hääle');
       });
     }
   }
