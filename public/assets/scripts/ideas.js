@@ -53,6 +53,7 @@ Ideas.model = Backbone.Model.extend({
 var IdeaFormView = Backbone.View.extend({
   tagName: 'form',
   template: _.template($('#idea-form-template').html()),
+  callbacks: [],
 
   events: {
     submit: 'submit',
@@ -64,13 +65,24 @@ var IdeaFormView = Backbone.View.extend({
     this.$(':submit').prop('disabled', !data.title || !data.description);
   },
 
+  afterSubmit: function(callback) {
+    this.callbacks.push(callback);
+  },
+
   submit: function(event) {
     event.preventDefault();
     var data = this.$el.parseAsJSON();
 
-    Ideas.create(data, { wait: true });
-    this.el.reset();
-    this.toggleSubmitButton();
+    this.$el.addClass('loading');
+    this.$(':input').attr('disabled', 'disabled');
+    Ideas.create(data, {
+      wait: true,
+      success: function() {
+        this.callbacks.forEach(function(callback) {
+          callback();
+        });
+      }.bind(this)
+    });
   },
 
   render: function() {
@@ -173,7 +185,8 @@ var NewIdeaView = Backbone.View.extend({
 
   events: {
     'click': function() {
-      var modal = new Modal('new-idea', new IdeaFormView);
+      var form = new IdeaFormView;
+      var modal = new Modal('new-idea', form);
 
       // Focus the title field only if the browser supports placeholder attribute.
       // If it doesn't and we focus the field, then the field would be empty and
@@ -182,7 +195,7 @@ var NewIdeaView = Backbone.View.extend({
         modal.$.field('title').focus();
       }
 
-      modal.$.on('submit', function() {
+      form.afterSubmit(function() {
         modal.close();
       });
     }

@@ -77,3 +77,21 @@ blockquote:before {
   margin-right: 0.25em;
   vertical-align: -0.4em;
 }
+
+/** Forms */
+form.loading:before {
+  content: url("../images/loading-animation.gif?");
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  margin-top: -32px;
+  margin-left: -32px;
+}
+
+form.loading [disabled] {
+  opacity: .33;
+  filter: alpha(opacity=33);
+}

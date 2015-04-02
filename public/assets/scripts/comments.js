@@ -21,14 +21,29 @@ var CommentFormView = Backbone.View.extend({
     this.$(':submit').prop('disabled', !data.text);
   },
 
+  enableForm: function() {
+    this.$el.removeClass('loading');
+    this.$(':input').removeAttr('disabled');
+  },
+
+  disableForm: function() {
+    this.$el.addClass('loading');
+    this.$(':input').attr('disabled', 'disabled');
+  },
+
   submit: function(event) {
     event.preventDefault();
     var data = this.$el.parseAsJSON();
     data.idea_id = this.model.id;
 
-    Comments.create(data, { wait: true });
-    this.el.reset();
-    this.toggleSubmitButton();
+    this.disableForm();
+    Comments.create(data, {
+      wait: true,
+      success: function() {
+        this.enableForm()
+        this.el.reset();
+      }.bind(this)
+    });
   },
 
   render: function() {
