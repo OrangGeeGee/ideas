@@ -65,18 +65,14 @@ SortingOptions.add([
 ]);
 
 $(searchField).on('keyup', function(event) {
-  var searchPhrase = this.value.toLowerCase();
 
   // Escape key.
   if ( event.which == 27 ) {
     $(this).val('').trigger('keyup');
   }
   else {
-    Ideas.filter(function(idea) {
-      var title = idea.get('title').toLowerCase();
-      var authorName = Users.get(idea.get('user_id')).get('name').toLowerCase();
-
-      idea.view.$el.toggle(!searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase));
+    Ideas.each(function(idea) {
+      idea.view.$el.toggle(idea.matchesCategoryFilter() && idea.matchesSearchPhrase());
     });
   }
 }).mimicPlaceholder();

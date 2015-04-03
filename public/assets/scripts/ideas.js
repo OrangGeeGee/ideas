@@ -43,6 +43,18 @@ Ideas.model = Backbone.Model.extend({
     return this.get('category_id') == Categories.getActive().id;
   },
 
+  matchesSearchPhrase: function() {
+    var searchPhrase = searchField.value.toLowerCase();
+    var title = this.get('title').toLowerCase();
+    var authorName = Users.get(this.get('user_id')).get('name').toLowerCase();
+
+    if ( searchPhrase == $(searchField).attr('placeholder').toLowerCase() ) {
+      searchPhrase = '';
+    }
+
+    return !searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase);
+  },
+
   isFinished: function() {
     return this.get('status_id') == 1;
   }
@@ -164,9 +176,8 @@ var IdeaView = Backbone.View.extend({
     this.model.on('change', this.render, this);
 
     Categories.on('change:active', function() {
-      view.$el.toggle(view.model.matchesCategoryFilter());
+      view.$el.toggle(view.model.matchesCategoryFilter() && view.model.matchesSearchPhrase());
     });
-
 
     return this.$el;
   },
@@ -225,7 +236,7 @@ var IdeaListView = Backbone.View.extend({
     var view = new IdeaView({ model: idea });
     var $view = view.render().insertAfter(this.$addNewIdea);
 
-    if ( !idea.matchesCategoryFilter() ) {
+    if ( !idea.matchesCategoryFilter() || !idea.matchesSearchPhrase() ) {
       $view.hide();
     }
     else if ( animate === true ) {
