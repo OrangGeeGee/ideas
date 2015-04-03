@@ -63,7 +63,6 @@
     <div class="entry-author">
       <%= user.generateProfileImage() %>
       <h4><%= user.get('name') %></h4>
-      <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content" title="Ava kommentaarid">
       <h3><%= title %></h3>
@@ -99,7 +98,6 @@
     <div class="entry-author">
       <%= user.generateProfileImage() %>
       <h4><%= user.get('name') %></h4>
-      <%= moment(created_at).fromNow() %>
     </div>
     <div class="entry-content">
       <p><%= text %></p>
@@ -146,6 +144,7 @@
   <script src="assets/scripts/comments.js"></script>
   <script src="assets/scripts/categories.js"></script>
   <script src="assets/scripts/sorting.js"></script>
+  <script src="assets/scripts/timestamps.js"></script>
   <script src="assets/scripts/tutorial.js"></script>
 </body>
 </html>

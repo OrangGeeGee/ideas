@@ -114,6 +114,7 @@ var CommentView = Backbone.View.extend({
     data.user = Users.get(data.user_id);
 
     this.$el.html(this.template(data));
+    this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
 
     return this.$el;
   }

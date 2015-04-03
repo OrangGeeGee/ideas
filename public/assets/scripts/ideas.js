@@ -161,13 +161,12 @@ var IdeaView = Backbone.View.extend({
   render: function() {
     var view = this;
     var data = this.model.toJSON();
-    var author = Users.get(this.model.get('user_id'));
-    var user = Users.get(USER_ID);
     data.comments = Comments.where({ idea_id: this.model.id });
     data.user = Users.get(data.user_id);
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
 
     this.$el.html(this.template(data));
+    this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
     this.$el.prepend(new VoteCountView({ model: this.model }).$el);
 
     this.$el.toggleClass('finished', this.model.isFinished());
