@@ -10,5 +10,6 @@ var Router = Backbone.Router.extend({
   initialize: function() {
     Categories.first().activate();
     SortingOptions.first().activate();
+    $('#notWorkingMessage').slideUp();
   }
 });

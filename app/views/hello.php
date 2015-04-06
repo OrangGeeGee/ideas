@@ -8,6 +8,7 @@
   <link href="assets/styles/base.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/layout.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/headings.css" type="text/css" rel="stylesheet">
+  <link href="assets/styles/buttons.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/idea-form.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/ideas-list.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/entry-list.css" type="text/css" rel="stylesheet">
@@ -30,6 +31,11 @@
       <ul id="categories-list"></ul>
       <ul id="sorting-options-list"></ul>
     </div>
+  </div>
+
+  <div id="notWorkingMessage">
+    <p>Kui leht on pärast paarisekundilist ootamist endiselt tühi (mis võib juhtuda, kui oled siin keskkonnas täiesti esimest korda), proovi lehte värskendada.</p>
+    <?= link_to('/', 'Värskenda', array('class' => 'button')) ?>
   </div>
 
   <!-- Templates -->
