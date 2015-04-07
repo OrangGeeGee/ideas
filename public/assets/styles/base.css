@@ -95,12 +95,3 @@ form.loading [disabled] {
   opacity: .33;
   filter: alpha(opacity=33);
 }
-
-/** First-time users for whom the page is empty */
-#notWorkingMessage {
-  background-color: white;
-  text-align: center;
-  width: 50%;
-  margin: 30px auto;
-  padding: 20px 100px;
-}

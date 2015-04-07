@@ -33,11 +33,6 @@
     </div>
   </div>
 
-  <div id="notWorkingMessage">
-    <p>Kui leht on pärast paarisekundilist ootamist endiselt tühi (mis võib juhtuda, kui oled siin keskkonnas täiesti esimest korda), proovi lehte värskendada.</p>
-    <?= link_to('/', 'Värskenda', array('class' => 'button')) ?>
-  </div>
-
   <!-- Templates -->
   <script type="text/html" id="idea-form-template">
     <h2><input type="text" name="title" placeholder="Idee pealkiri"/></h2>

@@ -14,6 +14,14 @@ if ( PHP_SAPI != 'cli' )
 
 Route::get('/', function()
 {
+  # For some reason, LDAP fails for first time users.
+  # If that's the case, wait for a bit and try again.
+  if ( Auth::user()->id == "0" )
+  {
+    sleep(1);
+    return Redirect::to('/');
+  }
+
   require '../app/UserAgentParser.php';
   $logData = parse_user_agent();
   $logData['user_id'] = Auth::user()->id;
