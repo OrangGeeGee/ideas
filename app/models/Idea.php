@@ -20,6 +20,16 @@ class Idea extends Eloquent {
     return $this->belongsToMany('User')->withPivot($pivotFields);
   }
 
+  public function votes()
+  {
+    return $this->belongsToMany('User');
+  }
+
+  public function comments()
+  {
+    return $this->hasMany('Comment');
+  }
+
   public function hasBeenVotedFor()
   {
     return !!$this->userData()

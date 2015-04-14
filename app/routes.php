@@ -146,7 +146,31 @@ Route::get('ideas/{id}/delete', function($id)
 
 Route::get('top', function()
 {
+  echo '<meta charset="utf-8"/>';
+  echo "<table>";
+  echo "<tr>";
+  echo "  <th>Lisaja</th>";
+  echo "  <th>Hääli</th>";
+  echo "  <th>Kommentaare</th>";
+  echo "  <th>Idee</th>";
+  echo "  <th>Kirjeldus</th>";
+  echo "</tr>";
 
+  foreach ( Idea::with('votes', 'user', 'comments')->where('category_id', 1)->get() as $idea )
+  {
+    $votes = count($idea->votes);
+    $comments = count($idea->comments);
+    $url = 'http://eos.crebit.ee/angaar/#ideas/' . $idea->id;
+
+    echo "<tr>";
+    echo "  <td>{$idea->user->name}</td>";
+    echo "  <td>{$votes}</td>";
+    echo "  <td>{$comments}</td>";
+    echo "  <td><a href=\"{$url}\" target='_blank'>{$idea->title}</a></td>";
+    echo "  <td>{$idea->description}</td>";
+    echo "</tr>";
+  }
+  echo "</table>";
 });
 
 
