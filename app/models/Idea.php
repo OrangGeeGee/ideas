@@ -22,7 +22,7 @@ class Idea extends Eloquent {
 
   public function votes()
   {
-    return $this->belongsToMany('User');
+    return $this->belongsToMany('User')->where('voted_at', '>', '0000-00-00 00:00:00');
   }
 
   public function comments()
