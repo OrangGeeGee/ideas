@@ -10,7 +10,7 @@
   <link href="assets/styles/headings.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/buttons.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/idea-form.css" type="text/css" rel="stylesheet">
-  <link href="assets/styles/ideas-list.css" type="text/css" rel="stylesheet">
+  <link href="assets/styles/ideas-list.css?20150416" type="text/css" rel="stylesheet">
   <link href="assets/styles/entry-list.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/comments.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/users.css" type="text/css" rel="stylesheet">
@@ -81,7 +81,7 @@
         <a href="ideas/<%= id %>/delete" title="Kustuta oma idee">Kustuta</a>
       </li>
       <% } %>
-      <% if ( user_id != USER_ID && status_id == 0 ) { %>
+      <% if ( user_id != USER_ID && !isFinished ) { %>
         <% if ( hasBeenVotedFor ) { %>
           <li class="vote">
             Hääletatud – <a href="ideas/<%= id %>/unvote">Kustuta hääl</a>
@@ -141,7 +141,7 @@
   </script>
   <script src="assets/scripts/routes.js"></script>
   <script src="assets/scripts/users.js"></script>
-  <script src="assets/scripts/ideas.js"></script>
+  <script src="assets/scripts/ideas.js?20150416"></script>
   <script src="assets/scripts/comments.js"></script>
   <script src="assets/scripts/categories.js"></script>
   <script src="assets/scripts/sorting.js"></script>

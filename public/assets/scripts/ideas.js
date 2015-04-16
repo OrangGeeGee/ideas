@@ -166,6 +166,7 @@ var IdeaView = Backbone.View.extend({
     var view = this;
     var data = this.model.toJSON();
     data.comments = Comments.where({ idea_id: this.model.id });
+    data.isFinished = this.model.isFinished();
     data.user = Users.get(data.user_id);
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
 
