@@ -55,8 +55,12 @@ Ideas.model = Backbone.Model.extend({
     return !searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase);
   },
 
-  isFinished: function() {
+  isInProgress: function() {
     return this.get('status_id') == 1;
+  },
+
+  isFinished: function() {
+    return this.get('status_id') == 2;
   }
 });
 
@@ -169,6 +173,7 @@ var IdeaView = Backbone.View.extend({
     this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
     this.$el.prepend(new VoteCountView({ model: this.model }).$el);
 
+    this.$el.toggleClass('in-progress', this.model.isInProgress());
     this.$el.toggleClass('finished', this.model.isFinished());
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
 

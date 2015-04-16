@@ -41,7 +41,6 @@
 }
 
 #ideas-list .entry-content {
-  border-radius: 10px;
   height: 120px;
   overflow: hidden;
   position: relative;
@@ -168,14 +167,21 @@
 }
 
 
-/** Finished ideas */
-.finished {
-  background-color: #f90 !important;
-  background-image: linear-gradient(orange, #f60);
+/** Idea statuses */
+.entry-content h3:before {
+  font-size: 14px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  vertical-align: middle;
 }
 
-.finished .entry-content h3 {
-  display: inline;
-  background: url('../images/mark-sign.png') no-repeat right;
-  padding-right: 40px;
+.in-progress .entry-content h3:before {
+  background-color: #df7df7;
+  content: "Tegemisel";
+}
+
+.finished .entry-content h3:before {
+  background-color: #f90;
+  content: "Tehtud";
 }
