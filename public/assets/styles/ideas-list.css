@@ -1,6 +1,7 @@
 
 #ideas-list > li {
   width: 30%;
+  min-height: 230px;
   float: left;
   position: relative;
   background-color: white;

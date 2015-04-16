@@ -6,7 +6,6 @@
 .entry-list > li {
   position: relative;
   padding: 40px 64px 20px 59px;
-  min-height: 100px;
   margin: 0.5% 1.5% 2%;
 }
 

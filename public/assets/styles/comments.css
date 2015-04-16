@@ -2,6 +2,7 @@
 #comment-list > li {
   margin: 0 0 20px;
   padding: 25px 0 0 80px;
+  min-height: 100px;
 }
 
 #comment-list > li:first-child {

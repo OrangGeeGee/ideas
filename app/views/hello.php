@@ -10,9 +10,9 @@
   <link href="assets/styles/headings.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/buttons.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/idea-form.css" type="text/css" rel="stylesheet">
-  <link href="assets/styles/ideas-list.css?20150416" type="text/css" rel="stylesheet">
-  <link href="assets/styles/entry-list.css" type="text/css" rel="stylesheet">
-  <link href="assets/styles/comments.css" type="text/css" rel="stylesheet">
+  <link href="assets/styles/ideas-list.css?20150416b" type="text/css" rel="stylesheet">
+  <link href="assets/styles/entry-list.css?20150416b" type="text/css" rel="stylesheet">
+  <link href="assets/styles/comments.css?20150416b" type="text/css" rel="stylesheet">
   <link href="assets/styles/users.css" type="text/css" rel="stylesheet">
   <link href="assets/styles/filters.css" type="text/css" rel="stylesheet">
   <link href="assets/plugins/modals/modals.css" type="text/css" rel="stylesheet">
