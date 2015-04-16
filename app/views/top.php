@@ -6,9 +6,25 @@
   <title>Angaar</title>
   <link href="assets/styles/base.css" type="text/css" rel="stylesheet">
   <style type="text/css">
+    table {
+      border-spacing: 0;
+    }
+    th,
+    td {
+      padding: 3px;
+    }
+    th {
+      text-align: left;
+    }
+    td:first-child {
+      width: 100px;
+    }
     th:nth-child(4),
     td:nth-child(4) {
       width: 20%
+    }
+    td {
+      border-top: 1px solid #CCC;
     }
   </style>
 </head>
@@ -31,8 +47,8 @@
         <td><?= count($idea->comments) ?></td>
         <td><?= link_to("http://eos.crebit.ee/angaar/#ideas/{$idea->id}", $idea->title) ?></td>
         <td><?= $idea->description ?></td>
-        <td><input type="text" name="area" value="<?= $idea->area ?>"/></td>
-        <td><input type="text" name="responsible" value="<?= $idea->responsible ?>"/></td>
+        <td><input type="text" name="area" value="<?= $idea->area ?>" placeholder="Valdkond"/></td>
+        <td><input type="text" name="responsible" value="<?= $idea->responsible ?>" placeholder="Vastutaja"/></td>
       </tr>
     <?php endforeach ?>
   </table>
