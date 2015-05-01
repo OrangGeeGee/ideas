@@ -23,10 +23,22 @@ class IdeaController extends \BaseController {
 	public function store()
 	{
 		$data = Input::get();
+    $user = Auth::user();
     $idea = new Idea($data);
 
-    Auth::user()->ideas()->save($idea);
+    $user->ideas()->save($idea);
     $idea->userData = $idea->userData->toArray();
+
+    # Notify secretaries about the new idea. Candy time!
+    if ( $user->hasEstonianEmailAddress() )
+    {
+      Mail::send('emails.idea', compact('idea', 'user'), function($message)
+      {
+        $message
+          ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
+          ->subject('[Angaar] Uus idee');
+      });
+    }
 
     return $idea;
 	}

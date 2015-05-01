@@ -54,7 +54,10 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'brainstorm@eos.crebit.ee', 'name' => 'Brainstorm'),
+	'from' => array(
+		'address' => 'angaar@eos.crebit.ee',
+		'name' => 'Angaar'
+	),
 
 	/*
 	|--------------------------------------------------------------------------

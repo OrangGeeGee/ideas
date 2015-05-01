@@ -42,6 +42,11 @@ class User extends Eloquent implements UserInterface {
     return true;
   }
 
+  public function hasEstonianEmailAddress()
+  {
+    return substr($this->email, -3) == '.ee';
+  }
+
   /**
    * @param Builder $query
    * @param string $timestamp
