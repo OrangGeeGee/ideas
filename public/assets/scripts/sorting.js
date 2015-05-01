@@ -59,11 +59,6 @@ var SortingItemView = Backbone.View.extend({
   }
 });
 
-SortingOptions.add([
-  { id: 1, name: 'Uuemad ees' },
-  { id: 2, name: 'Populaarsemad ees' }
-]);
-
 $(searchField).on('keyup', function(event) {
 
   // Escape key.

@@ -1,3 +1,7 @@
+<?php
+require 'Labels.php';
+Labels::initialize();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,17 +21,26 @@
   <link href="assets/styles/filters.css" type="text/css" rel="stylesheet">
   <link href="assets/plugins/modals/modals.css" type="text/css" rel="stylesheet">
   <link href="assets/plugins/introjs/introjs.css" type="text/css" rel="stylesheet">
+  <style type="text/css">
+    .in-progress .entry-content h3:before {
+      content: "<?= Labels::get('inProgress') ?>";
+    }
+
+    .finished .entry-content h3:before {
+      content: "<?= Labels::get('done') ?>";
+    }
+  </style>
 </head>
 <body>
 
-  <a href="//ee.swedbank.net/" style="">Tagasi intranetti</a>
+  <a href="//ee.swedbank.net/" style=""><?= Labels::get('toIntranet') ?></a>
 
   <div id="header">
     <div id="profile-section" style="display: none;">
 
     </div>
     <div id="filter-section">
-      <input type="text" id="searchField" placeholder="Otsi..."/>
+      <input type="text" id="searchField" placeholder="<?= Labels::get('searchPlaceholder') ?>"/>
       <ul id="categories-list"></ul>
       <ul id="sorting-options-list"></ul>
     </div>
@@ -35,19 +48,19 @@
 
   <!-- Templates -->
   <script type="text/html" id="idea-form-template">
-    <h2><input type="text" name="title" placeholder="Idee pealkiri"/></h2>
+    <h2><input type="text" name="title" placeholder="<?= Labels::get('ideaTitlePlaceholder') ?>"/></h2>
     <select name="category_id">
     <?php foreach ( Category::all() as $category ): ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>
     <?php endforeach ?>
     </select>
-    <textarea name="description" placeholder="Kirjeldus"></textarea>
-    <input type="submit" value="Lisa"/>
+    <textarea name="description" placeholder="<?= Labels::get('ideaDescriptionPlaceholder') ?>"></textarea>
+    <input type="submit" value="<?= Labels::get('add') ?>"/>
   </script>
 
   <script type="text/html" id="user-header-template">
-    <h2>Hei, <%= name.getForename() %></h2>
-    <p>Angaari-raames saad esitada ja kommenteerida ideid ning hääletada parimate poolt 15. aprillini.</p>
+    <h2><?= Labels::get('hi') ?>, <%= name.getForename() %></h2>
+    <p><?= Labels::get('introduction') ?></p>
   </script>
 
   <script type="text/html" id="comment-form-template">
@@ -55,8 +68,8 @@
       <%= Users.get(USER_ID).generateProfileImage() %>
     </div>
     <div class="entry-content">
-      <textarea name="text" placeholder="Kommentaar"></textarea>
-      <input type="submit" value="Lisa kommentaar"/>
+      <textarea name="text" placeholder="<?= Labels::get('commentPlaceholder') ?>"></textarea>
+      <input type="submit" value="<?= Labels::get('addComment') ?>"/>
     </div>
   </script>
 
@@ -65,30 +78,30 @@
       <%= user.generateProfileImage() %>
       <h4><%= user.get('name') %></h4>
     </div>
-    <div class="entry-content" title="Ava kommentaarid">
+    <div class="entry-content" title="<?= Labels::get('openComments') ?>">
       <h3><%= title %></h3>
       <p><%= description %></p>
       <div class="content-fader"></div>
     </div>
     <ul class="entry-data">
       <li class="comments">
-        <% if ( comments.length == 1 ) { %><a href="#" title="Ava kommentaar">1 kommentaar</a><% } %>
-        <% if ( comments.length > 1 ) { %><a href="#" title="Ava kommentaarid"><%= comments.length %> kommentaari</a><% } %>
-        <% if ( !comments.length ) { %>Kommentaarid puuduvad<% } %>
+        <% if ( comments.length == 1 ) { %><a href="#">1 <?= Labels::get('comment') ?></a><% } %>
+        <% if ( comments.length > 1 ) { %><a href="#"><%= comments.length %> <?= Labels::get('comments') ?></a><% } %>
+        <% if ( !comments.length ) { %><?= Labels::get('noComments') ?><% } %>
       </li>
       <% if ( user_id == USER_ID ) { %>
       <li class="delete">
-        <a href="ideas/<%= id %>/delete" title="Kustuta oma idee">Kustuta</a>
+        <a href="ideas/<%= id %>/delete" title="Kustuta oma idee"><?= Labels::get('delete') ?></a>
       </li>
       <% } %>
       <% if ( user_id != USER_ID && !isFinished ) { %>
         <% if ( hasBeenVotedFor ) { %>
           <li class="vote">
-            Hääletatud – <a href="ideas/<%= id %>/unvote">Kustuta hääl</a>
+            <?= Labels::get('voted') ?> – <a href="ideas/<%= id %>/unvote"><?= Labels::get('removeVote') ?></a>
           </li>
         <% } else if ( user.hasFreeVotes() ) { %>
           <li class="vote">
-            <a href="ideas/<%= id %>/vote">Anna hääl</a>
+            <a href="ideas/<%= id %>/vote"><?= Labels::get('vote') ?></a>
           </li>
         <% } %>
       <% } %>
@@ -107,14 +120,16 @@
 
   <script type="text/html" id="new-idea-template">
     <img src="<?= url('/assets/images/pencil-icon.png') ?>"/>
-    <h3>Lisa uus idee</h3>
+    <h3><?= Labels::get('addNewIdea') ?></h3>
   </script>
 
   <!-- Dependencies -->
   <script src="assets/scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="assets/scripts/jquery/jquery.helpers.js"></script>
   <script src="assets/scripts/moment/moment-2.4.0.min.js"></script>
+  <?php if ( Config::get('language') == 'EST' ): ?>
   <script src="assets/scripts/moment/moment.et.js"></script>
+  <?php endif ?>
   <script src="assets/scripts/backbone/underscore-1.5.2.js"></script>
   <script src="assets/scripts/backbone/backbone-1.1.0.js"></script>
   <script src="assets/scripts/backbone/model.js"></script>
@@ -145,6 +160,12 @@
   <script src="assets/scripts/comments.js"></script>
   <script src="assets/scripts/categories.js"></script>
   <script src="assets/scripts/sorting.js"></script>
+  <script>
+    SortingOptions.add([
+      { id: 1, name: '<?= Labels::get('sortingByDate') ?>' },
+      { id: 2, name: '<?= Labels::get('sortingByPopularity') ?>' }
+    ]);
+  </script>
   <script src="assets/scripts/timestamps.js"></script>
   <script src="assets/scripts/tutorial.js"></script>
 </body>

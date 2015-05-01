@@ -6,6 +6,10 @@ if ( PHP_SAPI != 'cli' )
   require 'ldap-auth.php';
 }
 
+Route::get('name', function() {
+  return Auth::user()->getFirstName();
+});
+
 
 /**
  * App routes.
@@ -14,9 +18,11 @@ if ( PHP_SAPI != 'cli' )
 
 Route::get('/', function()
 {
+  $user = Auth::user();
+
   # For some reason, LDAP fails for first time users.
   # If that's the case, wait for a bit and try again.
-  if ( Auth::user()->id == "0" )
+  if ( $user->id == "0" )
   {
     sleep(1);
     return Redirect::to('/');
@@ -26,6 +32,9 @@ Route::get('/', function()
   $logData = parse_user_agent();
   $logData['user_id'] = Auth::user()->id;
   RequestLog::create($logData);
+
+  # Localization.
+  Config::set('language', $user->hasEstonianEmailAddress() ? 'EST' : 'ENG');
 
 	return View::make('hello');
 });

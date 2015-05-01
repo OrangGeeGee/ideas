@@ -179,10 +179,8 @@
 
 .in-progress .entry-content h3:before {
   background-color: #df7df7;
-  content: "Tegemisel";
 }
 
 .finished .entry-content h3:before {
   background-color: #f90;
-  content: "Tehtud";
 }
