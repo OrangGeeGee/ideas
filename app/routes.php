@@ -185,6 +185,6 @@ if ( App::environment() == 'local' )
     $user = User::find($id);
     Auth::login($user);
 
-    return Redirect::to('whoami');
+    return Redirect::to('/');
   });
 }
