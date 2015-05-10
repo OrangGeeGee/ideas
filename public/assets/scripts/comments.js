@@ -80,6 +80,11 @@ var CommentListView = Backbone.View.extend({
     this.$form = new CommentFormView({ model: this.model }).render();
     this.$form.wrap('<li id="commentFormContainer">').parent().appendTo(this.$el);
 
+    this.model.events.each(function(event) {
+      var view = new EventView({ model: event });
+      view.render().insertAfter(this.$form.parent());
+    }, this);
+
     Comments
       .where({ idea_id: this.model.id })
       .forEach(this.renderComment, this);
@@ -108,6 +113,24 @@ var CommentListView = Backbone.View.extend({
 var CommentView = Backbone.View.extend({
   tagName: 'li',
   template: _.template($('#comment-template').html()),
+
+  render: function() {
+    var data = this.model.toJSON();
+    data.user = Users.get(data.user_id);
+
+    this.$el.html(this.template(data));
+    this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
+
+    return this.$el;
+  }
+});
+
+
+
+var EventView = Backbone.View.extend({
+  tagName: 'li',
+  className: 'event',
+  template: _.template($('#event-template').html()),
 
   render: function() {
     var data = this.model.toJSON();

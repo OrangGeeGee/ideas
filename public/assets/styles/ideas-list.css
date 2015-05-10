@@ -66,7 +66,6 @@
 }
 
 .entry-data a {
-  color: #d33e00;
   text-decoration: none;
 }
 
@@ -80,6 +79,11 @@
 
 .entry-data li.comments {
   background-image: url('../images/comments.png');
+}
+
+.entry-data li.event {
+  background-image: url('../images/calendar.png');
+  padding-left: 22px;
 }
 
 .entry-data li.delete {

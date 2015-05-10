@@ -18,6 +18,12 @@
   max-height: 900px;
 }
 
+.modal-body iframe {
+  border: medium none;
+  width: 100%;
+  height: 575px;
+}
+
 
 /** Background mask that blocks all interaction with
     the rest of the page when a modal window is open */
@@ -55,22 +61,4 @@
   border: solid #CCC;
   border-width: 0px 0px 1px 1px;
   border-bottom-left-radius: 5px;
-}
-
-
-/** Partner form modal */
-#partnerForm .modal-body > h2 {
-  float: left;
-}
-
-#partnerForm .modal-body h2:not(:first-child) {
-  margin-top: 20px;
-}
-
-#partnerForm .tabs-list {
-  float: right;
-}
-
-#partnerForm .tab-content {
-  clear: both;
 }

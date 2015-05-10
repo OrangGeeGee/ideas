@@ -25,6 +25,10 @@ p {
   margin-bottom: 10px;
 }
 
+a {
+  color: #d33e00;
+}
+
 input.placeholder,
 textarea.placeholder {
   color: #999;
@@ -79,7 +83,7 @@ blockquote:before {
 }
 
 /** Forms */
-form.loading:before {
+.loading:before {
   content: url("../images/loading-animation.gif?");
   height: 64px;
   width: 64px;
@@ -91,7 +95,7 @@ form.loading:before {
   margin-left: -32px;
 }
 
-form.loading [disabled] {
+.loading [disabled] {
   opacity: .33;
   filter: alpha(opacity=33);
 }

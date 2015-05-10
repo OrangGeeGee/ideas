@@ -58,6 +58,15 @@ Labels::initialize();
     <input type="submit" value="<?= Labels::get('add') ?>"/>
   </script>
 
+  <script type="text/html" id="event-form-template">
+    <h2><input type="text" name="title" placeholder="<?= Labels::get('eventTitlePlaceholder') ?>"/></h2>
+    <input type="text" name="location" placeholder="<?= Labels::get('eventLocationPlaceholder') ?>"/>
+    <textarea name="description" placeholder="<?= Labels::get('eventDescriptionPlaceholder') ?>"></textarea>
+    <input type="text" name="expectedPersonCount" placeholder="<?= Labels::get('eventExpectedPersonCountPlaceholder') ?>"/>
+    <input type="text" name="date" placeholder="<?= Labels::get('eventDatePlaceholder') ?>"/>
+    <input type="submit" value="<?= Labels::get('createEvent') ?>"/>
+  </script>
+
   <script type="text/html" id="user-header-template">
     <h2><?= Labels::get('hi') ?>, <%= name.getForename() %></h2>
     <p><?= Labels::get('introduction') ?></p>
@@ -89,9 +98,20 @@ Labels::initialize();
         <% if ( comments.length > 1 ) { %><a href="#"><%= comments.length %> <?= Labels::get('comments') ?></a><% } %>
         <% if ( !comments.length ) { %><?= Labels::get('noComments') ?><% } %>
       </li>
+      <?php if ( Auth::user()->hasEstonianEmailAddress() ): ?>
+      <% if ( user_id == USER_ID || events.length ) { %>
+      <li class="event">
+        <% if ( events.length > 0 ) { %>
+          <?= Labels::get('nextEventAt') ?> <%= moment(events[0].get('date')).format('Do MMMM HH:mm') %>
+        <% } else if ( user_id == USER_ID ) { %>
+          <a href="ideas/<%= id %>/event"><?= Labels::get('addEvent') ?></a>
+        <% } %>
+      </li>
+      <% } %>
+      <?php endif ?>
       <% if ( user_id == USER_ID ) { %>
       <li class="delete">
-        <a href="ideas/<%= id %>/delete" title="Kustuta oma idee"><?= Labels::get('delete') ?></a>
+        <a href="ideas/<%= id %>/delete"><?= Labels::get('delete') ?></a>
       </li>
       <% } %>
       <% if ( user_id != USER_ID && !isFinished ) { %>
@@ -115,6 +135,19 @@ Labels::initialize();
     </div>
     <div class="entry-content">
       <p><%= text %></p>
+    </div>
+  </script>
+
+  <script type="text/html" id="event-template">
+    <div class="entry-author">
+      <%= user.generateProfileImage() %>
+      <h4><%= user.get('name') %> created an event</h4>
+    </div>
+    <div class="entry-content">
+      <blockquote>
+        <p><%= description %></p>
+        <a href="<%= generateShadowEnvironmentLink() %>" target="_blank">View the event in Shadowing environment</a>
+      </blockquote>
     </div>
   </script>
 
@@ -148,6 +181,18 @@ Labels::initialize();
     USER_ID = '<?= Auth::user()->id ?>';
 
     /**
+     * @param {String} path
+     * @return {String}
+     */
+    function generateShadowEnvironmentLink(path) {
+      var domain = isProduction()
+        ? 'http://eos.crebit.ee/shadow/'
+        : 'http://localhost:83/';
+
+      return domain + (path || '');
+    }
+
+    /**
      * @return {boolean}
      */
     function isProduction() {
@@ -158,6 +203,7 @@ Labels::initialize();
   <script src="assets/scripts/users.js"></script>
   <script src="assets/scripts/ideas.js?20150416"></script>
   <script src="assets/scripts/comments.js"></script>
+  <script src="assets/scripts/events.js"></script>
   <script src="assets/scripts/categories.js"></script>
   <script src="assets/scripts/sorting.js"></script>
   <script>

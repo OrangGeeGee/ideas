@@ -8,6 +8,10 @@ Ideas.model = Backbone.Model.extend({
     userData: []
   },
 
+  initialize: function() {
+    this.events = new Backbone.Collection;
+  },
+
   vote: function() {
     var user = Users.get(USER_ID);
     var data = user.toJSON();
@@ -61,6 +65,56 @@ Ideas.model = Backbone.Model.extend({
 
   isFinished: function() {
     return this.get('status_id') == 2;
+  }
+});
+
+
+
+var EventFormView = Backbone.View.extend({
+  tagName: 'form',
+  template: _.template($('#event-form-template').html()),
+  callbacks: [],
+
+  events: {
+    submit: 'submit',
+    'keyup :input': 'toggleSubmitButton'
+  },
+
+  toggleSubmitButton: function() {
+    var data = this.$el.parseAsJSON();
+    this.$(':submit').prop('disabled', !data.title || !data.description);
+  },
+
+  afterSubmit: function(callback) {
+    this.callbacks.push(callback);
+  },
+
+  submit: function(event) {
+    event.preventDefault();
+    var data = this.$el.parseAsJSON();
+
+    this.$el.addClass('loading');
+    this.$(':input').attr('disabled', 'disabled');
+    Ideas.create(data, {
+      wait: true,
+      success: function() {
+        this.callbacks.forEach(function(callback) {
+          callback();
+        });
+      }.bind(this)
+    });
+  },
+
+  render: function() {
+    this.$el.html(this.template());
+    this.$el.field('category_id').val(Categories.getActive().id);
+    this.toggleSubmitButton();
+
+    if ( !('placeholder' in document.createElement('input')) ) {
+      this.$('[placeholder]').mimicPlaceholder();
+    }
+
+    return this.$el;
   }
 });
 
@@ -126,6 +180,26 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
       this.openIdea();
     },
+    'click .event a': function(event) {
+      event.preventDefault();
+      var form = new EventFormView;
+      var $iframe = $('<iframe/>', { src: generateShadowEnvironmentLink('events/create/' + this.model.id) });
+      var modal = new Modal('new-event', $iframe);
+
+      modal.$.addClass('loading');
+      $iframe.on('load', function() {
+        modal.$.removeClass('loading');
+      });
+
+      // Focus the title field only if the browser supports placeholder attribute.
+      // If it doesn't and we focus the field, then the field would be empty and
+      // the user wouldn't have any indication of the field's expected content.
+      if ( 'placeholder' in document.createElement('input') ) {
+        modal.$.field('title').focus();
+      }
+
+      window.eventModal = modal;
+    },
     'click .delete a': function(event) {
       event.preventDefault();
       this.deleteIdea();
@@ -156,6 +230,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   deleteIdea: function() {
+    // TODO: Translate
     if ( confirm('Oled sa kindel, et soovid oma idee kustutada?') ) {
       $.get('ideas/' + this.model.id + '/delete');
       this.remove();
@@ -166,10 +241,12 @@ var IdeaView = Backbone.View.extend({
     var view = this;
     var data = this.model.toJSON();
     data.comments = Comments.where({ idea_id: this.model.id });
+    data.events = this.model.events.models;
     data.isFinished = this.model.isFinished();
     data.user = Users.get(data.user_id);
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
 
+    this.$el.attr('data-idea-id', this.model.id);
     this.$el.html(this.template(data));
     this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
     this.$el.prepend(new VoteCountView({ model: this.model }).$el);
@@ -178,21 +255,24 @@ var IdeaView = Backbone.View.extend({
     this.$el.toggleClass('finished', this.model.isFinished());
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
 
-    this.model.on('change', this.render, this);
-
-    Categories.on('change:active', function() {
-      view.$el.toggle(view.model.matchesCategoryFilter() && view.model.matchesSearchPhrase());
-    });
-
     return this.$el;
   },
 
   initialize: function() {
     this.model.view = this;
-    this.$el.attr('data-idea-id', this.model.id);
+    this.model.on('change', this.render, this);
+    this.model.events.on('add', this.render, this);
+
+    Categories.on('change:active', function() {
+      this.$el.toggle(this.model.matchesCategoryFilter() && this.model.matchesSearchPhrase());
+    }.bind(this));
   }
 });
 
+$(window).on('message', function(event) {
+  Events.add(event.originalEvent.data);
+  eventModal.close();
+});
 
 
 var NewIdeaView = Backbone.View.extend({
