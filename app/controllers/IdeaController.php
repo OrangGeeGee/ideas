@@ -43,6 +43,15 @@ class IdeaController extends \BaseController {
     return $idea;
 	}
 
+  /**
+   * @param number $id
+   * @return string
+   */
+  public function getTitle($id)
+	{
+		return Idea::find($id)->title;
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 *

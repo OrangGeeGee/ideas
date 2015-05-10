@@ -10,6 +10,14 @@ Route::get('name', function() {
   return Auth::user()->getFirstName();
 });
 
+App::before(function()
+{
+  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Methods: GET');
+  header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+  header('Access-Control-Allow-Credentials: true');
+});
+
 
 /**
  * App routes.
@@ -56,6 +64,7 @@ Route::post('auth', function()
 
 Route::resource('users', 'UserController');
 Route::resource('ideas', 'IdeaController');
+Route::get('ideas/{id}/title', 'IdeaController@getTitle');
 Route::resource('comments', 'CommentController');
 Route::resource('categories', 'CategoryController');
 

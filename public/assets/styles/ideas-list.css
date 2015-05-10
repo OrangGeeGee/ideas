@@ -69,10 +69,6 @@
   text-decoration: none;
 }
 
-.finished .entry-data a {
-  color: black;
-}
-
 .entry-data a:hover {
   text-decoration: underline;
 }
