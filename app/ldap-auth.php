@@ -13,10 +13,10 @@
 define('LDAP_GLOBAL_USER_KEY', 'PHP_AUTH_USER');  # Either PHP_AUTH_USER or REMOTE_USER.
 define('LDAP_DOMAIN_OLD',      '@INT.HANSA.EE');
 define('LDAP_DOMAIN_NEW',      '@FSPA.MYNTET.SE');
-define('LDAP_SERVER',          'ldap-test.int.hansa.ee');
-define('LDAP_TREE',            'OU=Employees,OU=Accounts,DC=int,DC=hansa,DC=ee');
-define('LDAP_BIND_TREE',       'CN=diego,OU=Service Accounts,OU=Accounts,DC=int,DC=hansa,DC=ee');
-define('LDAP_BIND_PASSWORD',   '34VeaZyv4mKHkfCoGscWIw2r');
+define('LDAP_SERVER',          'ldapbb.fspa.myntet.se');
+define('LDAP_TREE',            'OU=FSB Users and Groups,DC=fspa,DC=myntet,DC=se');
+define('LDAP_BIND_TREE',       'CN=p985eos,OU=Service accounts,OU=FSB Users and Groups,DC=fspa,DC=myntet,DC=se');
+define('LDAP_BIND_PASSWORD',   'k9K1YxAz');
 define('LDAP_FILTER',          '(&(objectClass=user)(samaccountName=%s))');
 define('LDAP_DEFAULT_USER_ID', 't018ttt');
 
