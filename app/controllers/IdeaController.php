@@ -36,6 +36,7 @@ class IdeaController extends \BaseController {
       {
         $message
           ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
+          ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
           ->subject('[Angaar] Uus idee');
       });
     }
