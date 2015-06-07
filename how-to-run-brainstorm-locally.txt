@@ -1,0 +1,28 @@
+
+Setting up Brainstorm
+---
+
+1. Checkout SVN repository from https://svn.crebit.ee/internal/brainstorm/
+
+2. Run "composer install" in the root directory. If you haven't got Composer installed, then visit getcomposer.org. In case of proxy/firewall difficulties, download eos.crebit.ee/brainstorm/vendor.zip and unpack the contents inside the root directory so you have vendor/ directory next to app/, bootstrap/ and public/.
+
+NB! Never commit the vendor/ directory to the repository. The repository should contain only app specific code.
+
+3. Open up /bootstrap/start.php. Look up line 30:
+
+$env = $app->detectEnvironment(array(
+	'local' => array('PCEE047386'),
+	'production' => array('eos.crebit.ee')
+));
+
+Add your computer name to the 'local' array. One way to quickly get your computer name is by echoing out gethostname(). As with vendor/ directory, don't commit this change as this is developer specific.
+
+4. If you don't have the Shadow app running on another port, then open app/views/hello.php and either comment out <script src="assets/scripts/events.js"></script> line or clear the contents of that particular file. This ensures that the server doesn't try to fetch the events from the unreachable Shadow app, which would cancel the booting of the Brainstorm.
+
+5. Create a new database for the app, configure the app/config/database.php as needed.
+
+6. Run "php artisan migrate" from the command line inside the app's root directory. This will create the necessary database structure for the app.
+
+7. Add a random category to the categories table. Since every idea needs to have a category, then Brainstorm won't work without at least one category being present.
+
+8. Everything should work now. If it doesn't, ping Mattias.Saldre@swedbank.ee and hope to god he hasn't left Swedbank...
