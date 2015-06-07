@@ -4,6 +4,7 @@
 if ( PHP_SAPI != 'cli' )
 {
   require 'ldap-auth.php';
+  require 'Activities.php';
 }
 
 Route::get('name', function() {
@@ -26,6 +27,7 @@ App::before(function()
 
 Route::get('/', function()
 {
+  Activities::record(Activities::OPEN_APP);
   $user = Auth::user();
 
   # For some reason, LDAP fails for first time users.
@@ -36,20 +38,10 @@ Route::get('/', function()
     return Redirect::to('/');
   }
 
-  require '../app/UserAgentParser.php';
-  $logData = parse_user_agent();
-  $logData['user_id'] = Auth::user()->id;
-  RequestLog::create($logData);
-
   # Localization.
   Config::set('language', $user->hasEstonianEmailAddress() ? 'EST' : 'ENG');
 
 	return View::make('hello');
-});
-
-Route::get('login', function()
-{
-  return View::make('login');
 });
 
 Route::post('auth', function()
@@ -102,6 +94,7 @@ Route::get('ideas/{id}/read', function($id)
   createOrUpdatePivot($idea->userData(), 'user_id', $user->id, array(
     'seen_at' => DB::raw('NOW()')
   ));
+  Activities::record(Activities::OPEN_IDEA, $idea->title);
 });
 
 Route::get('ideas/{id}/vote', function($id)
@@ -137,6 +130,8 @@ Route::get('ideas/{id}/vote', function($id)
           ->subject('[Angaar] Sinu idee sai hääle');
       });
     }
+
+    Activities::record(Activities::VOTE_IDEA, $idea->title);
   }
 });
 
@@ -149,6 +144,8 @@ Route::get('ideas/{id}/unvote', function($id)
     ->where('user_id', '=', Auth::user()->id)
     ->where('idea_id', '=', $id)
     ->delete();
+
+  Activities::record(Activities::UNVOTE_IDEA, $idea->title);
 });
 
 Route::get('ideas/{id}/delete', function($id)
