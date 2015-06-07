@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateIdeaUserTable extends Migration {
+class RenameTimestampsToVotedAtAndSeenAt extends Migration {
 
 	/**
 	 * Run the migrations.
