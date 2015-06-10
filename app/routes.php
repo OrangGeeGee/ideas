@@ -27,7 +27,6 @@ App::before(function()
 
 Route::get('/', function()
 {
-  Activities::record(Activities::OPEN_APP);
   $user = Auth::user();
 
   # For some reason, LDAP fails for first time users.
@@ -37,6 +36,8 @@ Route::get('/', function()
     sleep(1);
     return Redirect::to('/');
   }
+
+  Activities::record(Activities::OPEN_APP);
 
   # Localization.
   Config::set('language', $user->hasEstonianEmailAddress() ? 'EST' : 'ENG');
