@@ -174,6 +174,11 @@ Route::post('top/update', function()
   $idea->save();
 });
 
+Route::get('activities', function()
+{
+  return Activity::all();
+});
+
 
 /**
  * Debug routes.
