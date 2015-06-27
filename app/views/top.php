@@ -26,12 +26,29 @@
     td {
       border-top: 1px solid #CCC;
     }
+    .status {
+      padding: 2px 5px;
+      color: white;
+    }
+    tr[data-status="1"] .status {
+      background-color: #df7df7;
+    }
+    tr[data-status="2"] .status {
+      background-color: orange;
+    }
+    tr[data-status="2"] .status:before {
+      content: "✔ ";
+    }
+    tr.filled td {
+      background-color: white;
+    }
   </style>
 </head>
 <body>
 
   <table>
     <tr>
+      <th>Staatus</th>
       <th>Lisaja</th>
       <th>Hääli</th>
       <th>Kommentaare</th>
@@ -41,7 +58,10 @@
       <th>Vastutaja</th>
     </tr>
     <?php foreach ( $ideas as $idea ): ?>
-      <tr data-idea-id="<?= $idea->id ?>">
+      <tr data-idea-id="<?= $idea->id ?>" data-status="<?= $idea->status_id ?>" class="<?= $idea->area || $idea->responsible ? 'filled' : '' ?>">
+        <td>
+          <span class="status"><?= $idea->status ? $idea->status->name : '' ?></span>
+        </td>
         <td><?= $idea->user->name ?></td>
         <td><?= count($idea->votes) ?></td>
         <td><?= count($idea->comments) ?></td>
@@ -67,6 +87,8 @@
       };
 
       $.post('<?= url('top/update') ?>', params);
+
+      $row.toggleClass('filled', !!params.area || !!params.responsible);
     });
   </script>
 </body>

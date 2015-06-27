@@ -162,7 +162,7 @@ Route::get('ideas/{id}/delete', function($id)
 
 Route::get('top', function()
 {
-  $ideas = Idea::with('votes', 'user', 'comments')->where('category_id', 1)->get();
+  $ideas = Idea::with('votes', 'user', 'comments', 'status')->where('category_id', 1)->get();
   return View::make('top', compact('ideas'));
 });
 
