@@ -25,6 +25,7 @@
     }
     td {
       border-top: 1px solid #CCC;
+      white-space: pre-line;
     }
     .status {
       padding: 2px 5px;
