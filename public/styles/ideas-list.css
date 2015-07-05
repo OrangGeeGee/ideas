@@ -1,0 +1,186 @@
+
+#ideas-list > li {
+  width: 30%;
+  min-height: 230px;
+  float: left;
+  position: relative;
+  background-color: white;
+}
+
+#ideas-list > li:first-child {
+  text-align: center;
+  padding: 48px 10px;
+  background-color: white;
+  transition: 0.2s background, 0.2s border;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+#ideas-list > li:first-child:hover {
+  background-color: #eee;
+  border-color: #e5e5e5;
+}
+
+#ideas-list > li:first-child img {
+  display: block;
+  margin: auto auto 5px;
+  transition: 0.2s opacity;
+  height: 85px;
+}
+
+#ideas-list > li:first-child:not(:hover) img,
+#ideas-list > li:first-child:not(:hover) h3 {
+  opacity: 0.5;
+}
+
+#ideas-list h3 {
+  padding-right: 40px;
+}
+
+#ideas-list .entry-content:hover h3 {
+  text-decoration: underline;
+}
+
+#ideas-list .entry-content {
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.entry-data {
+  list-style: none;
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dotted #555;
+}
+
+.entry-data li {
+  background: no-repeat left;
+  padding-left: 28px;
+  display: inline-block;
+}
+
+.entry-data li + li {
+  margin-left: 10px;
+}
+
+.entry-data a {
+  text-decoration: none;
+}
+
+.entry-data a:hover {
+  text-decoration: underline;
+}
+
+.entry-data li.comments {
+  background-image: url('../images/comments.png');
+}
+
+.entry-data li.event {
+  background-image: url('../images/calendar.png');
+  padding-left: 22px;
+}
+
+.entry-data li.delete {
+  background-image: url('../images/delete.png');
+  padding-left: 22px;
+}
+
+.entry-data li.vote {
+  background-image: url('../images/thumbs-up.png');
+}
+
+/** Single column layout */
+@media (max-width: 800px) {
+  #ideas-list > li {
+    margin-bottom: 7%;
+    width: 100%;
+  }
+}
+
+/** Two-column layout */
+@media (min-width: 801px) and (max-width: 1100px) {
+  #ideas-list > li {
+    margin: .5% 2% 4%;
+    width: 46%;
+  }
+}
+
+/** Three-column layout */
+@media (min-width: 801px) and (max-width: 1550px), (min-width: 1700px) {
+  .entry-data li {
+    display: block;
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 1700px) {
+  #ideas-list > li {
+    width: 22%;
+  }
+}
+
+
+/** Votes */
+.vote-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: url(../images/grey-star.png) no-repeat;
+  width: 64px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font: 22px/64px Open Sans;
+}
+
+.popular .vote-count {
+  background-image: url(../images/yellow-star.png);
+}
+
+
+/** Shadow effects */
+.box-shadow #ideas-list > li:not(.introjs-showElement):before,
+.box-shadow #ideas-list > li:not(.introjs-showElement):after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+}
+
+.box-shadow #ideas-list > li:before
+{
+  transform: rotate(-3deg);
+  left: 10px;
+}
+
+.box-shadow #ideas-list > li:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+}
+
+
+/** Idea statuses */
+.entry-content h3:before {
+  font-size: 14px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+.in-progress .entry-content h3:before {
+  background-color: #df7df7;
+}
+
+.finished .entry-content h3:before {
+  background-color: #f90;
+}
