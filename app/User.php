@@ -25,12 +25,6 @@ class User extends Model implements AuthenticatableContract {
 		return $this->hasMany('App\Comment');
 	}
 
-	public function hasFreeVotes() {
-		#return $this->available_votes > 0;
-		# TEMP: For the moment, users can vote for every idea there is.
-		return true;
-	}
-
 	public function getFirstName() {
 		return explode(' ', $this->name)[0];
 	}

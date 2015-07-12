@@ -115,7 +115,7 @@
           <li class="vote">
             <?= trans('voted') ?> – <a href="ideas/<%= id %>/unvote"><?= trans('ideas.removeVote') ?></a>
           </li>
-        <% } else if ( user.hasFreeVotes() ) { %>
+        <% } else { %>
           <li class="vote">
             <a href="ideas/<%= id %>/vote"><?= trans('ideas.vote') ?></a>
           </li>

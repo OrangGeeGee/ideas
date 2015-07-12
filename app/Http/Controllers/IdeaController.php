@@ -74,8 +74,7 @@ class IdeaController extends Controller {
     $user = \Auth::user();
 
     # Can't vote for your own idea.
-    if ( $idea->user_id == $user->id or !$user->hasFreeVotes() )
-    {
+    if ( $idea->user_id == $user->id ) {
       return;
     }
 

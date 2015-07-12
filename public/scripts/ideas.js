@@ -20,7 +20,6 @@ Ideas.model = Backbone.Model.extend({
     };
 
     this.get('userData').push(data);
-    user.decrement('available_votes');
   },
 
   removeVote: function() {
@@ -211,17 +210,13 @@ var IdeaView = Backbone.View.extend({
         $.get(event.target.href);
         this.model.removeVote();
       }
-      else if ( Users.get(USER_ID).hasFreeVotes() ) {
+      else {
         // TODO: Rewrite. Logic should be in the model.
         $.get(event.target.href);
         this.model.vote();
       }
 
       this.render();
-    },
-    'click img': function() {
-      var author = Users.get(this.model.get('user_id'));
-      //new UserProfileView({ model: author });
     }
   },
 
