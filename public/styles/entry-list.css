@@ -5,7 +5,6 @@
 
 .entry-list > li {
   position: relative;
-  padding: 40px 64px 20px 59px;
   margin: 0.5% 1.5% 2%;
 }
 
@@ -13,34 +12,10 @@
   margin-top: 5px;
 }
 
-.entry-author {
-  position: absolute;
-  color: #777;
-  left: -20px;
-  top: -15px;
-  font-size: 12px;
-}
-
 .entry-author img {
   border: 1px solid #ddd;
   max-width: 65px;
   vertical-align: middle;
-  transition: 0.33s transform;
-}
-
-.entry-author img:hover {
-  /*transform: scale(1.1);*/
-}
-
-.entry-author h4 {
-  margin: 0 5px 0 12px;
-  display: inline;
-  font-size: 16px;
-  font-weight: normal;
-}
-
-.finished .entry-author {
-  color: #333;
 }
 
 .entry-content {
@@ -49,16 +24,4 @@
 
 .entry-content p {
   white-space: pre-line;
-}
-
-.entry-content .content-fader {
-  background-image: linear-gradient(rgba(255, 255, 255, 0), white);
-  position: absolute;
-  bottom: 0;
-  height: 50px;
-  width: 100%;
-}
-
-.finished .content-fader {
-  display: none;
 }

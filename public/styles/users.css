@@ -3,8 +3,24 @@
   width: 500px;
 }
 
-#profile-image {
-  background: repeat center center / cover;
-  height: 280px;
-  margin: -10px -20px 20px;
+.profile-image {
+  background-position: center;
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.user-name {
+  color: #222
+  display: inline;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #777;
 }

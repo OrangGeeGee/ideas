@@ -203,25 +203,30 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
       this.deleteIdea();
     },
-    'click .vote a': function(event) {
+    'click .vote-action': function(event) {
       event.preventDefault();
 
       if ( this.model.hasBeenVotedFor() ) {
-        $.get(event.target.href);
+        $.get(event.currentTarget.href);
         this.model.removeVote();
       }
       else {
         // TODO: Rewrite. Logic should be in the model.
-        $.get(event.target.href);
+        $.get(event.currentTarget.href);
         this.model.vote();
       }
 
-      this.render();
+      // TODO: Update comment count as well.
+      this.refreshState();
     }
   },
 
   openIdea: function() {
     location.href = '#ideas/' + this.model.id;
+  },
+
+  refreshState: function() {
+    this.$el.toggleClass('voted', this.model.hasBeenVotedFor());
   },
 
   deleteIdea: function() {
@@ -241,12 +246,13 @@ var IdeaView = Backbone.View.extend({
     data.isFinished = this.model.isFinished();
     data.user = Users.get(data.user_id);
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
+    data.voteCount = this.model.getVoteCount();
 
     this.$el.attr('data-idea-id', this.model.id);
     this.$el.html(this.template(data));
     this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
-    this.$el.prepend(new VoteCountView({ model: this.model }).$el);
 
+    this.refreshState();
     this.$el.toggleClass('in-progress', this.model.isInProgress());
     this.$el.toggleClass('finished', this.model.isFinished());
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
@@ -337,20 +343,5 @@ var IdeaListView = Backbone.View.extend({
       this.renderIdea(model, true);
     }, this);
     this.collection.on('sort', this.render, this);
-  }
-});
-
-
-
-var VoteCountView = Backbone.View.extend({
-  className: 'vote-count',
-
-  render: function() {
-    var voteCount = this.model.getVoteCount();
-    this.$el.text(voteCount).toggle(voteCount > 0);
-  },
-
-  initialize: function() {
-    this.render();
   }
 });

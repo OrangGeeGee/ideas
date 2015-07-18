@@ -5,14 +5,8 @@ var Users = new Collection('users', function() {
 });
 
 Users.model = Backbone.Model.extend({
-  getProfileImageURL: function() {
-    return isProduction()
-      ? USER_PROFILE_IMAGE_PATH + this.id + '.jpg'
-      : 'images/placeholder-avatar.jpg';
-  },
-
   generateProfileImage: function() {
-    return '<img src="' + this.getProfileImageURL() + '"/>';
+    return '<div class="profile-image" style="background-image: url(' + this.get('profileImageURL') + ');"/>';
   },
 
   getIdeas: function () {

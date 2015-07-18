@@ -1,7 +1,6 @@
 
 #ideas-list > li {
   width: 30%;
-  min-height: 230px;
   float: left;
   position: relative;
   background-color: white;
@@ -34,25 +33,25 @@
 }
 
 #ideas-list h3 {
-  padding-right: 40px;
-}
-
-#ideas-list .entry-content:hover h3 {
-  text-decoration: underline;
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
 #ideas-list .entry-content {
-  height: 120px;
-  overflow: hidden;
-  position: relative;
   cursor: pointer;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+#ideas-list footer {
+  padding: 15px 15px 10px;
+  background-color: #f0f0f0;
 }
 
 .entry-data {
   list-style: none;
-  margin-top: 10px;
-  padding-top: 5px;
-  border-top: 1px dotted #555;
+  font-size: 12px;
 }
 
 .entry-data li {
@@ -73,22 +72,14 @@
   text-decoration: underline;
 }
 
-.entry-data li.comments {
-  background-image: url('../images/comments.png');
+.entry-data img {
+  max-width: 24px;
+  position: absolute;
+  margin-left: -28px;
 }
 
-.entry-data li.event {
-  background-image: url('../images/calendar.png');
-  padding-left: 22px;
-}
-
-.entry-data li.delete {
-  background-image: url('../images/delete.png');
-  padding-left: 22px;
-}
-
-.entry-data li.vote {
-  background-image: url('../images/thumbs-up.png');
+.entry-data li.votes img {
+  margin-top: -7px;
 }
 
 /** Single column layout */
@@ -123,48 +114,53 @@
 
 
 /** Votes */
-.vote-count {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: url(../images/grey-star.png) no-repeat;
-  width: 64px;
-  color: black;
+a.vote-action {
+  background-color: white;
+  border: 2px solid #FF9A58;
+  border-radius: 25px;
   text-decoration: none;
+  position: relative;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  margin-left: -20%;
+  left: 50%;
+  display: block;
+  width: 40%;
   text-align: center;
-  font: 22px/64px Open Sans;
+  height: 32px;
+  transition: left 0.33s, width 0.4s;
 }
 
-.popular .vote-count {
-  background-image: url(../images/yellow-star.png);
+a.vote-action .text {
+  display: inline-block;
+  margin-top: 2px;
 }
 
-
-/** Shadow effects */
-.box-shadow #ideas-list > li:not(.introjs-showElement):before,
-.box-shadow #ideas-list > li:not(.introjs-showElement):after
-{
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  width: 50%;
-  top: 80%;
-  max-width:300px;
-  background: #777;
-  box-shadow: 0 15px 10px #777;
+a.vote-action img {
+  display: none;
+  width: 24px;
+  margin: auto;
 }
 
-.box-shadow #ideas-list > li:before
-{
-  transform: rotate(-3deg);
-  left: 10px;
+.voted a.vote-action {
+  background-color: #FF9A58;
+  text-indent: -9999px;
+  width: 50px;
+  margin-left: -25px;
+  left: 90%;
 }
 
-.box-shadow #ideas-list > li:after
-{
-  transform: rotate(3deg);
-  right: 10px;
+.voted a.vote-action .text {
+  display: none;
+}
+
+.voted a.vote-action img {
+  display: block;
+}
+
+a.vote-action:hover {
+  background-color: #FF9A58;
+  color: white;
 }
 
 

@@ -23,7 +23,6 @@ a[href="//ee.swedbank.net/"]:not(:hover) {
   padding: 20px 40px;
   margin: 0 -40px 40px;
   position: relative;
-  font-size: 16px;
   min-height: 80px;
   overflow: hidden;
 }

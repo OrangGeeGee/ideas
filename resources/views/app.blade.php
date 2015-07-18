@@ -79,55 +79,59 @@
   </script>
 
   <script type="text/html" id="idea-template">
-    <div class="entry-author">
-      <%= user.generateProfileImage() %>
-      <h4><%= user.get('name') %></h4>
-    </div>
     <div class="entry-content" title="<?= trans('comments.open') ?>">
       <h3><%= title %></h3>
-      <p><%= description %></p>
-      <div class="content-fader"></div>
+      <div class="entry-author">
+        <%= user.generateProfileImage() %>
+        <span span class="user-name"><%= user.get('name') %></span>
+      </div>
     </div>
-    <ul class="entry-data">
-      <li class="comments">
-        <% if ( comments.length == 1 ) { %><a href="#">1 <?= trans('comments.one') ?></a><% } %>
-        <% if ( comments.length > 1 ) { %><a href="#"><%= comments.length %> <?= trans('comments.many') ?></a><% } %>
-        <% if ( !comments.length ) { %><?= trans('comments.missing') ?><% } %>
-      </li>
-      <?php if ( Auth::user()->hasEstonianEmailAddress() ): ?>
-      <% if ( user_id == USER_ID || events.length ) { %>
-      <li class="event">
-        <% if ( events.length > 0 ) { %>
-          <?= trans('nextEventAt') ?> <%= moment(events[0].get('date')).format('Do MMMM HH:mm') %>
-        <% } else if ( user_id == USER_ID ) { %>
-          <a href="ideas/<%= id %>/event"><?= trans('events.add') ?></a>
-        <% } %>
-      </li>
-      <% } %>
-      <?php endif ?>
-      <% if ( user_id == USER_ID ) { %>
-      <li class="delete">
-        <a href="ideas/<%= id %>/delete"><?= trans('ideas.delete') ?></a>
-      </li>
-      <% } %>
+
+    <footer>
       <% if ( user_id != USER_ID && !isFinished ) { %>
-        <% if ( hasBeenVotedFor ) { %>
-          <li class="vote">
-            <?= trans('voted') ?> – <a href="ideas/<%= id %>/unvote"><?= trans('ideas.removeVote') ?></a>
-          </li>
-        <% } else { %>
-          <li class="vote">
-            <a href="ideas/<%= id %>/vote"><?= trans('ideas.vote') ?></a>
+        <a class="vote-action" href="ideas/<%= id %>/vote">
+          <span class="text"><?= trans('ideas.vote') ?></span>
+          <img src="images/thumbs-up.png"/>
+        </a>
+      <% } %>
+
+      <ul class="entry-data">
+        <li class="votes">
+          <img src="images/thumbs-up-black.png"/>
+          <%= voteCount %> <?= trans('ideas.peopleLike') ?>
+        </li>
+        <li class="comments">
+          <img src="images/comments.png"/>
+          <% if ( comments.length == 1 ) { %><a href="#">1 <?= trans('comments.one') ?></a><% } %>
+          <% if ( comments.length > 1 ) { %><a href="#"><%= comments.length %> <?= trans('comments.many') ?></a><% } %>
+          <% if ( !comments.length ) { %><?= trans('comments.missing') ?><% } %>
+        </li>
+        <?php if ( Auth::user()->hasEstonianEmailAddress() ): ?>
+          <% if ( user_id == USER_ID || events.length ) { %>
+            <li class="event">
+              <img src="images/calendar.png"/>
+              <% if ( events.length > 0 ) { %>
+                <?= trans('nextEventAt') ?> <%= moment(events[0].get('date')).format('Do MMMM HH:mm') %>
+              <% } else if ( user_id == USER_ID ) { %>
+                <a href="ideas/<%= id %>/event"><?= trans('events.add') ?></a>
+              <% } %>
+            </li>
+          <% } %>
+        <?php endif ?>
+        <% if ( user_id == USER_ID ) { %>
+          <li class="delete">
+            <img src="images/delete.png"/>
+            <a href="ideas/<%= id %>/delete"><?= trans('ideas.delete') ?></a>
           </li>
         <% } %>
-      <% } %>
-    </ul>
+      </ul>
+    </footer>
   </script>
 
   <script type="text/html" id="comment-template">
     <div class="entry-author">
       <%= user.generateProfileImage() %>
-      <h4><%= user.get('name') %></h4>
+      <span class="user-name"><%= user.get('name') %></span>
     </div>
     <div class="entry-content">
       <p><%= text %></p>
