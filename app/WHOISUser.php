@@ -25,6 +25,18 @@ class WHOISUser extends Model implements AuthenticatableContract {
 		});
 	}
 
+	public function getFirstName() {
+		return explode(' ', $this->name)[0];
+	}
+
+	public function hasEstonianEmailAddress() {
+		return substr($this->email, -3) == '.ee';
+	}
+
+	public function getLocale() {
+		return $this->hasEstonianEmailAddress() ? 'et' : 'en';
+	}
+
 	public function getIntranetProfileImageURL() {
 
 		# Without email we can't verify in which country the user is working.

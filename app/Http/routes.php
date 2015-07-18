@@ -4,6 +4,7 @@
 if ( PHP_SAPI != 'cli' ) {
   require app_path('LDAP.php');
   require app_path('Activities.php');
+  require app_path('Notifications.php');
 }
 
 /**

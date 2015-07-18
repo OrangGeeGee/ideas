@@ -23,18 +23,6 @@ class IdeaController extends Controller {
     $user->ideas()->save($idea);
     $idea->userData = $idea->userData->toArray();
 
-    # Notify secretaries about the new idea. Candy time!
-    if ( $user->hasEstonianEmailAddress() )
-    {
-      \Mail::send('emails.idea', compact('idea', 'user'), function($message)
-      {
-        $message
-          #->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
-          ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
-          ->subject('[Angaar] Uus idee');
-      });
-    }
-
     return $idea;
 	}
 
@@ -95,19 +83,7 @@ class IdeaController extends Controller {
       ]);
     }
 
-    # Notify the author.
-    if ( \App::environment() == 'production' )
-    {
-      \Mail::send('emails.vote', compact('idea', 'user'), function($message) use($idea)
-      {
-        $author = $idea->user;
-
-        $message
-          ->to($author->email, $author->name)
-          ->subject('[Angaar] Sinu idee sai hääle');
-      });
-    }
-
+    \Notifications::newVote($idea);
     \Activities::record(\Activities::VOTE_IDEA, $idea->title);
   }
 
