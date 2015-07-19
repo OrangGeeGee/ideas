@@ -23,7 +23,7 @@
 									<td width="36"></td>
 									<td width="454" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<?php if ( App::getLocale() == 'et' ): ?>
-											{{ $comment->user->name }} lisas kommentaari sinu ideele <a href="{{ $comment->idea->generateURL }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
+											{{ $comment->user->name }} lisas kommentaari sinu ideele <a href="{{ $comment->idea->generateURL() }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
 										<?php else: ?>
 											{{ $comment->user->name }} added a new comment to your idea <a href="{{ $comment->idea->generateURL() }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
 										<?php endif ?>
