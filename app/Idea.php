@@ -8,11 +8,15 @@ class Idea extends Model {
 
   /**
    * @param Builder $query
-   * @param string $timestamp
+   * @param string $timestampStart
+   * @param string $timestampEnd
    * @return Collection
    */
-  public function scopeLatest($query, $timestamp = '') {
-    return $query->where('updated_at', '>=', $timestamp);
+  public function scopeLatest($query, $timestampStart = '', $timestampEnd = null) {
+    return $query->whereBetween('updated_at', [
+      $timestampStart,
+      isset($timestampEnd) ? $timestampEnd : \DB::raw('now')
+    ]);
   }
 
   public function votes() {
@@ -37,5 +41,9 @@ class Idea extends Model {
 
   public function status() {
     return $this->belongsTo('App\Status');
+  }
+
+  public function generateURL() {
+    return env('APP_URL') . "#ideas/$this->id";
   }
 }

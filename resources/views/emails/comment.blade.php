@@ -23,9 +23,9 @@
 									<td width="36"></td>
 									<td width="454" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<?php if ( App::getLocale() == 'et' ): ?>
-											{{ $comment->user->name }} lisas kommentaari sinu ideele <a href="http://eos.crebit.ee/angaar/#ideas/{{ $comment->idea->id }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
+											{{ $comment->user->name }} lisas kommentaari sinu ideele <a href="{{ $comment->idea->generateURL }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
 										<?php else: ?>
-											{{ $comment->user->name }} added a new comment to your idea <a href="http://eos.crebit.ee/angaar/#ideas/{{ $comment->idea->id }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
+											{{ $comment->user->name }} added a new comment to your idea <a href="{{ $comment->idea->generateURL() }}" target="_blank" style="color:#f60;">"{{ $comment->idea->title }}"</a>:
 										<?php endif ?>
 										<br><br>
 										<blockquote style="border-left:4px solid #CCC;margin:0;padding-left:10px;color:#777;font-style:italic;white-space:pre-line;">{{ $comment->text }}</blockquote>
@@ -37,10 +37,10 @@
 									<td width="454" style="color:#777;border-collapse:collapse;font-size:10pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<br><br>
 										<?php if ( App::getLocale() == 'et' ): ?>
-											Aitäh <a href="http://eos.crebit.ee/brainstorm" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
+											Aitäh <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
 											&ndash; Angaari meeskond
 										<?php else: ?>
-											Thank You for using <a href="http://eos.crebit.ee/brainstorm" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
+											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
 											&ndash; The Brainstorm Team
 										<?php endif ?>
 									</td>

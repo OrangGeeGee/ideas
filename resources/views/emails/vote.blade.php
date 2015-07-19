@@ -28,7 +28,7 @@
 											{{ $idea->user->name }} voted for Your idea:
 										<?php endif ?>
 										<br><br>
-										<a href="http://eos.crebit.ee/angaar/#ideas/{{ $idea->id }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $idea->title }}</a>
+										<a href="{{ $idea->generateURL() }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $idea->title }}</a>
 									</td>
 									<td width="36"></td>
 								</tr>
@@ -37,10 +37,10 @@
 									<td width="454" style="color:#777;border-collapse:collapse;font-size:10pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<br><br>
 										<?php if ( App::getLocale() == 'et' ): ?>
-											Aitäh <a href="http://eos.crebit.ee/brainstorm" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
+											Aitäh <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
 											&ndash; Angaari meeskond
 										<?php else: ?>
-											Thank You for using <a href="http://eos.crebit.ee/brainstorm" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
+											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
 											&ndash; The Brainstorm Team
 										<?php endif ?>
 									</td>

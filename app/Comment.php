@@ -5,8 +5,17 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model {
   protected $fillable = array('idea_id', 'text');
 
-  public function scopeLatest($query, $timestamp) {
-    return $query->where('updated_at', '>=', $timestamp);
+  /**
+   * @param Builder $query
+   * @param string $timestampStart
+   * @param string $timestampEnd
+   * @return Collection
+   */
+  public function scopeLatest($query, $timestampStart = '', $timestampEnd = null) {
+    return $query->whereBetween('updated_at', [
+      $timestampStart,
+      isset($timestampEnd) ? $timestampEnd : \DB::raw('now')
+    ]);
   }
 
   public function idea() {

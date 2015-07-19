@@ -24,7 +24,7 @@
                   <td width="454" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
                     {{ $idea->user->name }} lisas Ideekeskkonda uue idee:
                     <br><br>
-                    <a href="http://eos.crebit.ee/angaar/#ideas/{{ $idea->id }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $idea->title }}</a>
+                    <a href="{{ $idea->generateURL() }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $idea->title }}</a>
                     <br><br>
                     Kui {{ $idea->user->getFirstName() }} töötab sinu korrusel, siis ole hea ja vii talle miskit magusat. :) Kui sul on magus otsas (või Mattias ei ole sulle magusat toonudki), siis anna sellest <a href="mailto:mattias.saldre@swedbank.ee" style="color:#f60;">Mattiasele</a> märku.
                   </td>

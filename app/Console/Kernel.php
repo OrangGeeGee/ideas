@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\Inspire',
+		'App\Console\Commands\DailyUpdate',
 	];
 
 	/**
@@ -22,8 +23,9 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('inspire')
-				 ->hourly();
+		$schedule
+			->call('brainstorm:dailyupdate')
+			->dailyAt('08:00');
 	}
 
 }

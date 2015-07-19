@@ -58,6 +58,41 @@ class Notifications {
 
 
   /**
+   * Send an email with latest ideas, comments, etc to subscribed users.
+   */
+  public static function dailyUpdate() {
+    $data = [];
+    $today = new DateTime();
+    $yesterday = (new DateTime())->modify('-1 day');
+    $periodStart = $yesterday->format('Y-m-d');
+    $periodEnd = $today->format('Y-m-d');
+
+    $data['ideas'] = \App\Idea::latest($periodStart, $periodEnd)->get();
+    $data['comments'] = \App\Comment::latest($periodStart, $periodEnd)->get();
+    $data['votes'] = \App\Vote::latest($periodStart, $periodEnd)->get();
+
+    # No updates, cancel notification.
+    if ( $data['ideas']->count() == 0
+      && $data['comments']->count() == 0
+      && $data['votes']->count() == 0 ) {
+      return;
+    }
+
+    # TODO: Implement proper subscription for this.
+    foreach ( \App\WHOISUser::where(['name' => 'Mattias Saldre'])->get() as $subscriber ) {
+      \App::setLocale($subscriber->getLocale());
+      $data['title'] = trans('emails.dailyHeading') . " " . $yesterday->format('d/m/Y');
+
+      \Mail::send('emails.daily', $data, function($message) use ($subscriber, $data) {
+        $message
+          ->to($subscriber->email)
+          ->subject(self::prefixSubject($data['title']));
+      });
+    }
+  }
+
+
+  /**
    * @param string $title
    * @return string
    */

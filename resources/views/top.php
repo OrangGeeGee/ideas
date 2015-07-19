@@ -66,7 +66,7 @@
         <td><?= $idea->user->name ?></td>
         <td><?= $idea->votes->count() ?></td>
         <td><?= $idea->comments->count() ?></td>
-        <td><a href="<?= url("/#ideas/{$idea->id}") ?>" target="_blank"><?= $idea->title ?></a></td>
+        <td><a href="<?= $idea->generateURL() ?>" target="_blank"><?= $idea->title ?></a></td>
         <td><?= $idea->description ?></td>
         <td><input type="text" name="area" value="<?= $idea->area ?>" placeholder="Valdkond"/></td>
         <td><input type="text" name="responsible" value="<?= $idea->responsible ?>" placeholder="Vastutaja"/></td>
