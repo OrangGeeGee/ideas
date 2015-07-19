@@ -12,10 +12,13 @@ class Comment extends Model {
    * @return Collection
    */
   public function scopeLatest($query, $timestampStart = '', $timestampEnd = null) {
-    return $query->whereBetween('updated_at', [
-      $timestampStart,
-      isset($timestampEnd) ? $timestampEnd : \DB::raw('now')
-    ]);
+    $query->where('updated_at', '>=', $timestampStart);
+
+    if ( $timestampEnd ) {
+      $query->where('updated_at', '<=', $timestampEnd);
+    }
+
+    return $query;
   }
 
   public function idea() {

@@ -3,6 +3,7 @@ $(function() {
   new Router;
   Backbone.history.start();
 
+  new OnlineUsersListView;
   new CategoriesListView;
   new IdeaListView({ collection: Ideas }).$el.appendTo('body');
 

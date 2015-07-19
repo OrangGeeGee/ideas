@@ -10,6 +10,7 @@ class User extends Model implements AuthenticatableContract {
 	public $incrementing = false;
 	protected $fillable = [
 		'id',
+		'last_activity_at',
 	];
 	protected $hidden = [
 		'password',
@@ -27,6 +28,11 @@ class User extends Model implements AuthenticatableContract {
 
 	public function hasEstonianEmailAddress() {
 		return WHOISUser::find($this->id)->hasEstonianEmailAddress();
+	}
+
+	public function updateActivityTimestamp() {
+		$this->last_activity_at = \DB::raw('NOW()');
+		$this->save();
 	}
 
 }

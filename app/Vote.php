@@ -17,10 +17,13 @@ class Vote extends Model {
    * @return Collection
    */
   public function scopeLatest($query, $timestampStart = '', $timestampEnd = null) {
-    return $query->whereBetween('timestamp', [
-      $timestampStart,
-      isset($timestampEnd) ? $timestampEnd : \DB::raw('now')
-    ]);
+    $query->where('timestamp', '>=', $timestampStart);
+
+    if ( $timestampEnd ) {
+      $query->where('timestamp', '<=', $timestampEnd);
+    }
+
+    return $query;
   }
 
   public function idea() {

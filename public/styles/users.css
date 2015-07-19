@@ -24,3 +24,46 @@
   font-size: 12px;
   color: #777;
 }
+
+
+/** Online users list */
+#onlineUsersList {
+  list-style: none;
+}
+
+#onlineUsersList > li {
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+}
+
+#onlineUsersList > li:after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#onlineUsersList > li.online::after {
+  background-color: #98cc47;
+  background-image: linear-gradient(#b9f55b, #98cc47);
+  border: 1px solid #98cc47;
+}
+
+#onlineUsersList > li.away::after {
+  background-color: #FFC200;
+  background-image: linear-gradient(#FCE200, #FFBA00);
+  border: 1px solid #FFC200;
+}
+
+#onlineUsersList > li.offline {
+  display: none;
+}
+
+#onlineUsersList .profile-image {
+  width: 50px;
+  height: 50px;
+}

@@ -47,11 +47,13 @@ Route::resource('comments', 'CommentController');
 Route::resource('categories', 'CategoryController');
 
 Route::get('update', function() {
-  $lastUpdate = Session::get('lastUpdateCheck');
-  Session::put('lastUpdateCheck', date('Y-m-d H:i:s'));
+  $user = Auth::user();
+  $lastUpdate = $user->last_activity_at;
+  $user->updateActivityTimestamp();
 
   return array(
     'Users' => App\WHOISUser::newest($lastUpdate)->get()->toArray(),
+    'UserActivity' => App\User::where('last_activity_at', '>=', $lastUpdate)->get()->toArray(),
     'Ideas' => App\Idea::latest($lastUpdate)->get()->toArray(),
     'Votes' => App\Vote::latest($lastUpdate)->get()->toArray(),
     'Comments' => App\Comment::latest($lastUpdate)->get()->toArray()

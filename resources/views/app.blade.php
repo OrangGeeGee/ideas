@@ -32,9 +32,8 @@
   <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
 
   <div id="header">
-    <div id="profile-section" style="display: none;">
+    <ul id="onlineUsersList"></ul>
 
-    </div>
     <div id="filter-section">
       <input type="text" id="searchField" placeholder="<?= trans('frame.searchPlaceholder') ?>"/>
       <ul id="categories-list"></ul>
