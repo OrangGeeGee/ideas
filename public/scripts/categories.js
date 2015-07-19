@@ -1,7 +1,7 @@
 
-var Categories = new Collection('categories', function() {
-  new CategoriesListView;
-});
+var Categories = new (Backbone.Collection.extend({
+
+}));
 
 Categories.model = Backbone.Model.extend({
   activate: function() {

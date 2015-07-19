@@ -1,16 +1,11 @@
 
-var Users = new Collection('users', function() {
-  var activeUser = Users.get(USER_ID);
-  $('#header').prepend(new UserHeaderView({ model: activeUser }).$el);
-});
+var Users = new (Backbone.Collection.extend({
+
+}));
 
 Users.model = Backbone.Model.extend({
   generateProfileImage: function() {
     return '<div class="profile-image" style="background-image: url(' + this.get('profileImageURL') + ');"/>';
-  },
-
-  getIdeas: function () {
-    return Ideas.where({ user_id: String(this.id) });
   }
 });
 

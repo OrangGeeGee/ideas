@@ -1,45 +1,34 @@
 
-var Ideas = new Collection('ideas', function() {
-  var $ideasList = new IdeaListView({ collection: Ideas }).$el.appendTo('body');
-});
+var Ideas = new (Backbone.Collection.extend({
+  url: 'ideas'
+}));
 
 Ideas.model = Backbone.Model.extend({
-  defaults: {
-    userData: []
-  },
 
   initialize: function() {
     this.events = new Backbone.Collection;
+    this.votes = new Backbone.Collection;
   },
 
   vote: function() {
-    var user = Users.get(USER_ID);
-    var data = user.toJSON();
-    data.pivot = {
-      voted_at: moment().format('YYYY-MM-DD HH:mm:ss')
-    };
-
-    this.get('userData').push(data);
-  },
-
-  removeVote: function() {
-    this.get('userData').forEach(function(user) {
-      if ( user.id == USER_ID ) {
-        user.pivot.voted_at = '0000-00-00 00:00:00';
-      }
+    Votes.create({
+      user_id: USER_ID,
+      idea_id: this.id
     });
   },
 
+  removeVote: function() {
+    this.votes.where({
+      user_id: USER_ID
+    })[0].destroy();
+  },
+
   getVoteCount: function() {
-    return this.get('userData').filter(function(user) {
-      return user.pivot.voted_at != '0000-00-00 00:00:00';
-    }).length;
+    return this.votes.length;
   },
 
   hasBeenVotedFor: function() {
-    return this.get('userData').filter(function(user) {
-      return user.id == USER_ID && user.pivot.voted_at != '0000-00-00 00:00:00';
-    }).length == 1;
+    return this.votes.where({ user_id: USER_ID }).length > 0;
   },
 
   matchesCategoryFilter: function() {
@@ -207,17 +196,11 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
 
       if ( this.model.hasBeenVotedFor() ) {
-        $.get(event.currentTarget.href);
         this.model.removeVote();
       }
       else {
-        // TODO: Rewrite. Logic should be in the model.
-        $.get(event.currentTarget.href);
         this.model.vote();
       }
-
-      // TODO: Update comment count as well.
-      this.refreshState();
     }
   },
 
@@ -227,6 +210,10 @@ var IdeaView = Backbone.View.extend({
 
   refreshState: function() {
     this.$el.toggleClass('voted', this.model.hasBeenVotedFor());
+  },
+
+  updateVoteCount: function() {
+    this.$('.vote-count').text(this.model.getVoteCount());
   },
 
   deleteIdea: function() {
@@ -253,6 +240,7 @@ var IdeaView = Backbone.View.extend({
     this.$('.entry-author').append(new TimestampView({ model: this.model }).$el);
 
     this.refreshState();
+    this.updateVoteCount();
     this.$el.toggleClass('in-progress', this.model.isInProgress());
     this.$el.toggleClass('finished', this.model.isFinished());
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
@@ -264,6 +252,10 @@ var IdeaView = Backbone.View.extend({
     this.model.view = this;
     this.model.on('change', this.render, this);
     this.model.events.on('add', this.render, this);
+    this.model.votes.on('add remove', function() {
+      this.updateVoteCount();
+      this.refreshState();
+    }, this);
 
     Categories.on('change:active', function() {
       this.$el.toggle(this.model.matchesCategoryFilter() && this.model.matchesSearchPhrase());

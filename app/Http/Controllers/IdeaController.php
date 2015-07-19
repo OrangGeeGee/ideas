@@ -6,10 +6,7 @@ class IdeaController extends Controller {
    * @return $this
    */
 	public function index() {
-    return \App\Idea::with('userData')->get()->each(function($idea)
-    {
-      $idea->userData = $idea->userData->toArray();
-    });
+    return \App\Idea::all();
 	}
 
   /**
@@ -21,7 +18,6 @@ class IdeaController extends Controller {
     $idea = new \App\Idea($data);
 
     $user->ideas()->save($idea);
-    $idea->userData = $idea->userData->toArray();
 
     return $idea;
 	}
@@ -41,13 +37,13 @@ class IdeaController extends Controller {
   public function read(\App\Idea $idea) {
     $user = \Auth::user();
 
-    if ( $idea->votes->contains($user->id) ) {
-      $idea->votes()->updateExistingPivot($user->id, [
+    if ( $idea->views->contains($user->id) ) {
+      $idea->views()->updateExistingPivot($user->id, [
         'seen_at' => \DB::raw('NOW()')
       ]);
     }
     else {
-      $idea->votes()->save($user, [
+      $idea->views()->save($user, [
         'seen_at' => \DB::raw('NOW()')
       ]);
     }
@@ -66,22 +62,16 @@ class IdeaController extends Controller {
       return;
     }
 
-    # Each idea can only be voted once.
-    if ( $idea->hasBeenVotedFor() )
-    {
+    # Each idea can only be voted once per user.
+    if ( $idea->hasBeenVotedFor() ) {
       return;
     }
 
-    if ( $idea->votes->contains($user->id) ) {
-      $idea->votes()->updateExistingPivot($user->id, [
-        'voted_at' => \DB::raw('NOW()')
-      ]);
-    }
-    else {
-      $idea->votes()->save($user, [
-        'voted_at' => \DB::raw('NOW()')
-      ]);
-    }
+    \App\Vote::create([
+      'idea_id' => $idea->id,
+      'user_id' => $user->id,
+      'timestamp' => \DB::raw('NOW()')
+    ]);
 
     \Notifications::newVote($idea);
     \Activities::record(\Activities::VOTE_IDEA, $idea->title);
@@ -91,8 +81,10 @@ class IdeaController extends Controller {
    * @param \App\Idea $idea
    */
   public function unvote(\App\Idea $idea) {
-    $user = \Auth::user();
-    $idea->votes()->detach($user);
+    \App\Vote::where([
+      'user_id' => \Auth::user()->id,
+      'idea_id' => $idea->id,
+    ])->delete();
 
     \Activities::record(\Activities::UNVOTE_IDEA, $idea->title);
   }

@@ -15,17 +15,12 @@ class Idea extends Model {
     return $query->where('updated_at', '>=', $timestamp);
   }
 
-  public function userData() {
-    $pivotFields = [
-      'voted_at',
-      'seen_at',
-    ];
-
-    return $this->belongsToMany('App\User')->withPivot($pivotFields);
+  public function votes() {
+    return $this->hasMany('App\Vote');
   }
 
-  public function votes() {
-    return $this->belongsToMany('App\User')->where('voted_at', '>', '0000-00-00 00:00:00');
+  public function views() {
+    return $this->belongsToMany('App\User');
   }
 
   public function comments() {
@@ -33,10 +28,7 @@ class Idea extends Model {
   }
 
   public function hasBeenVotedFor() {
-    return !!$this->userData()
-      ->where('user_id', $this->id)
-      ->where('voted_at', '!=', '0000-00-00 00:00:00')
-      ->first();
+    return $this->votes()->where('user_id', \Auth::user()->id)->count() > 0;
   }
 
   public function user() {

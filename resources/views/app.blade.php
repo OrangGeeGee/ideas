@@ -98,7 +98,7 @@
       <ul class="entry-data">
         <li class="votes">
           <img src="images/thumbs-up-black.png"/>
-          <%= voteCount %> <?= trans('ideas.peopleLike') ?>
+          <span class="vote-count"></span> <?= trans('ideas.peopleLike') ?>
         </li>
         <li class="comments">
           <img src="images/comments.png"/>
@@ -179,17 +179,14 @@
   <script>
     USER_PROFILE_IMAGE_PATH = 'https://workspaces.swedbank.net/project/IDpicture/intranet/';
     USER_ID = '<?= Auth::user()->id ?>';
+    SHADOW_URL = '<?= env('SHADOW_URL') ?>';
 
     /**
      * @param {String} path
      * @return {String}
      */
     function generateShadowEnvironmentLink(path) {
-      var domain = isProduction()
-        ? 'http://eos.crebit.ee/shadow/'
-        : 'http://localhost:85/';
-
-      return domain + (path || '');
+      return SHADOW_URL + (path || '');
     }
 
     /**
@@ -202,10 +199,12 @@
   <script src="scripts/routes.js"></script>
   <script src="scripts/users.js"></script>
   <script src="scripts/ideas.js"></script>
+  <script src="scripts/votes.js"></script>
   <script src="scripts/comments.js"></script>
   <script src="scripts/events.js"></script>
   <script src="scripts/categories.js"></script>
   <script src="scripts/sorting.js"></script>
+  <script src="scripts/dataPoller.js"></script>
   <script>
     SortingOptions.add([
       { id: 1, name: '<?= trans('sorting.byDate') ?>' },
@@ -214,5 +213,17 @@
   </script>
   <script src="scripts/timestamps.js"></script>
   <script src="scripts/tutorial.js"></script>
+
+  <!-- Initial data -->
+  <script>
+    Categories.add(<?= \App\Category::all() ?>);
+    Ideas.add(<?= \App\Idea::all() ?>);
+    Votes.add(<?= \App\Vote::all() ?>);
+    Comments.add(<?= \App\Comment::all() ?>);
+    Users.add(<?= \App\WHOISUser::all() ?>);
+  </script>
+
+  <!-- Boot process -->
+  <script src="scripts/boot.js"></script>
 </body>
 </html>

@@ -1,9 +1,16 @@
 
-var Events = new Collection(generateShadowEnvironmentLink('events'), function() {
-  function addEvent(event) {
-    Ideas.get(event.get('idea_id')).events.add(event);
-  }
+var Events = new (Backbone.Collection.extend({
+  url: generateShadowEnvironmentLink('events'),
 
-  this.each(addEvent);
-  this.on('add', addEvent);
-});
+  initialize: function() {
+    this.on('add', function(event) {
+      Ideas.get(event.get('idea_id')).events.add(event);
+    });
+  }
+}));
+
+Events.fetch();
+
+setInterval(function() {
+  Events.fetch();
+}, 5000);

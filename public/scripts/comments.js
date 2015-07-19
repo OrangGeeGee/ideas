@@ -1,10 +1,13 @@
 
-var Comments = new Collection('comments', function() {
-  this.on('add', function(model) {
-    Ideas.get(model.get('idea_id')).trigger('change');
-  });
-});
+var Comments = new (Backbone.Collection.extend({
+  url: 'comments',
 
+  initialize: function() {
+    this.on('add', function(model) {
+      Ideas.get(model.get('idea_id')).trigger('change');
+    });
+  }
+}));
 
 
 var CommentFormView = Backbone.View.extend({
