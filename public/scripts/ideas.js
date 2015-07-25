@@ -49,6 +49,10 @@ Ideas.model = Backbone.Model.extend({
     return !searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase);
   },
 
+  isFinished: function() {
+    return this.getStatusId() == 2;
+  },
+
   getStatus: function() {
     return Statuses.get(this.getStatusId());
   },
