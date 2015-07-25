@@ -119,16 +119,19 @@ a.vote-action {
   border: 2px solid #FF9A58;
   border-radius: 25px;
   text-decoration: none;
-  position: relative;
-  margin-top: -30px;
-  margin-bottom: 10px;
-  margin-left: -20%;
-  left: 50%;
-  display: block;
   width: 40%;
   text-align: center;
   height: 32px;
+  margin-left: -20%;
+  left: 50%;
   transition: left 0.33s, width 0.4s;
+}
+
+#ideas-list .vote-action {
+  position: relative;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  display: block;
 }
 
 a.vote-action .text {
@@ -146,8 +149,8 @@ a.vote-action img {
   background-color: #FF9A58;
   text-indent: -9999px;
   width: 50px;
-  margin-left: -25px;
-  left: 90%;
+  margin-left: -25px !important;
+  left: 90% !important;
 }
 
 .voted a.vote-action .text {
@@ -209,6 +212,14 @@ a.vote-action:hover {
   padding: 40px;
   height: 100%;
   overflow-y: auto;
+}
+
+.idea-description-section {
+  position: relative;
+}
+
+.idea-description-section .vote-action {
+  position: absolute;
 }
 
 .idea-activity-section {

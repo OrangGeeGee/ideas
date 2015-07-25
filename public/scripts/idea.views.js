@@ -103,8 +103,26 @@ var IdeaFormView = Backbone.View.extend({
 var IdeaModalView = Backbone.View.extend({
   template: _.template($('#ideaModalTemplate').html()),
 
+  events: {
+    'click .vote-action': function(event) {
+      event.preventDefault();
+
+      // TODO: Duplicated code from IdeaView.
+      if ( this.model.hasBeenVotedFor() ) {
+        this.model.removeVote();
+      }
+      else {
+        this.model.vote();
+      }
+    }
+  },
+
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model));
+  },
+
+  refreshState: function() {
+    this.modal.$.toggleClass('voted', this.model.hasBeenVotedFor());
   },
 
   initialize: function() {
@@ -116,7 +134,12 @@ var IdeaModalView = Backbone.View.extend({
     var activityListView = new IdeaActivityListView({ model: this.model });
     this.$('.idea-activity-section').append(activityListView.$el);
 
-    new Modal('ideaModal', this.$el);
+    this.modal = new Modal('ideaModal', this.$el);
+
+    this.refreshState();
+    this.model.votes.on('add remove', function() {
+      this.refreshState();
+    }, this);
   }
 });
 

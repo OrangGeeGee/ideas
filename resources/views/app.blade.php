@@ -75,8 +75,15 @@
 
   <script type="text/html" id="ideaModalTemplate">
     <section class="idea-description-section">
-      <h2 class="idea-title"><%= title %></h2>
-      <p class="idea-description"><%= description %></p>
+      <h2 class="idea-title"><%= attributes.title %></h2>
+      <p class="idea-description"><%= attributes.description %></p>
+
+      <% if ( attributes.user_id != USER_ID && !isFinished() ) { %>
+        <a class="vote-action" href="ideas/<%= id %>/vote">
+          <span class="text"><?= trans('ideas.vote') ?></span>
+          <img src="images/thumbs-up.png"/>
+        </a>
+      <% } %>
     </section>
 
     <section class="idea-activity-section">
