@@ -1,0 +1,33 @@
+
+.entry-content h3:before {
+  font-size: 14px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  vertical-align: top;
+}
+
+.status-in-backlog .entry-content h3:before {
+  display: none;
+}
+
+.status-on-hold .entry-content h3:before {
+  background-color: #DDD;
+}
+
+.status-investigating .entry-content h3:before {
+  background-color: #BBDBF9;
+}
+
+.status-in-progress .entry-content h3:before {
+  background-color: #df7df7;
+}
+
+.status-finished .entry-content h3:before {
+  background-color: #D1ED3E;
+}
+
+.status-cancelled .entry-content h3:before {
+  background-color: #c83c3c;
+  color: white;
+}

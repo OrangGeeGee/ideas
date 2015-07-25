@@ -9,6 +9,4 @@ $(function() {
 
   var activeUser = Users.get(USER_ID);
   $('#header').prepend(new UserHeaderView({ model: activeUser }).$el);
-
-  DataPoller.initialize();
 });

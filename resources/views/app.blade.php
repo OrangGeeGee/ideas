@@ -11,6 +11,7 @@
   <link type="text/css" rel="stylesheet" href="styles/buttons.css">
   <link type="text/css" rel="stylesheet" href="styles/idea-form.css">
   <link type="text/css" rel="stylesheet" href="styles/ideas-list.css">
+  <link type="text/css" rel="stylesheet" href="styles/statuses.css">
   <link type="text/css" rel="stylesheet" href="styles/entry-list.css">
   <link type="text/css" rel="stylesheet" href="styles/comments.css">
   <link type="text/css" rel="stylesheet" href="styles/activities.css">
@@ -19,13 +20,11 @@
   <link type="text/css" rel="stylesheet" href="plugins/modals/modals.css">
   <link type="text/css" rel="stylesheet" href="plugins/introjs/introjs.css">
   <style type="text/css">
-    .in-progress .entry-content h3:before {
-      content: "<?= trans('statuses.inProgress') ?>";
-    }
-
-    .finished .entry-content h3:before {
-      content: "<?= trans('statuses.done') ?>";
-    }
+    <?php foreach ( App\Status::all() as $status ): ?>
+      .status-{{ $status->code }} .entry-content h3:before {
+        content: "<?= trans('statuses.' . camel_case($status->code)) ?>";
+      }
+    <?php endforeach ?>
   </style>
 </head>
 <body>
@@ -70,6 +69,16 @@
 
   <script type="text/html" id="commentFormTemplate">
     <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
+    <% if ( attributes.user_id == USER_ID ) { %>
+      <div class="status-container">
+        Change status to
+        <select name="status_id">
+          <?php foreach ( App\Status::orderBy('position')->get() as $status ): ?>
+            <option value="{{ $status->id }}">{{ trans('statuses.' . camel_case($status->code)) }}</option>
+          <?php endforeach ?>
+        </select>
+      </div>
+    <% } %>
     <input type="submit" value="<?= trans('comments.add') ?>"/>
   </script>
 
@@ -96,7 +105,7 @@
       <h3><%= title %></h3>
       <div class="entry-author">
         <%= user.generateProfileImage() %>
-        <span span class="user-name"><%= user.get('name') %></span>
+        <span class="user-name"><%= user.get('name') %></span>
       </div>
     </div>
 
@@ -145,6 +154,9 @@
     <div class="entry-author">
       <%= user.generateProfileImage() %>
       <span class="user-name"><%= user.get('name') %></span>
+      <% if ( statusChange ) { %>
+        <span class="action"><?= trans('statuses.changedTo') ?></span> <%= Statuses.get(statusChange.get('status_id')).get('name') %>
+      <% } %>
     </div>
     <div class="entry-content">
       <p><%= text %></p>
@@ -216,12 +228,18 @@
   <script src="scripts/votes.js"></script>
   <script src="scripts/comments.js"></script>
   <script src="scripts/comment.views.js"></script>
+  <?php if ( env('SHADOW_URL') ): ?>
   <script src="scripts/events.js"></script>
+  <?php endif ?>
   <script src="scripts/event.views.js"></script>
   <script src="scripts/categories.js"></script>
   <script src="scripts/activity.views.js"></script>
   <script src="scripts/sorting.js"></script>
+  <script src="scripts/statuses.js"></script>
+  <?php if ( env('POLLING_INTERVAL') ): ?>
+  <script>POLLING_INTERVAL = <?= env('POLLING_INTERVAL') ?>;</script>
   <script src="scripts/dataPoller.js"></script>
+  <?php endif ?>
   <script>
     SortingOptions.add([
       { id: 1, name: '<?= trans('sorting.byDate') ?>' },
@@ -238,6 +256,8 @@
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);
     Users.add(<?= \App\WHOISUser::all() ?>);
+    Statuses.add(<?= $statuses ?>);
+    StatusChanges.add(<?= \App\StatusChange::all() ?>);
   </script>
 
   <!-- Boot process -->

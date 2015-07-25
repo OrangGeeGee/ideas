@@ -7,6 +7,7 @@ Ideas.model = Backbone.Model.extend({
 
   initialize: function() {
     this.comments = new Backbone.Collection;
+    this.statusChanges = new Backbone.Collection;
     this.events = new Backbone.Collection;
     this.votes = new Backbone.Collection;
   },
@@ -48,11 +49,13 @@ Ideas.model = Backbone.Model.extend({
     return !searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase);
   },
 
-  isInProgress: function() {
-    return this.get('status_id') == 1;
+  getStatus: function() {
+    return Statuses.get(this.getStatusId());
   },
 
-  isFinished: function() {
-    return this.get('status_id') == 2;
+  getStatusId: function() {
+    var lastStatusChange = this.statusChanges.last();
+
+    return lastStatusChange ? lastStatusChange.get('status_id') : 0;
   }
 });

@@ -33,7 +33,11 @@ Route::get('/', function() {
     App::setLocale('et');
   }
 
-	return View::make('app');
+  $data['statuses'] = App\Status::all()->each(function($status) {
+    $status->name = trans('statuses.' . camel_case($status->code));
+  });
+
+	return View::make('app', $data);
 });
 
 Route::resource('users', 'UserController');
@@ -55,6 +59,7 @@ Route::get('update', function() {
     'Users' => App\WHOISUser::newest($lastUpdate)->get()->toArray(),
     'UserActivity' => App\User::where('last_activity_at', '>=', $lastUpdate)->get()->toArray(),
     'Ideas' => App\Idea::latest($lastUpdate)->get()->toArray(),
+    'StatusChanges' => App\StatusChange::latest($lastUpdate)->get()->toArray(),
     'Votes' => App\Vote::latest($lastUpdate)->get()->toArray(),
     'Comments' => App\Comment::latest($lastUpdate)->get()->toArray()
   );

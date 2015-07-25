@@ -167,24 +167,6 @@ a.vote-action:hover {
 }
 
 
-/** Idea statuses */
-.entry-content h3:before {
-  font-size: 14px;
-  padding: 2px 5px;
-  margin-right: 5px;
-  border-radius: 3px;
-  vertical-align: middle;
-}
-
-.in-progress .entry-content h3:before {
-  background-color: #df7df7;
-}
-
-.finished .entry-content h3:before {
-  background-color: #f90;
-}
-
-
 /** Idea modal */
 #ideaModal {
   background-color: #f5f5f5;
@@ -235,4 +217,14 @@ a.vote-action:hover {
 
 .idea-activity-section form + .activity-list {
   margin-top: 20px;
+}
+
+.status-container {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.status-container select {
+  display: inline-block;
+  width: auto;
 }

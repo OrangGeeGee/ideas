@@ -16,6 +16,10 @@ var DataPoller = {
   },
 
   initialize: function() {
-    setInterval(this.fetch, 5000);
+    setInterval(this.fetch, POLLING_INTERVAL);
   }
 };
+
+$(function() {
+  DataPoller.initialize();
+});

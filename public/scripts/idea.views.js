@@ -228,11 +228,14 @@ var IdeaView = Backbone.View.extend({
 
     this.refreshState();
     this.updateVoteCount();
-    this.$el.toggleClass('in-progress', this.model.isInProgress());
-    this.$el.toggleClass('finished', this.model.isFinished());
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
+    this.refreshStatus();
 
     return this.$el;
+  },
+
+  refreshStatus: function() {
+    this.$el.attr('class', 'status-' + this.model.getStatus().get('code'));
   },
 
   initialize: function() {
@@ -244,6 +247,7 @@ var IdeaView = Backbone.View.extend({
       this.updateVoteCount();
       this.refreshState();
     }, this);
+    this.model.statusChanges.on('add', this.refreshStatus, this);
 
     Categories.on('change:active', function() {
       this.$el.toggle(this.model.matchesCategoryFilter() && this.model.matchesSearchPhrase());

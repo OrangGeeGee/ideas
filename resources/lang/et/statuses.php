@@ -1,6 +1,11 @@
 <?php
 
 return [
+  'inBacklog' => "Idee",
+  'onHold' => "Ootel",
+  'investigating' => "Uurimisel",
   'inProgress' => "Tegemisel",
-  'done' => "Tehtud",
+  'finished' => "Tehtud",
+  'cancelled' => "Tagasi lükatud",
+  'changedTo' => "muutis idee staatust:",
 ];

@@ -1,6 +1,11 @@
 <?php
 
 return [
+  'inBacklog' => "In progress",
+  'onHold' => "In progress",
+  'investigating' => "Investigating",
   'inProgress' => "In progress",
-  'done' => "Done",
+  'finished' => "Done",
+  'cancelled' => "Cancelled",
+  'changedTo' => "changed status to",
 ];

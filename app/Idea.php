@@ -46,6 +46,17 @@ class Idea extends Model {
     return $this->belongsTo('App\Status');
   }
 
+  public function statusChanges() {
+    return $this->hasMany('App\StatusChange');
+  }
+
+  public function hasStatus($statusId) {
+    $lastStatusChange = $this->statusChanges->last();
+    $currentStatusId = $lastStatusChange ? $lastStatusChange->status_id : 0;
+
+    return $currentStatusId == $statusId;
+  }
+
   public function generateURL() {
     return env('APP_URL') . "#ideas/$this->id";
   }
