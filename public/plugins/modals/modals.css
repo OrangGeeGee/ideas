@@ -48,17 +48,14 @@
 
 /** Close button */
 .modal-window .modal-close-action {
-  background: url('gray-cross.png') center center no-repeat;
+  background: white url('gray-cross.png') center center no-repeat;
   width: 25px;
   height: 25px;
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: -25px;
 }
 
 .modal-window .modal-close-action:hover {
   background-color: #f0f0f0;
-  border: solid #CCC;
-  border-width: 0px 0px 1px 1px;
-  border-bottom-left-radius: 5px;
 }

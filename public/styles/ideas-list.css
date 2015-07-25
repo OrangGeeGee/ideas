@@ -180,3 +180,48 @@ a.vote-action:hover {
 .finished .entry-content h3:before {
   background-color: #f90;
 }
+
+
+/** Idea modal */
+#ideaModal {
+  background-color: #f5f5f5;
+  max-width: 800px;
+}
+
+#ideaModal .modal-body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#ideaModal .modal-body > h2 {
+  display: none;
+}
+
+#ideaModal .modal-body > div {
+  height: 100%;
+}
+
+.idea-description-section,
+.idea-activity-section {
+  float: left;
+  width: 50%;
+  padding: 40px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.idea-activity-section {
+  background-color: white;
+  overflow-x: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.idea-title {
+  line-height: 36px;
+}
+
+.idea-activity-section form + .activity-list {
+  margin-top: 20px;
+}

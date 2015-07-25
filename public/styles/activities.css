@@ -1,0 +1,10 @@
+
+.activity-list {
+  list-style: none;
+  font-size: 14px;
+}
+
+.activity-list .entry-content {
+  margin-left: 44px;
+  margin-top: -10px;
+}

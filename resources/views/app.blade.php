@@ -13,6 +13,7 @@
   <link type="text/css" rel="stylesheet" href="styles/ideas-list.css">
   <link type="text/css" rel="stylesheet" href="styles/entry-list.css">
   <link type="text/css" rel="stylesheet" href="styles/comments.css">
+  <link type="text/css" rel="stylesheet" href="styles/activities.css">
   <link type="text/css" rel="stylesheet" href="styles/users.css">
   <link type="text/css" rel="stylesheet" href="styles/filters.css">
   <link type="text/css" rel="stylesheet" href="plugins/modals/modals.css">
@@ -42,7 +43,7 @@
   </div>
 
   <!-- Templates -->
-  <script type="text/html" id="idea-form-template">
+  <script type="text/html" id="ideaFormTemplate">
     <h2><input type="text" name="title" placeholder="<?= trans('ideas.titlePlaceholder') ?>"/></h2>
     <select name="category_id">
     <?php foreach ( App\Category::all() as $category ): ?>
@@ -53,7 +54,7 @@
     <input type="submit" value="<?= trans('ideas.submit') ?>"/>
   </script>
 
-  <script type="text/html" id="event-form-template">
+  <script type="text/html" id="eventFormTemplate">
     <h2><input type="text" name="title" placeholder="<?= trans('events.titlePlaceholder') ?>"/></h2>
     <input type="text" name="location" placeholder="<?= trans('events.locationPlaceholder') ?>"/>
     <textarea name="description" placeholder="<?= trans('events.descriptionPlaceholder') ?>"></textarea>
@@ -62,22 +63,28 @@
     <input type="submit" value="<?= trans('events.create') ?>"/>
   </script>
 
-  <script type="text/html" id="user-header-template">
+  <script type="text/html" id="userHeaderTemplate">
     <h2><?= trans('frame.hi') ?>, <%= name.getForename() %></h2>
     <p><?= trans('frame.introduction') ?></p>
   </script>
 
-  <script type="text/html" id="comment-form-template">
-    <div class="entry-author">
-      <%= Users.get(USER_ID).generateProfileImage() %>
-    </div>
-    <div class="entry-content">
-      <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
-      <input type="submit" value="<?= trans('comments.add') ?>"/>
-    </div>
+  <script type="text/html" id="commentFormTemplate">
+    <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
+    <input type="submit" value="<?= trans('comments.add') ?>"/>
   </script>
 
-  <script type="text/html" id="idea-template">
+  <script type="text/html" id="ideaModalTemplate">
+    <section class="idea-description-section">
+      <h2 class="idea-title"><%= title %></h2>
+      <p class="idea-description"><%= description %></p>
+    </section>
+
+    <section class="idea-activity-section">
+
+    </section>
+  </script>
+
+  <script type="text/html" id="ideaListItemTemplate">
     <div class="entry-content" title="<?= trans('comments.open') ?>">
       <h3><%= title %></h3>
       <div class="entry-author">
@@ -127,7 +134,7 @@
     </footer>
   </script>
 
-  <script type="text/html" id="comment-template">
+  <script type="text/html" id="commentListItemTemplate">
     <div class="entry-author">
       <%= user.generateProfileImage() %>
       <span class="user-name"><%= user.get('name') %></span>
@@ -137,10 +144,10 @@
     </div>
   </script>
 
-  <script type="text/html" id="event-template">
+  <script type="text/html" id="eventListItemTemplate">
     <div class="entry-author">
       <%= user.generateProfileImage() %>
-      <h4><%= user.get('name') %> created an event</h4>
+      <span class="user-name"><%= user.get('name') %></span> created an event
     </div>
     <div class="entry-content">
       <blockquote>
@@ -150,7 +157,7 @@
     </div>
   </script>
 
-  <script type="text/html" id="new-idea-template">
+  <script type="text/html" id="newIdeaTemplate">
     <img src="<?= url('/images/pencil-icon.png') ?>"/>
     <h3><?= trans('ideas.add') ?></h3>
   </script>
@@ -196,11 +203,16 @@
   </script>
   <script src="scripts/routes.js"></script>
   <script src="scripts/users.js"></script>
+  <script src="scripts/user.views.js"></script>
   <script src="scripts/ideas.js"></script>
+  <script src="scripts/idea.views.js"></script>
   <script src="scripts/votes.js"></script>
   <script src="scripts/comments.js"></script>
+  <script src="scripts/comment.views.js"></script>
   <script src="scripts/events.js"></script>
+  <script src="scripts/event.views.js"></script>
   <script src="scripts/categories.js"></script>
+  <script src="scripts/activity.views.js"></script>
   <script src="scripts/sorting.js"></script>
   <script src="scripts/dataPoller.js"></script>
   <script>
