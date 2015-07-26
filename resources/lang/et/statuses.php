@@ -7,5 +7,6 @@ return [
   'inProgress' => "Tegemisel",
   'finished' => "Tehtud",
   'cancelled' => "Tagasi lükatud",
+  'change' => "Muuda idee staatust",
   'changedTo' => "muutis idee staatust:",
 ];

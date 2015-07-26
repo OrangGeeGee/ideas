@@ -71,7 +71,7 @@
     <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
     <% if ( attributes.user_id == USER_ID ) { %>
       <div class="status-container">
-        Change status to
+        {{ trans('statuses.change') }}
         <select name="status_id">
           <?php foreach ( App\Status::orderBy('position')->get() as $status ): ?>
             <option value="{{ $status->id }}">{{ trans('statuses.' . camel_case($status->code)) }}</option>
@@ -166,12 +166,12 @@
   <script type="text/html" id="eventListItemTemplate">
     <div class="entry-author">
       <%= user.generateProfileImage() %>
-      <span class="user-name"><%= user.get('name') %></span> created an event
+      <span class="user-name"><%= user.get('name') %></span> {{ trans('events.created') }}
     </div>
     <div class="entry-content">
       <blockquote>
         <p><%= description %></p>
-        <a href="<%= generateShadowEnvironmentLink() %>" target="_blank">View the event in Shadowing environment</a>
+        <a href="<%= generateShadowEnvironmentLink() %>" target="_blank">{{ trans('events.viewInShadowing') }}</a>
       </blockquote>
     </div>
   </script>
