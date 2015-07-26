@@ -26,6 +26,10 @@ class User extends Model implements AuthenticatableContract {
 		return $this->hasMany('App\Comment');
 	}
 
+	public function settings() {
+		return $this->hasOne('App\Setting');
+	}
+
 	public function hasEstonianEmailAddress() {
 		return WHOISUser::find($this->id)->hasEstonianEmailAddress();
 	}

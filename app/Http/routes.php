@@ -40,6 +40,11 @@ Route::get('/', function() {
 	return View::make('app', $data);
 });
 
+Route::get('landingPageVisited', function() {
+  $user = Auth::user();
+  $user->settings()->update(['landingPageVisited' => true]);
+});
+
 Route::resource('users', 'UserController');
 Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');

@@ -7,6 +7,7 @@
   <link type="text/css" rel="stylesheet" href="styles/fonts.css">
   <link type="text/css" rel="stylesheet" href="styles/base.css">
   <link type="text/css" rel="stylesheet" href="styles/layout.css">
+  <link type="text/css" rel="stylesheet" href="styles/landing.css">
   <link type="text/css" rel="stylesheet" href="styles/headings.css">
   <link type="text/css" rel="stylesheet" href="styles/buttons.css">
   <link type="text/css" rel="stylesheet" href="styles/idea-form.css">
@@ -29,15 +30,48 @@
 </head>
 <body>
 
-  <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
+  <?php if ( !Auth::user()->settings->landingPageVisited ): ?>
+    <script src="scripts/landing.js"></script>
 
-  <div id="header">
-    <ul id="onlineUsersList"></ul>
+    <div id="landingLayer">
+      <div id="landingContainer">
+        <h1>Ideekeskkond</h1>
 
-    <div id="filter-section">
-      <input type="text" id="searchField" placeholder="<?= trans('frame.searchPlaceholder') ?>"/>
-      <ul id="categories-list"></ul>
-      <ul id="sorting-options-list"></ul>
+        <ul id="featuresList">
+          <li>
+            <h2>Kes võivad ideid esitada?</h2>
+            <p>Kõik, kes unistavad mõnusamast ja kaasaegsemast töökeskkonnast ning uutest ja põnevatest toodetest.</p>
+          </li>
+          <li>
+            <h2>Milliseid ideid võib esitada?</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          </li>
+          <li>
+            <h2>Milliseid ideid võib esitada?</h2>
+            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </li>
+          <li>
+            <h2>Milliseid ideid võib esitada?</h2>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+          </li>
+        </ul>
+
+        <a href="javascript:hideLandingPage();" class="button">{{ trans('landing.startUsing') }}</a>
+      </div>
+    </div>
+  <?php endif ?>
+
+  <div id="container">
+    <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
+
+    <div id="header">
+      <ul id="onlineUsersList"></ul>
+
+      <div id="filter-section">
+        <input type="text" id="searchField" placeholder="<?= trans('frame.searchPlaceholder') ?>"/>
+        <ul id="categories-list"></ul>
+        <ul id="sorting-options-list"></ul>
+      </div>
     </div>
   </div>
 
