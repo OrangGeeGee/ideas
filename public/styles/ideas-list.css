@@ -85,7 +85,7 @@
 /** Single column layout */
 @media (max-width: 800px) {
   #ideas-list > li {
-    margin-bottom: 7%;
+    margin-bottom: 20px;
     width: 100%;
   }
 }
@@ -93,7 +93,7 @@
 /** Two-column layout */
 @media (min-width: 801px) and (max-width: 1100px) {
   #ideas-list > li {
-    margin: .5% 2% 4%;
+    margin: .5% 2% 20px;
     width: 46%;
   }
 }

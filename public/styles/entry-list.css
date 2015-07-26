@@ -1,11 +1,14 @@
 
 .entry-list {
   list-style: none;
+  display: flex;
+  flex-flow: wrap;
 }
 
 .entry-list > li {
   position: relative;
-  margin: 0.5% 1.5% 2%;
+  margin: 0.5% 1.5% 20px;
+  height: 100%;
 }
 
 .entry-list h3 + p {
