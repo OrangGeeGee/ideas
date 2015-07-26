@@ -215,6 +215,10 @@ a.vote-action:hover {
   line-height: 36px;
 }
 
+.idea-description {
+  white-space: pre-line;
+}
+
 .idea-activity-section form + .activity-list {
   margin-top: 20px;
 }
