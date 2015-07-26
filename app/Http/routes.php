@@ -50,6 +50,9 @@ Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
 Route::get('ideas/{idea}/read', 'IdeaController@read');
 Route::post('ideas/{idea}/vote', 'IdeaController@vote');
+Route::get('ideas/{idea}/notifySecretaries', function($idea) {
+  Notifications::notifySecretaries($idea);
+});
 Route::delete('ideas/{idea}/vote', 'IdeaController@unvote');
 Route::get('ideas/{idea}/delete', 'IdeaController@destroy');
 Route::resource('comments', 'CommentController');

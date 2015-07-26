@@ -12,15 +12,29 @@ class Notifications {
   public static function newIdea(Idea $idea) {
     App::setLocale($idea->user->getLocale());
 
-    # Notify secretaries about the new idea. Candy time!
+    # Send the idea for validation
     if ( $idea->user->hasEstonianEmailAddress() ) {
-      Mail::send('emails.idea', compact('idea'), function($message) use ($idea) {
+      Mail::send('emails.ideaValidation', compact('idea'), function($message) use ($idea) {
         $message
-          ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
-          ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
-          ->subject(self::prefixSubject(trans('emails.newIdea'), $idea->user->getLocale()));
+          ->to('mattias.saldre@swedbank.ee', 'Mattias Saldre')
+          ->subject(self::prefixSubject(trans('emails.newIdea')));
       });
     }
+  }
+
+
+  /**
+   * Notifies secretaries about a new idea. Candy time!
+   *
+   * @param Idea $idea
+   */
+  public static function notifySecretaries(Idea $idea) {
+    Mail::send('emails.notificationToSecretaries', compact('idea'), function($message) use ($idea) {
+      $message
+        ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
+        ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
+        ->subject(self::prefixSubject(trans('emails.newIdea')));
+    });
   }
 
 
