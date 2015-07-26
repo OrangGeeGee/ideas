@@ -18,6 +18,14 @@ class User extends Model implements AuthenticatableContract {
 	];
 	public $timestamps = false;
 
+	public static function boot() {
+		parent::boot();
+
+		self::created(function($user) {
+			$user->settings()->create([]);
+		});
+	}
+
 	public function ideas() {
 		return $this->hasMany('App\Idea');
 	}
