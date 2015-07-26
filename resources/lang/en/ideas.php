@@ -2,6 +2,7 @@
 
 return [
   'add' => "Add new idea",
+  'added' => "added new idea",
   'submit' => "Submit idea",
   'delete' => "Delete idea",
   'vote' => "Like",

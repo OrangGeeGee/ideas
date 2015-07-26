@@ -73,6 +73,8 @@
         <ul id="sorting-options-list"></ul>
       </div>
     </div>
+
+    <section id="activitySection"></section>
   </div>
 
   <!-- Templates -->
@@ -215,6 +217,28 @@
     <h3><?= trans('ideas.add') ?></h3>
   </script>
 
+  <script type="text/html" id="activityListIdeaTemplate">
+    <div class="entry-author">
+      <%= Users.get(attributes.user_id).generateProfileImage() %>
+      <span class="user-name"><%= Users.get(attributes.user_id).get('name') %></span>
+      <span class="action">{{ trans('ideas.added') }}</span>
+    </div>
+    <div class="entry-content">
+      <%= generateLink() %>
+    </div>
+  </script>
+
+  <script type="text/html" id="activityListCommentTemplate">
+    <div class="entry-author">
+      <%= Users.get(attributes.user_id).generateProfileImage() %>
+      <span class="user-name"><%= Users.get(attributes.user_id).get('name') %></span>
+    </div>
+    <div class="entry-content">
+      <p><%= attributes.text %></p>
+      <%= Ideas.get(attributes.idea_id).generateLink() %>
+    </div>
+  </script>
+
   <!-- Dependencies -->
   <script src="scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="scripts/jquery/jquery.helpers.js"></script>
@@ -225,6 +249,7 @@
   <script src="scripts/backbone/underscore-1.5.2.js"></script>
   <script src="scripts/backbone/backbone-1.1.0.js"></script>
   <script src="scripts/backbone/model.js"></script>
+  <script src="scripts/helpers/layout.js"></script>
   <script src="scripts/helpers/browser.js"></script>
   <script src="scripts/helpers/function.js"></script>
   <script src="scripts/helpers/array.js"></script>
@@ -267,6 +292,7 @@
   <?php endif ?>
   <script src="scripts/event.views.js"></script>
   <script src="scripts/categories.js"></script>
+  <script src="scripts/activities.js"></script>
   <script src="scripts/activity.views.js"></script>
   <script src="scripts/sorting.js"></script>
   <script src="scripts/statuses.js"></script>

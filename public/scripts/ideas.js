@@ -25,6 +25,10 @@ Ideas.model = Backbone.Model.extend({
     })[0].destroy();
   },
 
+  generateLink: function() {
+    return '<a href="#ideas/' + this.id + '">' + this.get('title') + '</a>';
+  },
+
   getVoteCount: function() {
     return this.votes.length;
   },

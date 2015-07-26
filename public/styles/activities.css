@@ -5,7 +5,7 @@
 }
 
 .activity-list > li + li {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .activity-list .entry-content {
@@ -16,4 +16,26 @@
 .activity-list .action {
   color: #777;
   font-size: 12px;
+}
+
+#activitySection {
+  background-color: white;
+  border-left: 1px solid #ddd;
+  position: fixed;
+  right: 0;
+  width: 400px;
+  margin: -40px 0;
+}
+
+#activitySection .activity-list {
+  padding: 40px;
+  overflow-y: auto;
+}
+
+#activitySection .activity-list > li {
+  margin-bottom: 20px;
+}
+
+#activitySection .comment a[href^="#ideas"]:before {
+  content: "@";
 }

@@ -321,11 +321,21 @@ var IdeaListView = Backbone.View.extend({
     this.collection.each(this.renderIdea, this);
   },
 
+  resize: function() {
+    var MARGIN = 40;
+    var viewport = Layout.getViewportDimensions();
+
+    this.$el.width(viewport.width - $('#activitySection').width() - MARGIN * 2);
+  },
+
   initialize: function() {
     this.render();
     this.collection.on('add', function(model) {
       this.renderIdea(model, true);
     }, this);
     this.collection.on('sort', this.render, this);
+
+    this.resize();
+    Layout.onResize(this.resize, this);
   }
 });

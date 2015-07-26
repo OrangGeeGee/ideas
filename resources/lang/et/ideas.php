@@ -2,6 +2,7 @@
 
 return [
   'add' => "Lisa uus idee",
+  'added' => "lisas uue idee",
   'submit' => "Lisa idee",
   'delete' => "Kustuta idee",
   'vote' => "Meeldib",

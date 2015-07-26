@@ -5,6 +5,7 @@ $(function() {
 
   new OnlineUsersListView;
   new CategoriesListView;
+  new ActivityListView().$el.appendTo('#activitySection');
   new IdeaListView({ collection: Ideas }).$el.appendTo('#container');
 
   var activeUser = Users.get(USER_ID);
