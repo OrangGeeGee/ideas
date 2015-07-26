@@ -14,7 +14,7 @@ class CreateSettingsTable extends Migration {
 	{
 		Schema::create('settings', function(Blueprint $table)
 		{
-			$table->integer('user_id');
+			$table->string('user_id');
 			$table->boolean('landingPageVisited');
 		});
 	}

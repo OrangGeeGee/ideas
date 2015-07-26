@@ -35,20 +35,7 @@ class IdeaController extends Controller {
    * @param \App\Idea $idea
    */
   public function read(\App\Idea $idea) {
-    $user = \Auth::user();
-
-    if ( $idea->views->contains($user->id) ) {
-      $idea->views()->updateExistingPivot($user->id, [
-        'seen_at' => \DB::raw('NOW()')
-      ]);
-    }
-    else {
-      $idea->views()->save($user, [
-        'seen_at' => \DB::raw('NOW()')
-      ]);
-    }
-
-    \Activities::record(\Activities::OPEN_IDEA, $idea->title);
+    $idea->views()->create([]);
   }
 
   /**

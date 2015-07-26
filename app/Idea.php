@@ -27,7 +27,7 @@ class Idea extends Model {
   }
 
   public function views() {
-    return $this->belongsToMany('App\User');
+    return $this->hasMany('App\View');
   }
 
   public function comments() {

@@ -3,6 +3,7 @@
 use App\Idea;
 use App\Comment;
 use App\Activity;
+use App\View;
 
 require 'UserAgentParser.php';
 
@@ -47,4 +48,8 @@ Idea::deleted(function($idea) {
 
 Comment::created(function($comment) {
   Activities::record(Activities::ADD_COMMENT, $comment->idea->title, $comment->text);
+});
+
+View::created(function($view) {
+  Activities::record(Activities::OPEN_IDEA, $view->idea->title);
 });
