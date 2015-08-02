@@ -82,6 +82,9 @@ var CommentView = Backbone.View.extend({
     data.statusChange = Ideas.get(data.idea_id).statusChanges.where({ comment_id: data.id })[0];
 
     this.$el.html(this.template(data));
+    this.$el.linkify({
+      target: '_blank'
+    });
     this.$('.entry-content').append(new TimestampView({ model: this.model }).$el);
   },
 

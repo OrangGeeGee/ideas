@@ -249,6 +249,8 @@
   <script src="scripts/backbone/underscore-1.5.2.js"></script>
   <script src="scripts/backbone/backbone-1.1.0.js"></script>
   <script src="scripts/backbone/model.js"></script>
+  <script src="scripts/linkify/linkify.js"></script>
+  <script src="scripts/linkify/linkify-jquery.js"></script>
   <script src="scripts/helpers/layout.js"></script>
   <script src="scripts/helpers/browser.js"></script>
   <script src="scripts/helpers/function.js"></script>

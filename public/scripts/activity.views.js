@@ -80,6 +80,9 @@ var ActivityListCommentView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model));
+    this.$el.linkify({
+      target: '_blank'
+    });
     this.$('.entry-content').append(new TimestampView({ model: this.model }).$el);
   },
 
