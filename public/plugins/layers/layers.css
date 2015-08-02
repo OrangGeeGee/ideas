@@ -1,0 +1,42 @@
+
+.layer {
+  position: absolute;
+  z-index: 2;
+  background-color: orange;
+  color: white;
+  border-radius: 2px;
+  width: 350px;
+}
+
+.layer:before {
+  background-color: orange;
+  content: "";
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  transform: rotate(45deg);
+  width: 20px;
+}
+
+.layer-inner {
+  padding: 20px;
+  position: relative;
+  border: 1px solid orange;
+}
+
+.layer h2 {
+  font-size: 28px;
+  line-height: 41px;
+  margin-top: -8px;
+}
+
+.background-size-supported .layer h2 {
+  background: none;
+  font-size: 36px;
+  color: inherit;
+}
+
+.layer-body p:last-child {
+  margin-bottom: 0;
+}

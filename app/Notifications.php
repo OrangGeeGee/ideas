@@ -92,8 +92,9 @@ class Notifications {
       return;
     }
 
-    # TODO: Implement proper subscription for this.
-    foreach ( \App\WHOISUser::where(['name' => 'Mattias Saldre'])->get() as $subscriber ) {
+    foreach ( \App\Setting::where('receiveDailyNewsletter', true)->get() as $setting ) {
+      # TODO: A separate query for every single user can hinder performance.
+      $subscriber = \App\WHOISUser::find($setting->user_id);
       \App::setLocale($subscriber->getLocale());
       $data['title'] = trans('emails.dailyHeading') . " " . $yesterday->format('d/m/Y');
 

@@ -1,5 +1,5 @@
 
 function hideLandingPage() {
   $('#landingLayer').remove();
-  $.get('landingPageVisited');
+  $.post('users/settings', { landingPageVisited: 1 });
 }

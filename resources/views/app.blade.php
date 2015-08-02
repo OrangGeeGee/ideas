@@ -18,7 +18,9 @@
   <link type="text/css" rel="stylesheet" href="styles/activities.css">
   <link type="text/css" rel="stylesheet" href="styles/users.css">
   <link type="text/css" rel="stylesheet" href="styles/filters.css">
+  <link type="text/css" rel="stylesheet" href="styles/settings.css">
   <link type="text/css" rel="stylesheet" href="plugins/modals/modals.css">
+  <link type="text/css" rel="stylesheet" href="plugins/layers/layers.css">
   <link type="text/css" rel="stylesheet" href="plugins/introjs/introjs.css">
   <style type="text/css">
     <?php foreach ( App\Status::all() as $status ): ?>
@@ -65,6 +67,7 @@
     <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
 
     <div id="header">
+      <h2><?= trans('frame.hi') ?>, <span id="userName"><?= Auth::user()->getFirstName() ?></span> <span class="call-to-action">Mis ideed sul täna on?</span></h2>
       <ul id="onlineUsersList"></ul>
 
       <div id="filter-section">
@@ -78,6 +81,28 @@
   </div>
 
   <!-- Templates -->
+  <script type="text/html" id="layerTemplate">
+    <div class="layer">
+      <div class="layer-inner" style="background-image: linear-gradient(rgba(255, 119, 0, 0.5), orange 50%), url(<?= App\WHOISUser::find(Auth::user()->id)->profileImageURL ?>);">
+        <div class="layer-body"></div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="userSettingsTemplate">
+    <h2><?= trans('settings.title') ?></h2>
+    <dl class="settings-list">
+      <dt>
+        <label for="receiveDailyNewsletter"><?= trans('settings.receiveDailyNewsletter') ?></label>
+      </dt>
+      <dd>
+        <input type="checkbox" id="receiveDailyNewsletter" name="receiveDailyNewsletter" <%= settings.receiveDailyNewsletter ? ' checked' : '' %>/>
+      </dd>
+    </dl>
+
+    <button><?= trans('settings.save') ?></button>
+  </script>
+
   <script type="text/html" id="ideaFormTemplate">
     <h2><input type="text" name="title" placeholder="<?= trans('ideas.titlePlaceholder') ?>"/></h2>
     <select name="category_id">
@@ -96,11 +121,6 @@
     <input type="text" name="expectedPersonCount" placeholder="<?= trans('events.expectedPersonCountPlaceholder') ?>"/>
     <input type="text" name="date" placeholder="<?= trans('events.datePlaceholder') ?>"/>
     <input type="submit" value="<?= trans('events.create') ?>"/>
-  </script>
-
-  <script type="text/html" id="userHeaderTemplate">
-    <h2><?= trans('frame.hi') ?>, <%= name.getForename() %></h2>
-    <p><?= trans('frame.introduction') ?></p>
   </script>
 
   <script type="text/html" id="commentFormTemplate">
@@ -251,6 +271,7 @@
   <script src="scripts/backbone/model.js"></script>
   <script src="scripts/linkify/linkify.js"></script>
   <script src="scripts/linkify/linkify-jquery.js"></script>
+  <script src="plugins/layers/layers.js"></script>
   <script src="scripts/helpers/layout.js"></script>
   <script src="scripts/helpers/browser.js"></script>
   <script src="scripts/helpers/function.js"></script>
@@ -317,7 +338,7 @@
     Ideas.add(<?= \App\Idea::all() ?>);
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);
-    Users.add(<?= \App\WHOISUser::all() ?>);
+    Users.add(<?= $users ?>);
     Statuses.add(<?= $statuses ?>);
     StatusChanges.add(<?= \App\StatusChange::all() ?>);
   </script>

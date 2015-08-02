@@ -27,6 +27,22 @@ a[href="//ee.swedbank.net/"]:not(:hover) {
   overflow: hidden;
 }
 
+#header .call-to-action {
+  color: #777;
+  font-size: 20px;
+}
+
+.layer-inner {
+  background-position: center;
+  background-size: cover;
+  background-color: orange;
+
+}
+
+#userName .profile-image {
+  margin-top: -10px;
+}
+
 #headerProfile {
   display: none;
   float: left;

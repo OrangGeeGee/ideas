@@ -20,6 +20,10 @@ function enableCORS() {
  * ----------------------------------------------------------------------------
  */
 
+Route::get('test', function() {
+  Notifications::dailyUpdate();
+});
+
 Route::get('/', function() {
 
   if ( !Auth::check() ) {
@@ -37,15 +41,17 @@ Route::get('/', function() {
     $status->name = trans('statuses.' . camel_case($status->code));
   });
 
+  $data['users'] = App\WHOISUser::all()->each(function($user) {
+    if ( $user->id === Auth::user()->id ) {
+      $user->settings = App\User::find($user->id)->settings;
+    }
+  });
+
 	return View::make('app', $data);
 });
 
-Route::get('landingPageVisited', function() {
-  $user = Auth::user();
-  $user->settings()->update(['landingPageVisited' => true]);
-});
-
 Route::resource('users', 'UserController');
+Route::post('users/settings', 'UserController@updateSettings');
 Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
 Route::get('ideas/{idea}/read', 'IdeaController@read');

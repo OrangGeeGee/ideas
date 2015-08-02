@@ -42,6 +42,10 @@ class User extends Model implements AuthenticatableContract {
 		return WHOISUser::find($this->id)->hasEstonianEmailAddress();
 	}
 
+	public function getFirstName() {
+		return explode(' ', WHOISUser::find($this->id)->name)[0];
+	}
+
 	public function updateActivityTimestamp() {
 		$this->last_activity_at = \DB::raw('NOW()');
 		$this->save();

@@ -14,8 +14,11 @@ $.fn.parseAsJSON = function() {
         data[this.name] = $form.field(this.name).filter(':checked').val();
       }
     }
+    else if ( $field.is(':checkbox') ) {
+      data[this.name] = this.checked ? 1 : 0;
+    }
     else {
-      data[this.name] = $field.is(':checkbox') ? this.checked === true : this.value;
+      data[this.name] = this.value;
     }
   });
 

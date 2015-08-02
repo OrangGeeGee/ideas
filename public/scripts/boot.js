@@ -9,5 +9,9 @@ $(function() {
   new IdeaListView({ collection: Ideas }).$el.appendTo('#container');
 
   var activeUser = Users.get(USER_ID);
-  $('#header').prepend(new UserHeaderView({ model: activeUser }).$el);
+  $('#userName').append(activeUser.generateProfileImage());
+
+  $('#userName').on('click', function() {
+    new UserSettingsView({ model: activeUser });
+  });
 });

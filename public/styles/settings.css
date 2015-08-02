@@ -1,0 +1,24 @@
+
+.settings-list {
+  overflow: hidden;
+}
+
+.settings-list dt,
+.settings-list dd {
+  float: left;
+}
+
+.settings-list dt {
+  width: 90%;
+}
+
+.settings-list dd {
+  text-align: right;
+  width: 10%;
+}
+
+.settings-list + button {
+  margin-top: 20px;
+  margin-left: auto;
+  display: block;
+}
