@@ -4,7 +4,7 @@ $(function() {
   Backbone.history.start();
 
   new OnlineUsersListView;
-  new CategoriesListView;
+  new FilteringView;
   new ActivityListView().$el.appendTo('#activitySection');
   new IdeaListView({ collection: Ideas }).$el.appendTo('#container');
 
@@ -14,4 +14,6 @@ $(function() {
   $('#userName').on('click', function() {
     new UserSettingsView({ model: activeUser });
   });
+
+  Layout.initialize();
 });

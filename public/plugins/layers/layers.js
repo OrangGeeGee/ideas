@@ -23,6 +23,8 @@ function Layer(options) {
   }
 
   this.position();
+
+  Layout.onResize(this.position, this);
 }
 
 
@@ -30,6 +32,7 @@ function Layer(options) {
  * Positions the tooltip above the $target.
  */
 Layer.prototype.position = function() {
+  var layerWidth = this.$.width();
   var targetPosition = this.$target.offset();
   var targetHeight = this.$target.outerHeight();
   var targetWidth = this.$target.outerWidth();
@@ -38,7 +41,7 @@ Layer.prototype.position = function() {
 
   this.$.css({
     top: targetPosition.top + targetHeight + tooltipPointerHeight,
-    left: targetPosition.left + (targetWidth / 2) - tooltipPointerWidth
+    left: targetPosition.left + (targetWidth / 2) - layerWidth + tooltipPointerWidth
   });
 };
 

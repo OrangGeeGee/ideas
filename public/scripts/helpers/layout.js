@@ -23,3 +23,19 @@ Layout.onResize = function(callback, context) {
     callback.call(context || this, Layout.getViewportDimensions());
   });
 };
+
+
+Layout.sync = function() {
+  var viewport = Layout.getViewportDimensions();
+
+  Layout.$header.outerWidth(viewport.width - Layout.$activitySection.width());
+};
+
+
+Layout.initialize = function() {
+  Layout.$header = $('header');
+  Layout.$activitySection = $('#activitySection');
+
+  Layout.onResize(Layout.sync);
+  Layout.sync();
+};

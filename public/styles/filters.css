@@ -1,48 +1,28 @@
 
 #filter-section {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-}
-
-#filter-section ul {
-  list-style: none;
-  margin-left: 20px;
-  display: inline-block;
-  border-left: 1px dotted;
-  padding-left: 20px;
-}
-
-#filter-section ul > li {
-  display: inline-block;
-}
-
-#filter-section ul > li + li {
-  margin-left: 10px;
-}
-
-#filter-section ul a {
-  padding: 5px;
-  background-color: white;
-  color: black;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-#filter-section ul > li:not(.active) a:hover {
-  text-decoration: underline;
-}
-
-#filter-section ul > li.active a {
-  background-color: #f70;
+  padding: 10px 30px;
+  border-top: 1px solid #606060;
   color: white;
+  text-align: right;
+}
+
+#filter-section input[type="text"],
+#filter-section select {
+  font-size: 12px;
+  padding: 2px 5px;
+  margin: 0 0 0 5px;
+}
+
+#filter-section select {
+  display: inline-block;
+  width: auto;
 }
 
 #searchField {
   display: inline-block;
   width: 140px;
   transition: .33s width;
-  padding: 2px 5px;
+  padding-bottom: 1px;
 }
 
 #searchField:focus {

@@ -37,20 +37,11 @@ Ideas.model = Backbone.Model.extend({
     return this.votes.where({ user_id: USER_ID }).length > 0;
   },
 
-  matchesCategoryFilter: function() {
-    return this.get('category_id') == Categories.getActive().id;
-  },
-
-  matchesSearchPhrase: function() {
-    var searchPhrase = searchField.value.toLowerCase();
+  matchesSearchPhrase: function(searchPhrase) {
     var title = this.get('title').toLowerCase();
     var authorName = Users.get(this.get('user_id')).get('name').toLowerCase();
 
-    if ( searchPhrase == $(searchField).attr('placeholder').toLowerCase() ) {
-      searchPhrase = '';
-    }
-
-    return !searchPhrase || title.contains(searchPhrase) || authorName.contains(searchPhrase);
+    return title.contains(searchPhrase) || authorName.contains(searchPhrase);
   },
 
   isFinished: function() {

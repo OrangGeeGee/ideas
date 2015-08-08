@@ -1,11 +1,13 @@
 
+
+/** Back to Intranet link */
 a[href="//ee.swedbank.net/"] {
   background-color: #f70;
   background: linear-gradient(90deg, #f70, #fb0);
   margin: -40px -40px 0;
   padding: 5px 20px;
   color: white;
-  display: block;
+  display: none;  /* Not needed when no official Hackathon is taking place */
   font-size: 14px;
 }
 
@@ -17,46 +19,31 @@ a[href="//ee.swedbank.net/"]:not(:hover) {
   text-decoration: none;
 }
 
-#header {
-  background-color: white;
-  border-bottom: 1px solid #CCC;
-  padding: 20px 40px;
-  margin: 0 -40px 40px;
-  position: relative;
-  min-height: 80px;
-  overflow: hidden;
+
+/** Header */
+header {
+  background-color: #444;
+  color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
-#header .call-to-action {
-  color: #777;
-  font-size: 20px;
-}
-
-.layer-inner {
-  background-position: center;
-  background-size: cover;
-  background-color: orange;
-
-}
-
-#userName .profile-image {
-  margin-top: -10px;
-}
-
-#headerProfile {
-  display: none;
-  float: left;
-  width: 30%;
-}
-
-#headerProfile h2 {
+header h2 {
   margin-bottom: 0;
 }
 
-#freeVotesLeft {
-  background-color: #f70;
-  color: white;
-  padding: 0 8px;
-  font-size: 20px;
-  border-radius: 4px;
+#userBar {
+  padding: 20px 30px;
+}
+
+#userName {
+  float: right;
+  font-size: 18px;
+}
+
+#userName .profile-image {
+  margin-left: 10px;
+  width: 55px;
+  height: 55px;
 }

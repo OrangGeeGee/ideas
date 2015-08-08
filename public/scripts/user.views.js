@@ -27,11 +27,16 @@ var OnlineUsersListItemView = Backbone.View.extend({
 var OnlineUsersListView = Backbone.View.extend({
   el: '#onlineUsersList',
 
+  refresh: function() {
+    this.$el.toggleClass('hidden', this.$el.children('.online, .away').length == 0);
+  },
+
   initialize: function() {
     Users.on('change:last_activity_at', function(user) {
       if ( !user.statusView ) {
         user.statusView = new OnlineUsersListItemView({ model: user });
         this.$el.append(user.statusView.$el);
+        this.refresh();
       }
     }, this);
   }

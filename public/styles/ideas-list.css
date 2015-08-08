@@ -1,12 +1,20 @@
 
+#ideas-list {
+  position: relative;
+  top: 150px;
+  left: 10px;
+}
+
 #ideas-list > li {
   width: 30%;
   float: left;
   position: relative;
   background-color: white;
+  display: none;
 }
 
 #ideas-list > li:first-child {
+  display: block;
   text-align: center;
   padding: 48px 10px;
   background-color: white;

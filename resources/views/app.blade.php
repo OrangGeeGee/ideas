@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Angaar</title>
+  <title><?= trans('frame.appName') ?></title>
   <link type="text/css" rel="stylesheet" href="styles/fonts.css">
   <link type="text/css" rel="stylesheet" href="styles/base.css">
   <link type="text/css" rel="stylesheet" href="styles/layout.css">
@@ -26,6 +26,12 @@
     <?php foreach ( App\Status::all() as $status ): ?>
       .status-{{ $status->code }} .entry-content h3:before {
         content: "<?= trans('statuses.' . camel_case($status->code)) ?>";
+      }
+    <?php endforeach ?>
+
+    <?php foreach ( App\Category::all() as $category ): ?>
+      body[data-active-category="{{ $category->id }}"] #ideas-list > li[data-category-id="{{ $category->id }}"] {
+        display: block;
       }
     <?php endforeach ?>
   </style>
@@ -66,16 +72,30 @@
   <div id="container">
     <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
 
-    <div id="header">
-      <h2><?= trans('frame.hi') ?>, <span id="userName"><?= Auth::user()->getFirstName() ?></span> <span class="call-to-action">Mis ideed sul täna on?</span></h2>
-      <ul id="onlineUsersList"></ul>
+    <header>
+      <div id="userBar">
+        <span id="userName"><?= Auth::user()->getFirstName() ?></span>
+        <h2><?= trans('frame.appName') ?></h2>
+
+        <ul id="onlineUsersList" class="hidden" title="{{ trans('frame.currentlyOnline') }}"></ul>
+      </div>
 
       <div id="filter-section">
-        <input type="text" id="searchField" placeholder="<?= trans('frame.searchPlaceholder') ?>"/>
-        <ul id="categories-list"></ul>
-        <ul id="sorting-options-list"></ul>
+
+        {{ trans('filters.heading') }}
+        <input type="text" id="searchField" placeholder="<?= trans('filters.searchPlaceholder') ?>"/>
+        <select id="category">
+          <?php foreach ( App\Category::all() as $category ): ?>
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+          <?php endforeach ?>
+        </select>
+        <select id="sorting">
+          <?php foreach ( [trans('filters.byDate'), trans('filters.byPopularity')] as $index => $sortingMethod ): ?>
+            <option value="{{ $index + 1 }}">{{ $sortingMethod }}</option>
+          <?php endforeach ?>
+        </select>
       </div>
-    </div>
+    </header>
 
     <section id="activitySection"></section>
   </div>
@@ -314,27 +334,19 @@
   <script src="scripts/events.js"></script>
   <?php endif ?>
   <script src="scripts/event.views.js"></script>
-  <script src="scripts/categories.js"></script>
   <script src="scripts/activities.js"></script>
   <script src="scripts/activity.views.js"></script>
-  <script src="scripts/sorting.js"></script>
   <script src="scripts/statuses.js"></script>
   <?php if ( env('POLLING_INTERVAL') ): ?>
   <script>POLLING_INTERVAL = <?= env('POLLING_INTERVAL') ?>;</script>
   <script src="scripts/dataPoller.js"></script>
   <?php endif ?>
-  <script>
-    SortingOptions.add([
-      { id: 1, name: '<?= trans('sorting.byDate') ?>' },
-      { id: 2, name: '<?= trans('sorting.byPopularity') ?>' }
-    ]);
-  </script>
   <script src="scripts/timestamps.js"></script>
   <script src="scripts/tutorial.js"></script>
+  <script src="scripts/filtering.views.js"></script>
 
   <!-- Initial data -->
   <script>
-    Categories.add(<?= \App\Category::all() ?>);
     Ideas.add(<?= \App\Idea::all() ?>);
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);

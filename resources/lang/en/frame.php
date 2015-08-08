@@ -1,8 +1,7 @@
 <?php
 
 return [
-  'hi' => "Hi",
-  'introduction' => "Here you can add your own ideas for the Hackathon and comment/vote for others.",
+  'appName' => "Idea Environment",
   'backToIntranet' => "Back to Intranet",
-  'searchPlaceholder' => "Search...",
+  'currentlyOnline' => "Currently online",
 ];

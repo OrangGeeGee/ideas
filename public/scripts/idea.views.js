@@ -38,7 +38,7 @@ var EventFormView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template());
-    this.$el.field('category_id').val(Categories.getActive().id);
+    this.$el.field('category_id').val($('#category').val());
     this.toggleSubmitButton();
 
     if ( !('placeholder' in document.createElement('input')) ) {
@@ -88,7 +88,7 @@ var IdeaFormView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template());
-    this.$el.field('category_id').val(Categories.getActive().id);
+    this.$el.field('category_id').val($('#category').val());
     this.toggleSubmitButton();
 
     if ( !('placeholder' in document.createElement('input')) ) {
@@ -150,6 +150,11 @@ var IdeaModalView = Backbone.View.extend({
 
 var IdeaView = Backbone.View.extend({
   tagName: 'li',
+  attributes: function() {
+    return {
+      'data-category-id': this.model.get('category_id')
+    };
+  },
   template: _.template($('#ideaListItemTemplate').html()),
 
   events: {
@@ -251,10 +256,6 @@ var IdeaView = Backbone.View.extend({
       this.refreshState();
     }, this);
     this.model.statusChanges.on('add', this.refreshStatus, this);
-
-    Categories.on('change:active', function() {
-      this.$el.toggle(this.model.matchesCategoryFilter() && this.model.matchesSearchPhrase());
-    }.bind(this));
   }
 });
 
@@ -310,11 +311,10 @@ var IdeaListView = Backbone.View.extend({
     var view = new IdeaView({ model: idea });
     var $view = view.render().insertAfter(this.$addNewIdea);
 
-    if ( !idea.matchesCategoryFilter() || !idea.matchesSearchPhrase() ) {
-      $view.hide();
-    }
-    else if ( animate === true ) {
-      $view.hide().show(500);
+    if ( animate === true ) {
+      $view.hide().show(500, function() {
+        $view.removeAttr('style');
+      });
     }
   },
 

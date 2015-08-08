@@ -20,11 +20,10 @@
 
 #activitySection {
   background-color: white;
-  border-left: 1px solid #ddd;
+  border-left: 2px solid #444;
   position: fixed;
   right: 0;
   width: 400px;
-  margin: -40px 0;
 }
 
 #activitySection .activity-list {
