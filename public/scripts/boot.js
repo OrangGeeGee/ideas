@@ -16,4 +16,9 @@ $(function() {
   });
 
   Layout.initialize();
+
+  // Show Swedish Hackathon category for Swedes by default.
+  if ( activeUser.get('email').endsWith(['.se', '.com']) ) {
+    $('#category').val(3).trigger('change');
+  }
 });

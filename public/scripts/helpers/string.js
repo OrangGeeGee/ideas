@@ -15,3 +15,21 @@ String.prototype.getForename = function() {
 String.prototype.contains = function(str) {
   return this.indexOf(str) !== -1;
 };
+
+
+/**
+ * @param {String|String[]} snippet
+ * @return {Boolean}
+ */
+String.prototype.endsWith = function(snippet) {
+
+  if ( $.isArray(snippet) ) {
+    var string = String(this);
+
+    return snippet.filter(function(keyword) {
+      return string.endsWith(keyword);
+    }).length > 0;
+  }
+
+  return this.substr(-snippet.length) == snippet;
+};
