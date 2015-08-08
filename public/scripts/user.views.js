@@ -33,6 +33,12 @@ var OnlineUsersListView = Backbone.View.extend({
 
   initialize: function() {
     Users.on('change:last_activity_at', function(user) {
+
+      // Don't list the active user.
+      if ( user.id == USER_ID ) {
+        return;
+      }
+
       if ( !user.statusView ) {
         user.statusView = new OnlineUsersListItemView({ model: user });
         this.$el.append(user.statusView.$el);
