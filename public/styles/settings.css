@@ -1,20 +1,29 @@
 
-.settings-list {
-  overflow: hidden;
+.settings-list > div {
+  position: relative;
 }
 
-.settings-list dt,
-.settings-list dd {
-  float: left;
+.settings-list > div + div {
+  margin-top: 10px;
 }
 
 .settings-list dt {
-  width: 90%;
+  padding-left: 25px;
+}
+
+.settings-list label {
+  font-size: 20px;
+}
+
+.settings-list dt p {
+  font-size: 14px;
+  line-height: 16px;
 }
 
 .settings-list dd {
-  text-align: right;
-  width: 10%;
+  position: absolute;
+  left: 0;
+  top: 4px;
 }
 
 .settings-list + button {

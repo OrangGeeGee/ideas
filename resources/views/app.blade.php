@@ -112,12 +112,25 @@
   <script type="text/html" id="userSettingsTemplate">
     <h2><?= trans('settings.title') ?></h2>
     <dl class="settings-list">
-      <dt>
-        <label for="receiveDailyNewsletter"><?= trans('settings.receiveDailyNewsletter') ?></label>
-      </dt>
-      <dd>
-        <input type="checkbox" id="receiveDailyNewsletter" name="receiveDailyNewsletter" <%= settings.receiveDailyNewsletter ? ' checked' : '' %>/>
-      </dd>
+      <div>
+        <dt>
+          <label for="receiveCommentNotification">{{ trans('settings.receiveCommentNotification') }}</label>
+        <p>{{ trans('settings.receiveCommentNotification.description') }}</p>
+        </dt>
+        <dd>
+          <input type="checkbox" id="receiveCommentNotification" name="receiveCommentNotification" <%= settings.receiveCommentNotification ? ' checked' : '' %>/>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
+          <label for="receiveDailyNewsletter">{{ trans('settings.receiveDailyNewsletter') }}</label>
+          <p>{{ trans('settings.receiveDailyNewsletter.description') }}</p>
+        </dt>
+        <dd>
+          <input type="checkbox" id="receiveDailyNewsletter" name="receiveDailyNewsletter" <%= settings.receiveDailyNewsletter ? ' checked' : '' %>/>
+        </dd>
+      </div>
     </dl>
 
     <button><?= trans('settings.save') ?></button>

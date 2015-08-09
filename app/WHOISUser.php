@@ -53,4 +53,8 @@ class WHOISUser extends Model implements AuthenticatableContract {
 		return $query->where('created_at', '>=', $timestamp);
 	}
 
+	public function settings() {
+		return User::find($this->id)->settings();
+	}
+
 }

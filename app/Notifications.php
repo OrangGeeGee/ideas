@@ -39,20 +39,30 @@ class Notifications {
 
 
   /**
+   * Notify the author of the idea.
+   *
    * @param Comment $comment
    */
   public static function newComment(Comment $comment) {
     $ideaAuthor = $comment->idea->user;
+
+    # Check if the user doesn't want to receive notifications.
+    if ( !$ideaAuthor->settings->receiveCommentNotification ) {
+      return;
+    }
+
+    # Don't notify the author if the new comment was made by him/her.
+    if ( $comment->user->id == $ideaAuthor->id ) {
+      return;
+    }
+
     App::setLocale($ideaAuthor->getLocale());
 
-    # Notify the author of the idea.
-    if ( $comment->user->id != $ideaAuthor->id ) {
-      Mail::send('emails.comment', compact('comment'), function($message) use($ideaAuthor) {
-        $message
-          ->to($ideaAuthor->email, $ideaAuthor->name)
-          ->subject(self::prefixSubject(trans('emails.newComment')));
-      });
-    }
+    Mail::send('emails.comment', compact('comment'), function($message) use($ideaAuthor) {
+      $message
+        ->to($ideaAuthor->email, $ideaAuthor->name)
+        ->subject(self::prefixSubject(trans('emails.newComment')));
+    });
   }
 
 
