@@ -14,7 +14,7 @@ class AddReceiveCommentNotificationColumnToSettingsTable extends Migration {
 	{
 		Schema::table('settings', function(Blueprint $table)
 		{
-			$table->boolean('receiveCommentNotification')->after('landingPageVisited');
+			$table->boolean('receiveCommentNotification')->default(1)->after('landingPageVisited');
 		});
 	}
 
