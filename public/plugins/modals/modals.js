@@ -93,7 +93,7 @@ Modal.prototype.close = function() {
   this.$.hide();
 
   // Allow callbacks to be queued to the event.
-  this.$.trigger('modal-close', [this]);
+  this.$.trigger('modalclose', [this]);
 
   // Remove opened idea's ID from the URL. Avoid scrolling the page back to the top.
   var scrollPosition = $('html').scrollTop() || $('body').scrollTop();
@@ -163,6 +163,19 @@ Modal.prototype.resize = function() {
 
   this.$body.height(this.getAvailableHeight() - bodyMargin - bodyPadding);
   this.$.center();
+};
+
+
+/**
+ * Executes the specified callback when the modal gets closed.
+ *
+ * @param {Function} callback
+ * @param {Object} context
+ */
+Modal.prototype.onClose = function(callback, context) {
+  this.$.on('modalclose', function() {
+    callback.call(context || this);
+  });
 };
 
 

@@ -21,4 +21,8 @@ $(function() {
   if ( activeUser.get('email').endsWith(['.se', '.com']) ) {
     $('#category').val(3).trigger('change');
   }
+
+  if ( !activeUser.get('settings').landingPageVisited ) {
+    new LandingModalView();
+  }
 });

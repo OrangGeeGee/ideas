@@ -38,37 +38,6 @@
 </head>
 <body>
 
-  <?php if ( !Auth::user()->settings->landingPageVisited ): ?>
-    <script src="scripts/landing.js"></script>
-
-    <div id="landingLayer">
-      <div id="landingContainer">
-        <h1>Ideekeskkond</h1>
-
-        <ul id="featuresList">
-          <li>
-            <h2>Kes võivad ideid esitada?</h2>
-            <p>Kõik, kes unistavad mõnusamast ja kaasaegsemast töökeskkonnast ning uutest ja põnevatest toodetest.</p>
-          </li>
-          <li>
-            <h2>Milliseid ideid võib esitada?</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          </li>
-          <li>
-            <h2>Milliseid ideid võib esitada?</h2>
-            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          </li>
-          <li>
-            <h2>Milliseid ideid võib esitada?</h2>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-          </li>
-        </ul>
-
-        <a href="javascript:hideLandingPage();" class="button">{{ trans('landing.startUsing') }}</a>
-      </div>
-    </div>
-  <?php endif ?>
-
   <div id="container">
     <a href="//ee.swedbank.net/" style=""><?= trans('frame.backToIntranet') ?></a>
 
@@ -101,6 +70,10 @@
   </div>
 
   <!-- Templates -->
+  <script type="text/html" id="landingModalTemplate">
+    <?= View::make('landing-' . App::getLocale()) ?>
+  </script>
+
   <script type="text/html" id="layerTemplate">
     <div class="layer">
       <div class="layer-inner" style="background-image: linear-gradient(rgba(255, 119, 0, 0.5), orange 50%), url(<?= App\WHOISUser::find(Auth::user()->id)->profileImageURL ?>);">
@@ -335,6 +308,7 @@
       return '<?= App::environment() ?>' == 'production';
     }
   </script>
+  <script src="scripts/landing.views.js"></script>
   <script src="scripts/routes.js"></script>
   <script src="scripts/users.js"></script>
   <script src="scripts/user.views.js"></script>
