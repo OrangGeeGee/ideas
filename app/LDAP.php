@@ -71,7 +71,7 @@ class LDAP {
 
     return [
       'id' => $id,
-      'name' => $data[0]['displayname'][0],
+      'name' => utf8_encode($data[0]['displayname'][0]),
       'email' => $data[0]['mail'][0],
       'title' => isset($data[0]['title']) ? $data[0]['title'][0] : '',
     ];
