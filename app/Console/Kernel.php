@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel {
 	protected function schedule(Schedule $schedule)
 	{
 		$schedule
-			->exec('brainstorm:dailyupdate')
+			->command('brainstorm:dailyupdate')
 			->dailyAt('08:00');
 	}
 
