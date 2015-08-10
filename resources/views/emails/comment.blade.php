@@ -9,7 +9,7 @@
 					</tr>
 					<tr>
 						<td width="100%" style="font-size:20pt;font-weight:300;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';" align="center" height="1">
-							Brainstorm
+							{{ trans('app.name') }}
 						</td>
 					</tr>
 					<tr>
@@ -40,8 +40,8 @@
 											Aitäh <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
 											&ndash; Angaari meeskond
 										<?php else: ?>
-											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
-											&ndash; The Brainstorm Team
+											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">{{ trans('app.name') }}</a>!<br>
+											&ndash; The {{ trans('app.name') }} Team
 										<?php endif ?>
 									</td>
 									<td width="36"></td>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= trans('frame.appName') ?></title>
+  <title><?= trans('app.name') ?></title>
   <link type="text/css" rel="stylesheet" href="styles/fonts.css">
   <link type="text/css" rel="stylesheet" href="styles/base.css">
   <link type="text/css" rel="stylesheet" href="styles/layout.css">
@@ -44,7 +44,7 @@
     <header>
       <div id="userBar">
         <span id="userName"><?= Auth::user()->getFirstName() ?></span>
-        <h2><?= trans('frame.appName') ?></h2>
+        <h2><?= trans('app.name') ?></h2>
 
         <ul id="onlineUsersList" class="hidden" title="{{ trans('frame.currentlyOnline') }}"></ul>
       </div>

@@ -68,8 +68,8 @@
 											Aitäh <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">ideekeskkonda</a> kasutamast!<br>
 											&ndash; Angaari meeskond
 										<?php else: ?>
-											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">Brainstorm</a>!<br>
-											&ndash; The Brainstorm Team
+											Thank You for using <a href="{{ env('APP_URL') }}" target="_blank" style="color:#f60;">{{ trans('app.name') }}</a>!<br>
+											&ndash; The {{ trans('app.name') }} Team
 										<?php endif ?>
 									</td>
 									<td width="36"></td>

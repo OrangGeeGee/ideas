@@ -1,4 +1,4 @@
-<h2>{{ trans('frame.appName') }}</h2>
+<h2>{{ trans('app.name') }}</h2>
 <p>Ideekeskkonna eesmärk on leida ideid, kuidas muuta Swedbank atraktiivsemaks nii klientidele kui omatöötajatele. Iga üks saab piiramatult ideid esitada, olgu need kui ulmelised tahes. Esitatud ideed aitavad luua visiooni, kuhu suunas Swedbank võiks liikuda.</p>
 
 <ul id="featuresList">

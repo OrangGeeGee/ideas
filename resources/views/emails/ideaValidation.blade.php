@@ -9,7 +9,7 @@
           </tr>
           <tr>
             <td width="100%" style="font-size:20pt;font-weight:300;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';" align="center" height="1">
-              Brainstorm
+              {{ trans('app.name') }}
             </td>
           </tr>
           <tr>

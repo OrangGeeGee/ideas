@@ -16,6 +16,7 @@ class Notifications {
     if ( $idea->user->hasEstonianEmailAddress() ) {
       Mail::send('emails.ideaValidation', compact('idea'), function($message) use ($idea) {
         $message
+          ->from('brainstorm@eos.crebit.ee', trans('app.name'))
           ->to('mattias.saldre@swedbank.ee', 'Mattias Saldre')
           ->subject(self::prefixSubject(trans('emails.newIdea')));
       });
@@ -31,6 +32,7 @@ class Notifications {
   public static function notifySecretaries(Idea $idea) {
     Mail::send('emails.notificationToSecretaries', compact('idea'), function($message) use ($idea) {
       $message
+        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
         ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
         ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
         ->subject(self::prefixSubject(trans('emails.newIdea')));
@@ -60,6 +62,7 @@ class Notifications {
 
     Mail::send('emails.comment', compact('comment'), function($message) use($ideaAuthor) {
       $message
+        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
         ->to($ideaAuthor->email, $ideaAuthor->name)
         ->subject(self::prefixSubject(trans('emails.newComment')));
     });
@@ -75,6 +78,7 @@ class Notifications {
 
     Mail::send('emails.vote', compact('idea'), function ($message) use ($ideaAuthor) {
       $message
+        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
         ->to($ideaAuthor->email, $ideaAuthor->name)
         ->subject(self::prefixSubject(trans('emails.newVote')));
     });
@@ -110,6 +114,7 @@ class Notifications {
 
       \Mail::send('emails.daily', $data, function($message) use ($subscriber, $data) {
         $message
+          ->from('brainstorm@eos.crebit.ee', trans('app.name'))
           ->to($subscriber->email)
           ->subject(self::prefixSubject($data['title']));
       });
@@ -122,7 +127,7 @@ class Notifications {
    * @return string
    */
   private static function prefixSubject($title) {
-    $appName = ( App::getLocale() == 'et' ) ? 'Ideekeskkond' : 'Brainstorm';
+    $appName = trans('app.name');
 
     return "[$appName] $title";
   }

@@ -7,5 +7,5 @@ return [
   'addedIdea' => "added an idea",
   'commentedOn' => "commented on",
   'votedFor' => "voted for",
-  'dailyHeading' => "Brainstorm Daily",
+  'dailyHeading' => "Idea Environment Daily",
 ];

@@ -1,4 +1,4 @@
-<h2>{{ trans('frame.appName') }}</h2>
+<h2>{{ trans('app.name') }}</h2>
 <p>Idea environment is a place for gathering ideas on how to make Swedbank better, both from the customer and the employee perspective. Anyone can add their ideas and doing so, help shape the possible direction that Swedbank as a whole is heading to.</p>
 
 <ul id="featuresList">
