@@ -20,10 +20,6 @@ function enableCORS() {
  * ----------------------------------------------------------------------------
  */
 
-Route::get('test', function() {
-  Notifications::dailyUpdate();
-});
-
 Route::get('/', function() {
 
   if ( !Auth::check() ) {
