@@ -1,6 +1,6 @@
 
 .layer {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   background-color: orange;
   color: white;
