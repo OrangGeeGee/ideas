@@ -17,6 +17,12 @@ class CreateSettingsTable extends Migration {
 			$table->string('user_id');
 			$table->boolean('landingPageVisited');
 		});
+
+		foreach ( \App\WHOISUser::all() as $user ) {
+			\DB::table('settings')->insert([
+				'user_id' => $user->id,
+			]);
+		}
 	}
 
 	/**

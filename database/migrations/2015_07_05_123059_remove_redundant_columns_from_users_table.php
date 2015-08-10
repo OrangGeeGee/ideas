@@ -12,6 +12,27 @@ class RemoveRedundantColumnsFromUsersTable extends Migration {
 	 */
 	public function up()
 	{
+		\App\User::chunk(50, function($users) {
+			foreach ( $users as $user ) {
+				if ( !\App\WHOISUser::find($user->id) ) {
+					try {
+						$data = \LDAP::getUserData($user->id);
+					} catch ( Exception $e ) {
+						$data = [
+							'id' => $user->id,
+							'name' => $user->name,
+							'email' => $user->email,
+						];
+					}
+
+					$whoisUser = new \App\WHOISUser($data);
+					$whoisUser->created_at = $user->created_at;
+					$whoisUser->updated_at = $user->updated_at;
+					$whoisUser->save();
+				}
+			}
+		});
+
 		Schema::table('users', function(Blueprint $table)
 		{
 			$table->dropColumn(['name', 'email', 'available_votes']);
