@@ -8,6 +8,10 @@
   margin-top: 20px;
 }
 
+.activity-list .timestamp {
+  display: inline-block;
+}
+
 .activity-list .entry-content {
   margin-left: 44px;
   margin-top: -10px;

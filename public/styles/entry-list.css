@@ -27,5 +27,6 @@
 
 .entry-content p {
   white-space: pre-line;
+  word-wrap: break-word;
   margin-bottom: 0;
 }
