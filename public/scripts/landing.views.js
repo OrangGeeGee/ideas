@@ -8,6 +8,8 @@ var LandingModalView = Backbone.View.extend({
     modal.setContent(this.template());
     modal.$title.hide();
 
+    modal.resize();
+
     modal.$.on('click', '.button-bar a', function(event) {
       event.preventDefault();
       modal.close();
