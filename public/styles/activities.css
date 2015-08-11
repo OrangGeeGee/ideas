@@ -28,11 +28,13 @@
   position: fixed;
   right: 0;
   width: 400px;
+  height: 100%;
 }
 
 #activitySection .activity-list {
   padding: 40px;
   overflow-y: auto;
+  height: 100%;
 }
 
 #activitySection .activity-list > li {
