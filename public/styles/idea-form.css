@@ -20,6 +20,11 @@ textarea {
   padding: 5px;
 }
 
+#new-idea .cc-counter {
+  color: #666;
+  font-size: 12px;
+}
+
 textarea {
   height: 100px;
 }

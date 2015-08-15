@@ -34,6 +34,10 @@
         display: block;
       }
     <?php endforeach ?>
+
+    #new-idea .cc-counter:after {
+      content: " {!! trans('ideas.charactersLeft') !!}";
+    }
   </style>
 </head>
 <body>
@@ -110,7 +114,7 @@
   </script>
 
   <script type="text/html" id="ideaFormTemplate">
-    <h2><input type="text" name="title" placeholder="<?= trans('ideas.titlePlaceholder') ?>"/></h2>
+    <h2><input type="text" name="title" placeholder="<?= trans('ideas.titlePlaceholder') ?>" maxlength="70" autocomplete="off"/></h2>
     <select name="category_id">
     <?php foreach ( App\Category::all() as $category ): ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>

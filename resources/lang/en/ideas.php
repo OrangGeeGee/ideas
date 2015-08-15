@@ -10,4 +10,5 @@ return [
   'titlePlaceholder' => "Title...",
   'descriptionPlaceholder' => "Description...",
   'peopleLike' => "people like this",
+  'charactersLeft' => "characters left",
 ];

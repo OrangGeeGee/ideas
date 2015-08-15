@@ -44,11 +44,13 @@
   font-size: 32px;
   font-weight: 300;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 #ideas-list .entry-content {
   cursor: pointer;
-  padding: 40px 30px;
+  padding: 40px 30px 30px;
+  max-height: 320px; /* When animating a new idea, the content can stretch quite a bit for a moment */
   text-align: center;
 }
 

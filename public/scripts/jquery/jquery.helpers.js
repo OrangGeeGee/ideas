@@ -98,3 +98,55 @@ $.fn.mimicPlaceholder = function() {
     $field.trigger('blur');
   });
 };
+
+
+/**
+ *  Plugin for adding a character counter underneath textareas for keeping
+ *  the user up-to-date on how many characters are left for inserting.
+ *
+ *  @author
+ *    Mattias Saldre
+ *
+ *  @param {Number} [maximumCharacters]
+ *    Specify manually maximum characters. Will overwrite textarea's maxlength attribute.
+ *
+ *  @return {jQuery}
+ *    Current set
+ */
+$.fn.characterCounter = function(maximumCharacters) {
+  this.filter('input:not(.cc-field)').each(function() {
+    var $field = $(this).addClass('cc-field');
+
+    if ( typeof maximumCharacters == 'number' ) {
+      $field.attr('maxlength', maximumCharacters);
+    }
+
+    var maxLength = $field.attr('maxlength');
+
+    if ( !maxLength ) {
+      return;
+    }
+
+    var $counter = $('<p class="cc-counter"/>').insertAfter($field);
+
+    function updateCharactersLeft() {
+      var value = $field.val();
+      var charsLeft = maxLength - value.length;
+
+      $counter
+        .text(charsLeft)
+        .toggleClass('cc-warning', charsLeft > 0 && charsLeft < maxLength * 0.05)
+        .toggleClass('cc-limit-reached', charsLeft === 0);
+    }
+
+    $field.on('keyup paste', function() {
+      // Fake delay is needed for paste event.
+      setTimeout(updateCharactersLeft, 0);
+    });
+
+    // Update the "X characters left" message with the initial value.
+    updateCharactersLeft();
+  });
+
+  return this;
+};

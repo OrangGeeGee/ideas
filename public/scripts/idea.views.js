@@ -281,6 +281,8 @@ var NewIdeaView = Backbone.View.extend({
         modal.$.field('title').focus();
       }
 
+      modal.$.field('title').characterCounter();
+
       form.afterSubmit(function() {
         modal.close();
       });

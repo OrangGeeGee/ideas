@@ -10,4 +10,5 @@ return [
   'titlePlaceholder' => "Pealkiri...",
   'descriptionPlaceholder' => "Kirjeldus...",
   'peopleLike' => "inimesele meeldib see",
+  'charactersLeft' => "tähemärki järel",
 ];
