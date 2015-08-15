@@ -47,7 +47,7 @@
 
     <header>
       <div id="userBar">
-        <span id="userName"><?= Auth::user()->getFirstName() ?></span>
+        <span id="userName" title="{{ trans('settings.hint') }}"><?= Auth::user()->getFirstName() ?></span>
         <h2><?= trans('app.name') ?></h2>
 
         <ul id="onlineUsersList" class="hidden" title="{{ trans('frame.currentlyOnline') }}"></ul>

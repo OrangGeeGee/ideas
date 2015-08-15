@@ -64,7 +64,7 @@ var UserSettingsView = Backbone.View.extend({
   },
 
   close: function() {
-    this.$layer.remove();
+    this.layer.remove();
     this.remove();
   },
 
@@ -73,7 +73,8 @@ var UserSettingsView = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.$layer = new Layer({
+    this.layer = new Layer({
+      id: 'userSettingsLayer',
       $target: $('#userName .profile-image'),
       content: this.$el
     });

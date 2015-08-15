@@ -38,12 +38,28 @@ header h2 {
 }
 
 #userName {
+  cursor: pointer;
   float: right;
   font-size: 18px;
+  margin-right: 18px;
+}
+
+#userName:hover {
+  text-decoration: underline;
 }
 
 #userName .profile-image {
   margin-left: 10px;
   width: 55px;
   height: 55px;
+  position: relative;
+}
+
+#userName .profile-image:after {
+  content: "￬";
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: -19px;
+  top: 4px;
 }

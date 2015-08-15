@@ -8,12 +8,20 @@
  */
 function Layer(options) {
   $.extend(this, {
+    id: '',
     $target: $(),
     content: ''
   }, options);
 
+  if ( $('#' + this.id).is(':visible') ) {
+    return;
+  }
+
   var template = $('#layerTemplate').html();
-  this.$ = $(template).addClass(this.className).prependTo('body');
+  this.$ = $(template).attr({
+    'id': this.id,
+    'class': this.className
+  }).prependTo('body');
 
   if ( this.content instanceof Backbone.View ) {
     this.$.find('.layer-body').append(this.content.$el);
@@ -23,9 +31,31 @@ function Layer(options) {
   }
 
   this.position();
+  this.closeOnBackgroundInteraction();
 
   Layout.onResize(this.position, this);
 }
+
+
+/**
+ * Closes the layer when user clicks on background or hits Escape key.
+ */
+Layer.prototype.closeOnBackgroundInteraction = function() {
+  var layer = this;
+  var ESCAPE_KEY = 27;
+
+  $('body').on('mousedown', function(event) {
+    if ( !layer.$.find(event.target).length && !layer.$.is(event.target) ) {
+      layer.remove();
+    }
+  });
+
+  $(document).on('keydown', function(event) {
+    if ( event.which == ESCAPE_KEY ) {
+      layer.remove();
+    }
+  });
+};
 
 
 /**
@@ -33,7 +63,10 @@ function Layer(options) {
  */
 Layer.prototype.position = function() {
   var layerWidth = this.$.width();
-  var targetPosition = this.$target.offset();
+  var targetPosition = {
+    left: this.$target.offset().left,
+    top: this.$target.position().top
+  };
   var targetHeight = this.$target.outerHeight();
   var targetWidth = this.$target.outerWidth();
   var tooltipPointerWidth = 20;
