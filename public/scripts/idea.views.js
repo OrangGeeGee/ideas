@@ -58,7 +58,12 @@ var IdeaFormView = Backbone.View.extend({
 
   events: {
     submit: 'submit',
+    'change select[name="category_id"]': 'changeCategory',
     'keyup :input': 'toggleSubmitButton'
+  },
+
+  changeCategory: function() {
+    $('#category').val(this.$('select[name="category_id"]').val()).trigger('change');
   },
 
   toggleSubmitButton: function() {
