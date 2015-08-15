@@ -57,6 +57,10 @@ class Idea extends Model {
     return $currentStatusId == $statusId;
   }
 
+  public function statusCanBeChangedBy(User $user) {
+    return $this->user_id == $user->id || $user->settings->canModerateStatuses;
+  }
+
   public function generateURL() {
     return env('APP_URL') . "#ideas/$this->id";
   }

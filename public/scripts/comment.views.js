@@ -50,6 +50,7 @@ var CommentFormView = Backbone.View.extend({
             status_id: data.status_id
           });
 
+          // HACK:
           // Force the comment to re-render so that the status
           // change will be visible.
           comment.trigger('change');

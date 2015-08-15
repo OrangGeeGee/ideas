@@ -135,7 +135,7 @@
 
   <script type="text/html" id="commentFormTemplate">
     <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
-    <% if ( attributes.user_id == USER_ID ) { %>
+    <% if ( attributes.user_id == USER_ID || Users.get(USER_ID).get('settings').canModerateStatuses ) { %>
       <div class="status-container">
         {{ trans('statuses.change') }}
         <select name="status_id">
