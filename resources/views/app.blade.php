@@ -95,7 +95,7 @@
         <p>{{ trans('settings.receiveCommentNotification.description') }}</p>
         </dt>
         <dd>
-          <input type="checkbox" id="receiveCommentNotification" name="receiveCommentNotification" <%= settings.receiveCommentNotification ? ' checked' : '' %>/>
+          <input type="checkbox" id="receiveCommentNotification" name="receiveCommentNotification" <%= receiveCommentNotification ? ' checked' : '' %>/>
         </dd>
       </div>
 
@@ -105,7 +105,7 @@
           <p>{{ trans('settings.receiveDailyNewsletter.description') }}</p>
         </dt>
         <dd>
-          <input type="checkbox" id="receiveDailyNewsletter" name="receiveDailyNewsletter" <%= settings.receiveDailyNewsletter ? ' checked' : '' %>/>
+          <input type="checkbox" id="receiveDailyNewsletter" name="receiveDailyNewsletter" <%= receiveDailyNewsletter ? ' checked' : '' %>/>
         </dd>
       </div>
     </dl>
@@ -316,6 +316,8 @@
   <script src="scripts/routes.js"></script>
   <script src="scripts/users.js"></script>
   <script src="scripts/user.views.js"></script>
+  <script src="scripts/settings.js"></script>
+  <script src="scripts/setting.views.js"></script>
   <script src="scripts/ideas.js"></script>
   <script src="scripts/idea.views.js"></script>
   <script src="scripts/votes.js"></script>
@@ -342,6 +344,7 @@
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);
     Users.add(<?= $users ?>);
+    Settings.set(<?= \Auth::user()->settings ?>);
     Statuses.add(<?= $statuses ?>);
     StatusChanges.add(<?= \App\StatusChange::all() ?>);
   </script>

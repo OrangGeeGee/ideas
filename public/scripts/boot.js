@@ -12,7 +12,7 @@ $(function() {
   $('#userName').append(activeUser.generateProfileImage());
 
   $('#userName').on('click', function() {
-    new UserSettingsView({ model: activeUser });
+    new UserSettingsView({ model: Settings });
   });
 
   Layout.initialize();

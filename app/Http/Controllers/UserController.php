@@ -17,6 +17,9 @@ class UserController extends Controller {
 		$data = $request->all();
 		$user = \Auth::user();
 
+		# Prevent users from self-assigning them elevated rights.
+		unset($data['canModerateStatuses']);
+
 		$user->settings()->update($data);
 	}
 

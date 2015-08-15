@@ -47,38 +47,3 @@ var OnlineUsersListView = Backbone.View.extend({
     }, this);
   }
 });
-
-
-
-var UserSettingsView = Backbone.View.extend({
-  template: _.template($('#userSettingsTemplate').html()),
-
-  events: {
-    'click :checkbox': 'save',
-    'click button': 'close'
-  },
-
-  save: function() {
-    var data = this.$el.parseAsJSON();
-    $.post('users/settings', data);
-  },
-
-  close: function() {
-    this.layer.remove();
-    this.remove();
-  },
-
-  render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
-  },
-
-  initialize: function() {
-    this.layer = new Layer({
-      id: 'userSettingsLayer',
-      $target: $('#userName .profile-image'),
-      content: this.$el
-    });
-
-    this.render();
-  }
-});
