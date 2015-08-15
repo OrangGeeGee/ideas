@@ -88,6 +88,10 @@
   margin-left: -28px;
 }
 
+[data-vote-count="0"] .entry-data li.votes {
+  display: none;
+}
+
 .entry-data li.votes img {
   margin-top: -7px;
 }

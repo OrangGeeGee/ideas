@@ -213,6 +213,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   updateVoteCount: function() {
+    this.$el.attr('data-vote-count', this.model.getVoteCount());
     this.$('.vote-count').text(this.model.getVoteCount());
   },
 
