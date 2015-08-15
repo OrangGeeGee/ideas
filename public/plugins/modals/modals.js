@@ -36,6 +36,8 @@ function Modal(id, content) {
     modal.close();
   });
 
+  this.resize();
+
   return this;
 }
 
