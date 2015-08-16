@@ -28,22 +28,3 @@
 #searchField:focus {
   width: 240px;
 }
-
-@media (max-width: 1120px) {
-  #filter-section {
-    width: 50%;
-    text-align: right;
-    bottom: 0;
-  }
-
-  #filter-section ul {
-    display: block;
-    margin: 0 0 20px;
-    padding: 0;
-    border: none;
-  }
-
-  #searchField {
-    margin-bottom: 20px;
-  }
-}

@@ -44,3 +44,15 @@
 #activitySection .comment a[href^="#ideas"]:before {
   content: "@";
 }
+
+
+/** Responsive */
+@media (max-width: 1000px) {
+  #activitySection {
+    display: none;
+  }
+
+  #container > header {
+    width: 100% !important;
+  }
+}

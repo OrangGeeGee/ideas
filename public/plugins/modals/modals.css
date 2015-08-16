@@ -3,8 +3,8 @@
   display: none;
   position: fixed;
   background: white;
-  min-width: 480px;
-  max-width: 600px;
+  min-width: 600px;
+  max-width: 800px;
   z-index: 2;
   transition-property: top, left;
   transition-duration: 0.33s;

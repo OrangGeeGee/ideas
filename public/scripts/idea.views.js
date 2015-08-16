@@ -336,7 +336,7 @@ var IdeaListView = Backbone.View.extend({
     var MARGIN = 40;
     var viewport = Layout.getViewportDimensions();
 
-    this.$el.width(viewport.width - $('#activitySection').width() - MARGIN * 2);
+    this.$el.width(viewport.width - $('#activitySection').width() - MARGIN);
   },
 
   initialize: function() {
