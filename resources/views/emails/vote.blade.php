@@ -23,12 +23,12 @@
 									<td width="36"></td>
 									<td width="454" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<?php if ( App::getLocale() == 'et' ): ?>
-											{{ $idea->user->name }} andis oma hääle sinu poolt postitatud ideele:
+											{{ $vote->user->name }} andis oma hääle sinu poolt postitatud ideele:
 										<?php else: ?>
-											{{ $idea->user->name }} voted for Your idea:
+											{{ $vote->user->name }} voted for Your idea:
 										<?php endif ?>
 										<br><br>
-										<a href="{{ $idea->generateURL() }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $idea->title }}</a>
+										<a href="{{ $vote->idea->generateURL() }}" target="_blank" style="color:#f60;font-weight:300;font-size:14pt;">{{ $vote->idea->title }}</a>
 									</td>
 									<td width="36"></td>
 								</tr>

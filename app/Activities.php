@@ -4,6 +4,7 @@ use App\Idea;
 use App\Comment;
 use App\Activity;
 use App\View;
+use App\Vote;
 
 require 'UserAgentParser.php';
 
@@ -52,4 +53,8 @@ Comment::created(function($comment) {
 
 View::created(function($view) {
   Activities::record(Activities::OPEN_IDEA, $view->idea->title);
+});
+
+Vote::created(function($vote) {
+  Activities::record(\Activities::VOTE_IDEA, $vote->idea->title);
 });

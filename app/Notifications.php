@@ -1,5 +1,6 @@
 <?php
 
+use App\Vote;
 use App\Idea;
 use App\Comment;
 
@@ -70,13 +71,13 @@ class Notifications {
 
 
   /**
-   * @param Idea $idea
+   * @param Vote $vote
    */
-  public static function newVote(Idea $idea) {
-    $ideaAuthor = $idea->user;
+  public static function newVote(Vote $vote) {
+    $ideaAuthor = $vote->idea->user;
     App::setLocale($ideaAuthor->getLocale());
 
-    Mail::send('emails.vote', compact('idea'), function ($message) use ($ideaAuthor) {
+    Mail::send('emails.vote', compact('vote'), function ($message) use ($ideaAuthor) {
       $message
         ->from('brainstorm@eos.crebit.ee', trans('app.name'))
         ->to($ideaAuthor->email, $ideaAuthor->name)
@@ -139,4 +140,8 @@ Idea::created(function($idea) {
 
 Comment::created(function($comment) {
   Notifications::newComment($comment);
+});
+
+Vote::created(function($vote) {
+  Notifications::newVote($vote);
 });

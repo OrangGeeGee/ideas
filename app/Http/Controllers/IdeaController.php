@@ -59,9 +59,6 @@ class IdeaController extends Controller {
       'user_id' => $user->id,
       'timestamp' => \DB::raw('NOW()')
     ]);
-
-    \Notifications::newVote($idea);
-    \Activities::record(\Activities::VOTE_IDEA, $idea->title);
   }
 
   /**
