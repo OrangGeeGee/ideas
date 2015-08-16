@@ -50,7 +50,7 @@
 #ideas-list .entry-content {
   cursor: pointer;
   padding: 40px 30px 30px;
-  max-height: 320px; /* When animating a new idea, the content can stretch quite a bit for a moment */
+  max-height: 350px; /* When animating a new idea, the content can stretch quite a bit for a moment */
   text-align: center;
 }
 
