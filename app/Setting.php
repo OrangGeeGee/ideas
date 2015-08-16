@@ -3,7 +3,19 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model {
-  protected $fillable = ['user_id'];
-  protected $hidden = ['user_id'];
+  protected $fillable = [
+    'receiveCommentNotification',
+    'receiveDailyNewsletter',
+    'receiveVoteNotification',
+  ];
+  protected $hidden = [
+    'user_id',
+    'user',
+  ];
+  protected $primaryKey = 'user_id';
   public $timestamps = false;
+
+  public function user() {
+    return $this->belongsTo('App\WHOISUser');
+  }
 }

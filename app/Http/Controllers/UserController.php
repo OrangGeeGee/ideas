@@ -14,13 +14,16 @@ class UserController extends Controller {
 	}
 
 	public function updateSettings(Request $request) {
-		$data = $request->all();
+
+		# Convert boolean values to integer, otherwise Eloquent's isDirty()
+		# method will mistake "1 ==> true" operations as changes.
+		$data = array_map(function($boolean) {
+			return (int) $boolean;
+		}, $request->all());
 		$user = \Auth::user();
 
-		# Prevent users from self-assigning them elevated rights.
-		unset($data['canModerateStatuses']);
-
-		$user->settings()->update($data);
+		$user->settings->fill($data);
+		$user->settings->save();
 	}
 
 }

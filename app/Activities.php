@@ -5,6 +5,7 @@ use App\Comment;
 use App\Activity;
 use App\View;
 use App\Vote;
+use App\Setting;
 
 require 'UserAgentParser.php';
 
@@ -16,6 +17,10 @@ class Activities {
   const VOTE_IDEA = 'Voted for idea: "%s"';
   const UNVOTE_IDEA = 'Removed vote from idea: "%s"';
   const ADD_COMMENT = 'Added new comment under "%s": "%s"';
+
+  const SETTING_NOTIFICATION_VOTE = '%s %s vote notifications';
+  const SETTING_NOTIFICATION_COMMENT = '%s %s comment notifications';
+  const SETTING_NOTIFICATION_NEWSLETTER = '%s %s daily newsletter';
 
 
   /**
@@ -56,5 +61,23 @@ View::created(function($view) {
 });
 
 Vote::created(function($vote) {
-  Activities::record(\Activities::VOTE_IDEA, $vote->idea->title);
+  Activities::record(Activities::VOTE_IDEA, $vote->idea->title);
+});
+
+Setting::updated(function($setting) {
+  $notifications = [
+    'receiveVoteNotification' => Activities::SETTING_NOTIFICATION_VOTE,
+    'receiveCommentNotification' => Activities::SETTING_NOTIFICATION_COMMENT,
+    'receiveDailyNewsletter' => Activities::SETTING_NOTIFICATION_NEWSLETTER,
+  ];
+
+  foreach ( $notifications as $notificationType => $messageTemplate ) {
+
+    if ( !$setting->isDirty($notificationType) ) {
+      continue;
+    }
+
+    $state = ( $setting->$notificationType == true ) ? 'enabled' : 'disabled';
+    Activities::record($messageTemplate, $setting->user->name, $state);
+  }
 });
