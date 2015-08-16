@@ -12,4 +12,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # SVG images need this for production...
+    AddType image/svg+xml svg svgz
+    AddEncoding gzip svgz
 </IfModule>
