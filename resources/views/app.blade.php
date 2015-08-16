@@ -39,6 +39,10 @@
       content: " {!! trans('ideas.charactersLeft') !!}";
     }
   </style>
+  <!--[if IE 8]>
+  <script src="scripts/html5shiv/html5shiv-3.7.3.js"></script>
+  <link type="text/css" rel="stylesheet" href="styles/ie8.css">
+  <![endif]-->
 </head>
 <body>
 
@@ -270,6 +274,9 @@
   </script>
 
   <!-- Dependencies -->
+  <script src="scripts/helpers/object.js"></script>
+  <script src="scripts/helpers/array.js"></script>
+  <script src="scripts/helpers/string.js"></script>
   <script src="scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="scripts/jquery/jquery.helpers.js"></script>
   <script src="scripts/moment/moment-2.4.0.min.js"></script>
@@ -285,8 +292,6 @@
   <script src="scripts/helpers/layout.js"></script>
   <script src="scripts/helpers/browser.js"></script>
   <script src="scripts/helpers/function.js"></script>
-  <script src="scripts/helpers/array.js"></script>
-  <script src="scripts/helpers/string.js"></script>
   <script src="plugins/modals/modals.js"></script>
   <script src="plugins/introjs/intro.js"></script>
   <script src="plugins/viewport.js"></script>

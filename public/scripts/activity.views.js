@@ -59,7 +59,7 @@ var ActivityListView = Backbone.View.extend({
     var viewport = Layout.getViewportDimensions();
     var PADDING = parseInt(this.$el.css('padding-top'));
 
-    this.$el.height(viewport.height - this.$el.offset().top - PADDING * 2);
+    this.$el.height(viewport.height - this.$el.position().top - PADDING * 2);
   },
 
   initialize: function() {
