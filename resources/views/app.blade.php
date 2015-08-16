@@ -95,6 +95,16 @@
     <dl class="settings-list">
       <div>
         <dt>
+          <label for="receiveVoteNotification">{{ trans('settings.receiveVoteNotification') }}</label>
+        <p>{{ trans('settings.receiveVoteNotification.description') }}</p>
+        </dt>
+        <dd>
+          <input type="checkbox" id="receiveVoteNotification" name="receiveVoteNotification" <%= receiveVoteNotification ? ' checked' : '' %>/>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
           <label for="receiveCommentNotification">{{ trans('settings.receiveCommentNotification') }}</label>
         <p>{{ trans('settings.receiveCommentNotification.description') }}</p>
         </dt>

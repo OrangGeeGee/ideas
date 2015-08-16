@@ -49,11 +49,6 @@ class Notifications {
   public static function newComment(Comment $comment) {
     $ideaAuthor = $comment->idea->user;
 
-    # Check if the user doesn't want to receive notifications.
-    if ( !$ideaAuthor->settings->receiveCommentNotification ) {
-      return;
-    }
-
     # Don't notify the author if the new comment was made by him/her.
     if ( $comment->user->id == $ideaAuthor->id ) {
       return;
@@ -139,9 +134,21 @@ Idea::created(function($idea) {
 });
 
 Comment::created(function($comment) {
+
+  # Check if the user doesn't want to receive notifications.
+  if ( !$comment->idea->user->settings->receiveCommentNotification ) {
+    return;
+  }
+
   Notifications::newComment($comment);
 });
 
 Vote::created(function($vote) {
+
+  # Check if the user doesn't want to receive notifications.
+  if ( !$vote->idea->user->settings->receiveVoteNotification ) {
+    return;
+  }
+
   Notifications::newVote($vote);
 });
