@@ -20,4 +20,4 @@ Activities.comparator = function(a, b) {
   return ( timestamp1 < timestamp2 ) ? -1 : ( timestamp1 > timestamp2 ) ? 1 : 0;
 };
 
-Activities.minimumDate = moment().subtract(1, 'week').format('YYYY-MM-DD');
+Activities.minimumDate = moment().subtract(2, 'month').format('YYYY-MM-DD');
