@@ -22,7 +22,7 @@ class CreateVotesTable extends Migration {
 
 		foreach ( DB::table('idea_user')->where('voted_at', '!=', '0000-00-00 00:00:00')->get() as $row )
 		{
-			\App\Vote::create([
+			DB::table('votes')->insert([
 				'user_id' => $row->user_id,
 				'idea_id' => $row->idea_id,
 				'timestamp' => $row->voted_at
