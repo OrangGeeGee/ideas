@@ -31,6 +31,8 @@ class Notifications {
    * @param Idea $idea
    */
   public static function notifySecretaries(Idea $idea) {
+    App::setLocale('et');
+
     Mail::send('emails.notificationToSecretaries', compact('idea'), function($message) use ($idea) {
       $message
         ->from('brainstorm@eos.crebit.ee', trans('app.name'))
