@@ -17,7 +17,7 @@ class Notifications {
     $moderator = WHOISUser::find('msald');
 
     (new Email)
-      ->subject(trans('emails.newIdea'))
+      ->subject(localize('emails.newIdea', 'et'))
       ->to($moderator)
       ->view('emails.ideaValidation', compact('idea'))
       ->send();
@@ -33,7 +33,7 @@ class Notifications {
     $moderator = WHOISUser::find('msald');
 
     (new Email)
-      ->subject(trans('emails.newIdea'))
+      ->subject(localize('emails.newIdea', 'et'))
       ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
       ->cc($moderator)
       ->view('emails.notificationToSecretaries', compact('idea'))
@@ -55,7 +55,7 @@ class Notifications {
     }
 
     (new Email)
-      ->subject(trans('emails.newComment'))
+      ->subject(localize('emails.newComment', $ideaAuthor->getLocale()))
       ->to($ideaAuthor)
       ->view('emails.comment', compact('comment'))
       ->send();
@@ -69,7 +69,7 @@ class Notifications {
     $ideaAuthor = $vote->idea->user;
 
     (new Email)
-      ->subject(trans('emails.newVote'))
+      ->subject(localize('emails.newVote', $ideaAuthor->getLocale()))
       ->to($ideaAuthor)
       ->view('emails.vote', compact('vote'))
       ->send();
@@ -86,7 +86,6 @@ class Notifications {
     $periodStart = $yesterday->format('Y-m-d');
     $periodEnd = $today->format('Y-m-d');
 
-    $data['title'] = trans('emails.dailyHeading') . " " . $yesterday->format('d/m/Y');
     $data['ideas'] = \App\Idea::latest($periodStart, $periodEnd)->get();
     $data['comments'] = \App\Comment::latest($periodStart, $periodEnd)->get();
     $data['votes'] = \App\Vote::latest($periodStart, $periodEnd)->get();
@@ -101,6 +100,7 @@ class Notifications {
     foreach ( \App\Setting::where('receiveDailyNewsletter', true)->get() as $setting ) {
       # TODO: A separate query for every single user can hinder performance.
       $subscriber = \App\WHOISUser::find($setting->user_id);
+      $data['title'] = localize('emails.dailyHeading', $subscriber->getLocale()) . " " . $yesterday->format('d/m/Y');
 
       (new Email)
         ->subject($data['title'])
