@@ -14,6 +14,18 @@ function enableCORS() {
   header('Access-Control-Allow-Origin: *');
 }
 
+/**
+ * Alias for trans() helper, prioritizing the $locale argument.
+ *
+ * @param string $label
+ * @param string [$locale='en']
+ * @param array $data
+ * @return string
+ */
+function localize($label, $locale = 'en', $data = []) {
+  return trans($label, $data, null, $locale);
+};
+
 
 /**
  * App routes.

@@ -1,8 +1,11 @@
 <?php
 
+require_once 'Email.php';
+
 use App\Vote;
 use App\Idea;
 use App\Comment;
+use App\WHOISUser;
 
 class Notifications {
 
@@ -11,17 +14,13 @@ class Notifications {
    * @param Idea $idea
    */
   public static function newIdea(Idea $idea) {
-    App::setLocale($idea->user->getLocale());
+    $moderator = WHOISUser::find('msald');
 
-    # Send the idea for validation
-    if ( $idea->user->hasEstonianEmailAddress() ) {
-      Mail::send('emails.ideaValidation', compact('idea'), function($message) use ($idea) {
-        $message
-          ->from('brainstorm@eos.crebit.ee', trans('app.name'))
-          ->to('mattias.saldre@swedbank.ee', 'Mattias Saldre')
-          ->subject(self::prefixSubject(trans('emails.newIdea')));
-      });
-    }
+    (new Email)
+      ->subject(trans('emails.newIdea'))
+      ->to($moderator)
+      ->view('emails.ideaValidation', compact('idea'))
+      ->send();
   }
 
 
@@ -31,15 +30,14 @@ class Notifications {
    * @param Idea $idea
    */
   public static function notifySecretaries(Idea $idea) {
-    App::setLocale('et');
+    $moderator = WHOISUser::find('msald');
 
-    Mail::send('emails.notificationToSecretaries', compact('idea'), function($message) use ($idea) {
-      $message
-        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
-        ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
-        ->cc('mattias.saldre@swedbank.ee', 'Mattias Saldre')
-        ->subject(self::prefixSubject(trans('emails.newIdea')));
-    });
+    (new Email)
+      ->subject(trans('emails.newIdea'))
+      ->to('liivalaia-sekretarid@swedbank.ee', 'Liivalaia sekretärid')
+      ->cc($moderator)
+      ->view('emails.notificationToSecretaries', compact('idea'))
+      ->send();
   }
 
 
@@ -56,14 +54,11 @@ class Notifications {
       return;
     }
 
-    App::setLocale($ideaAuthor->getLocale());
-
-    Mail::send('emails.comment', compact('comment'), function($message) use($ideaAuthor) {
-      $message
-        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
-        ->to($ideaAuthor->email, $ideaAuthor->name)
-        ->subject(self::prefixSubject(trans('emails.newComment')));
-    });
+    (new Email)
+      ->subject(trans('emails.newComment'))
+      ->to($ideaAuthor)
+      ->view('emails.comment', compact('comment'))
+      ->send();
   }
 
 
@@ -72,14 +67,12 @@ class Notifications {
    */
   public static function newVote(Vote $vote) {
     $ideaAuthor = $vote->idea->user;
-    App::setLocale($ideaAuthor->getLocale());
 
-    Mail::send('emails.vote', compact('vote'), function ($message) use ($ideaAuthor) {
-      $message
-        ->from('brainstorm@eos.crebit.ee', trans('app.name'))
-        ->to($ideaAuthor->email, $ideaAuthor->name)
-        ->subject(self::prefixSubject(trans('emails.newVote')));
-    });
+    (new Email)
+      ->subject(trans('emails.newVote'))
+      ->to($ideaAuthor)
+      ->view('emails.vote', compact('vote'))
+      ->send();
   }
 
 
@@ -93,6 +86,7 @@ class Notifications {
     $periodStart = $yesterday->format('Y-m-d');
     $periodEnd = $today->format('Y-m-d');
 
+    $data['title'] = trans('emails.dailyHeading') . " " . $yesterday->format('d/m/Y');
     $data['ideas'] = \App\Idea::latest($periodStart, $periodEnd)->get();
     $data['comments'] = \App\Comment::latest($periodStart, $periodEnd)->get();
     $data['votes'] = \App\Vote::latest($periodStart, $periodEnd)->get();
@@ -107,27 +101,13 @@ class Notifications {
     foreach ( \App\Setting::where('receiveDailyNewsletter', true)->get() as $setting ) {
       # TODO: A separate query for every single user can hinder performance.
       $subscriber = \App\WHOISUser::find($setting->user_id);
-      \App::setLocale($subscriber->getLocale());
-      $data['title'] = trans('emails.dailyHeading') . " " . $yesterday->format('d/m/Y');
 
-      \Mail::send('emails.daily', $data, function($message) use ($subscriber, $data) {
-        $message
-          ->from('brainstorm@eos.crebit.ee', trans('app.name'))
-          ->to($subscriber->email)
-          ->subject(self::prefixSubject($data['title']));
-      });
+      (new Email)
+        ->subject($data['title'])
+        ->to($subscriber)
+        ->view('emails.daily', $data)
+        ->send();
     }
-  }
-
-
-  /**
-   * @param string $title
-   * @return string
-   */
-  private static function prefixSubject($title) {
-    $appName = trans('app.name');
-
-    return "[$appName] $title";
   }
 }
 
