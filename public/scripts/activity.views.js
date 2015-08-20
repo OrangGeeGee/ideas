@@ -39,6 +39,12 @@ var ActivityListView = Backbone.View.extend({
   },
 
   renderComment: function(comment) {
+
+    // Check if the idea has been deleted.
+    if ( !Ideas.get(comment.get('idea_id')) ) {
+      return;
+    }
+
     var commentView = new ActivityListCommentView({ model: comment });
     this.$el.prepend(commentView.$el);
   },
