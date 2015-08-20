@@ -335,16 +335,16 @@
   <script src="scripts/setting.views.js"></script>
   <script src="scripts/ideas.js"></script>
   <script src="scripts/idea.views.js"></script>
-  <script src="scripts/votes.js"></script>
-  <script src="scripts/comments.js"></script>
+  <script src="scripts/votes.js?20150820"></script>
+  <script src="scripts/comments.js?20150820"></script>
   <script src="scripts/comment.views.js"></script>
   <?php if ( env('SHADOW_URL') ): ?>
-  <script src="scripts/events.js"></script>
+  <script src="scripts/events.js?20150820"></script>
   <?php endif ?>
   <script src="scripts/event.views.js"></script>
   <script src="scripts/activities.js"></script>
   <script src="scripts/activity.views.js"></script>
-  <script src="scripts/statuses.js"></script>
+  <script src="scripts/statuses.js?20150820"></script>
   <?php if ( env('POLLING_INTERVAL') ): ?>
   <script>POLLING_INTERVAL = <?= env('POLLING_INTERVAL') ?>;</script>
   <script src="scripts/dataPoller.js"></script>
