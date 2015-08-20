@@ -7,6 +7,12 @@ Ideas.model = Backbone.Model.extend({
 
   initialize: function() {
     this.comments = new Backbone.Collection;
+    this.comments.comparator = function(a, b) {
+      var timestamp1 = a.get('created_at');
+      var timestamp2 = b.get('created_at');
+
+      return ( timestamp1 < timestamp2 ) ? -1 : ( timestamp1 > timestamp2 ) ? 1 : 0;
+    };
     this.statusChanges = new Backbone.Collection;
     this.events = new Backbone.Collection;
     this.votes = new Backbone.Collection;
