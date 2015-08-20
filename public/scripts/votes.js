@@ -4,7 +4,11 @@ var Votes = new (Backbone.Collection.extend({
 
   initialize: function() {
     this.on('add', function(vote) {
-      Ideas.get(vote.get('idea_id')).votes.add(vote);
+      var idea = Ideas.get(vote.get('idea_id'));
+
+      if ( idea ) {
+        idea.votes.add(vote);
+      }
     });
   }
 }));

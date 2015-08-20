@@ -4,7 +4,11 @@ var Comments = new (Backbone.Collection.extend({
 
   initialize: function() {
     this.on('add', function(comment) {
-      Ideas.get(comment.get('idea_id')).comments.add(comment);
+      var idea = Ideas.get(comment.get('idea_id'));
+
+      if ( idea ) {
+        idea.comments.add(comment);
+      }
     });
   }
 }));

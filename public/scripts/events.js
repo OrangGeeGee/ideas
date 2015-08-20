@@ -4,7 +4,11 @@ var Events = new (Backbone.Collection.extend({
 
   initialize: function() {
     this.on('add', function(event) {
-      Ideas.get(event.get('idea_id')).events.add(event);
+      var idea = Ideas.get(event.get('idea_id'));
+
+      if ( idea ) {
+        idea.events.add(event);
+      }
     });
   }
 }));

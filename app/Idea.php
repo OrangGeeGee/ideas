@@ -1,10 +1,14 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Idea extends Model {
+  use SoftDeletes;
   protected $fillable = array('category_id', 'title', 'description');
-  protected $softDelete = true;
+  protected $dates = [
+    'deleted_at',
+  ];
 
   /**
    * @param Builder $query
