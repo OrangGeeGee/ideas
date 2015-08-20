@@ -353,6 +353,12 @@
   <script src="scripts/tutorial.js"></script>
   <script src="scripts/filtering.views.js"></script>
 
+  <!-- Client side localization -->
+  <script src="scripts/localization.js"></script>
+  <script>
+    localize('removeVoteConfirmation', '{!! trans('ideas.removeVoteConfirmation') !!}');
+  </script>
+
   <!-- Initial data -->
   <script>
     Ideas.add(<?= \App\Idea::all() ?>);

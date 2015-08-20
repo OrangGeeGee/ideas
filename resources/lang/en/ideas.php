@@ -7,6 +7,7 @@ return [
   'delete' => "Delete idea",
   'vote' => "Like",
   'removeVote' => "Remove vote",
+  'removeVoteConfirmation' => "Are you sure you want to take back your vote?",
   'titlePlaceholder' => "Title...",
   'descriptionPlaceholder' => "Description...",
   'peopleLike' => "people like this",

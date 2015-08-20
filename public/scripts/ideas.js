@@ -26,9 +26,11 @@ Ideas.model = Backbone.Model.extend({
   },
 
   removeVote: function() {
-    this.votes.where({
-      user_id: USER_ID
-    })[0].destroy();
+    if ( confirm(localize('removeVoteConfirmation')) ) {
+      this.votes.where({
+        user_id: USER_ID
+      })[0].destroy();
+    }
   },
 
   generateLink: function() {
