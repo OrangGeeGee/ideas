@@ -218,8 +218,8 @@ var IdeaView = Backbone.View.extend({
   },
 
   deleteIdea: function() {
-    // TODO: Translate
-    if ( confirm('Oled sa kindel, et soovid oma idee kustutada?') ) {
+
+    if ( confirm(localize('deleteConfirmation')) ) {
       // TODO: Let model.destroy() method take care of the business here.
       $.get('ideas/' + this.model.id + '/delete');
       this.remove();

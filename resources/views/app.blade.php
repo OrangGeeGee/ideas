@@ -357,6 +357,7 @@
   <script src="scripts/localization.js"></script>
   <script>
     localize('removeVoteConfirmation', '{!! trans('ideas.removeVoteConfirmation') !!}');
+    localize('deleteConfirmation', '{!! trans('ideas.deleteConfirmation') !!}');
   </script>
 
   <!-- Initial data -->
