@@ -23,7 +23,7 @@
 									<td width="36"></td>
 									<td width="454" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:'Open Sans','Segoe UI',Arial,'Sans Serif';max-width:454px" valign="top">
 										<?php if ( App::getLocale() == 'et' ): ?>
-											{{ $vote->user->name }} andis oma hääle sinu poolt postitatud ideele:
+											{{ $vote->user->name }} andis oma hääle sinu poolt lisatud ideele:
 										<?php else: ?>
 											{{ $vote->user->name }} voted for Your idea:
 										<?php endif ?>
