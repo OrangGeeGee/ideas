@@ -249,7 +249,7 @@ var IdeaView = Backbone.View.extend({
   },
 
   refreshStatus: function() {
-    this.$el.attr('class', 'status-' + this.model.getStatus().get('code'));
+    this.$el.attr('data-status', this.model.getStatus().get('code'));
   },
 
   initialize: function() {

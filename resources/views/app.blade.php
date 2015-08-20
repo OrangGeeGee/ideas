@@ -24,7 +24,7 @@
   <link type="text/css" rel="stylesheet" href="plugins/introjs/introjs.css">
   <style type="text/css">
     <?php foreach ( App\Status::all() as $status ): ?>
-      .status-{{ $status->code }} .entry-content h3:before {
+      #ideas-list > li[data-status="{{ $status->code }}"] .entry-content h3:before {
         content: "<?= trans('statuses.' . camel_case($status->code)) ?>";
       }
     <?php endforeach ?>

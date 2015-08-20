@@ -10,27 +10,27 @@
   margin-top: -5px;
 }
 
-.status-in-backlog .entry-content h3:before {
+#ideas-list > li[data-status="in-backlog"] .entry-content h3:before {
   display: none;
 }
 
-.status-on-hold .entry-content h3:before {
+#ideas-list > li[data-status="on-hold"] .entry-content h3:before {
   background-color: #DDD;
 }
 
-.status-investigating .entry-content h3:before {
+#ideas-list > li[data-status="investigating"] .entry-content h3:before {
   background-color: #BBDBF9;
 }
 
-.status-in-progress .entry-content h3:before {
+#ideas-list > li[data-status="in-progress"] .entry-content h3:before {
   background-color: #df7df7;
 }
 
-.status-finished .entry-content h3:before {
+#ideas-list > li[data-status="finished"] .entry-content h3:before {
   background-color: #D1ED3E;
 }
 
-.status-cancelled .entry-content h3:before {
+#ideas-list > li[data-status="cancelled"] .entry-content h3:before {
   background-color: #c83c3c;
   color: white;
 }
