@@ -23,6 +23,14 @@ $(function() {
   }
 
   if ( !activeUser.get('settings').landingPageVisited ) {
-    new LandingModalView();
+
+    // An idea is open, let's just assume the user understands the
+    // purpose of the environment without reading the landing content.
+    if ( Modals.active ) {
+      Settings.save({ landingPageVisited: 1 });
+    }
+    else {
+      new LandingModalView();
+    }
   }
 });

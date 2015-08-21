@@ -14,7 +14,7 @@ var LandingModalView = Backbone.View.extend({
     });
 
     modal.onClose(function() {
-      $.post('users/settings', { landingPageVisited: 1 });
+      Settings.save({ landingPageVisited: 1 });
     }, this);
   },
 
