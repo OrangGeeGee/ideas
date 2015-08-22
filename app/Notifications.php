@@ -86,14 +86,11 @@ class Notifications {
     $periodStart = $yesterday->format('Y-m-d');
     $periodEnd = $today->format('Y-m-d');
 
-    $data['ideas'] = \App\Idea::latest($periodStart, $periodEnd)->get();
-    $data['comments'] = \App\Comment::latest($periodStart, $periodEnd)->get();
-    $data['votes'] = \App\Vote::latest($periodStart, $periodEnd)->get();
+    $data['periodStart'] = $periodStart;
+    $data['ideas'] = Idea::latest($periodStart, $periodEnd)->with('comments.user', 'votes')->get();
 
     # No updates, cancel notification.
-    if ( $data['ideas']->count() == 0
-      && $data['comments']->count() == 0
-      && $data['votes']->count() == 0 ) {
+    if ( $data['ideas']->count() == 0 ) {
       return;
     }
 

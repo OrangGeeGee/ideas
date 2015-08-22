@@ -18,13 +18,32 @@ function enableCORS() {
  * Alias for trans() helper, prioritizing the $locale argument.
  *
  * @param string $label
- * @param string [$locale='en']
+ * @param string $locale
  * @param array $data
  * @return string
  */
 function localize($label, $locale = 'en', $data = []) {
   return trans($label, $data, null, $locale);
 };
+
+/**
+ * @param array $list
+ * @param string $locale
+ * @return string
+ */
+function humanizeList(array $list, $locale = 'en') {
+  $and = localize('frame.and', $locale);
+
+  if ( count($list) == 1 ) {
+    return $list[0];
+  }
+  else {
+    $lastItem = array_pop($list);
+    $commaSeparated = implode(', ', $list) . " $and $lastItem";
+
+    return $commaSeparated;
+  }
+}
 
 
 /**
