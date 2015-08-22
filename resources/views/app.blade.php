@@ -202,6 +202,12 @@
           <img src="images/thumbs-up-black.png"/>
           <span class="vote-count"></span> <?= trans('ideas.peopleLike') ?>
         </li>
+        <li class="sharing">
+          <a href="#">
+            <img src="images/share.png"/>
+            <?= trans('ideas.share') ?>
+          </a>
+        </li>
         <li class="comments">
           <img src="images/comments.png"/>
           <% if ( comments.length == 1 ) { %><a href="#">1 <?= trans('comments.one') ?></a><% } %>
@@ -358,6 +364,8 @@
   <script>
     localize('removeVoteConfirmation', '{!! trans('ideas.removeVoteConfirmation') !!}');
     localize('deleteConfirmation', '{!! trans('ideas.deleteConfirmation') !!}');
+    localize('askRecipientEmail', '{!! trans('ideas.askRecipientEmail') !!}');
+    localize('thanksForSharing', '{!! trans('ideas.thanksForSharing') !!}');
   </script>
 
   <!-- Initial data -->

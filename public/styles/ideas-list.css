@@ -96,6 +96,10 @@
   margin-top: -7px;
 }
 
+.entry-data li.sharing img {
+  height: 17px;
+}
+
 /** Single column layout */
 @media (max-width: 700px) {
   #ideas-list > li {

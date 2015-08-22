@@ -6,6 +6,7 @@ use App\Activity;
 use App\View;
 use App\Vote;
 use App\Setting;
+use App\Share;
 
 require 'UserAgentParser.php';
 
@@ -15,6 +16,7 @@ class Activities {
   const OPEN_IDEA = 'Opened idea: "%s"';
   const DELETE_IDEA = 'Deleted idea: "%s"';
   const VOTE_IDEA = 'Voted for idea: "%s"';
+  const SHARE_IDEA = 'Shared idea %s with %s';
   const UNVOTE_IDEA = 'Removed vote from idea: "%s"';
   const ADD_COMMENT = 'Added new comment under "%s": "%s"';
 
@@ -80,4 +82,8 @@ Setting::updated(function($setting) {
     $state = ( $setting->$notificationType == true ) ? 'enabled' : 'disabled';
     Activities::record($messageTemplate, $setting->user->name, $state);
   }
+});
+
+Share::created(function($share) {
+  Activities::record(Activities::SHARE_IDEA, $share->idea->title, $share->recipient->name);
 });

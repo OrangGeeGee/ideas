@@ -33,3 +33,23 @@ String.prototype.endsWith = function(snippet) {
 
   return this.substr(-snippet.length) == snippet;
 };
+
+
+/**
+ * @param {String} dataType
+ * @return {Boolean}
+ */
+String.prototype.isValid = function(dataType) {
+  var pattern;
+
+  switch ( dataType ) {
+    case 'email':
+      pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      break;
+
+    default:
+      throw new TypeError(dataType + ' is not a supported validation type.');
+  }
+
+  return pattern.test(this);
+};

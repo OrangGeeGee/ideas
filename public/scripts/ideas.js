@@ -25,6 +25,18 @@ Ideas.model = Backbone.Model.extend({
     });
   },
 
+  share: function() {
+    var data = {
+      email: prompt(localize('askRecipientEmail'))
+    };
+
+    if ( data.email.isValid('email') ) {
+      $.post('ideas/' + this.id + '/share', data, function() {
+        alert(localize('thanksForSharing'));
+      });
+    }
+  },
+
   removeVote: function() {
     if ( confirm(localize('removeVoteConfirmation')) ) {
       this.votes.where({

@@ -5,6 +5,7 @@ require_once 'Email.php';
 use App\Vote;
 use App\Idea;
 use App\Comment;
+use App\Share;
 use App\WHOISUser;
 
 class Notifications {
@@ -77,6 +78,23 @@ class Notifications {
 
 
   /**
+   * @param Idea $idea
+   * @param WHOISUser $sharer
+   * @param WHOISUser $recipient
+   */
+  public static function shareIdea(Idea $idea, WHOISUser $sharer, WHOISUser $recipient) {
+    (new Email)
+      ->subject(localize('emails.sharingTitle', $recipient->getLocale(), [
+        'sharer' => $sharer->name,
+        'idea' => $idea->title,
+      ]))
+      ->to($recipient)
+      ->view('emails.shareIdea', compact('idea', 'sharer'))
+      ->send();
+  }
+
+
+  /**
    * Send an email with latest ideas, comments, etc to subscribed users.
    */
   public static function dailyUpdate() {
@@ -130,4 +148,8 @@ Vote::created(function($vote) {
   }
 
   Notifications::newVote($vote);
+});
+
+Share::created(function($share) {
+  Notifications::shareIdea($share->idea, $share->user, $share->recipient);
 });

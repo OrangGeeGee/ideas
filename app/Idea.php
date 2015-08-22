@@ -30,6 +30,10 @@ class Idea extends Model {
     return $this->hasMany('App\Vote');
   }
 
+  public function shares() {
+    return $this->hasMany('App\Share');
+  }
+
   public function views() {
     return $this->hasMany('App\View');
   }

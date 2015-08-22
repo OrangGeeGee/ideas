@@ -83,6 +83,7 @@ Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
 Route::get('ideas/{idea}/read', 'IdeaController@read');
 Route::post('ideas/{idea}/vote', 'IdeaController@vote');
+Route::post('ideas/{idea}/share', 'IdeaController@share');
 Route::get('ideas/{idea}/notifySecretaries', function($idea) {
   Notifications::notifySecretaries($idea);
 });

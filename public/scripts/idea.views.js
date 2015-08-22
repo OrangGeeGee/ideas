@@ -188,6 +188,10 @@ var IdeaView = Backbone.View.extend({
 
       window.eventModal = modal;
     },
+    'click .sharing a': function(event) {
+      event.preventDefault();
+      this.model.share();
+    },
     'click .delete a': function(event) {
       event.preventDefault();
       this.deleteIdea();

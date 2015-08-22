@@ -10,4 +10,6 @@ return [
   'voted' => "voted for this idea.",
   'votedForYourIdea' => ":user voted for Your idea",
   'dailyHeading' => "Idea Environment Daily",
+  'sharingTitle' => ":sharer shared an idea :idea",
+  'sharingDescription' => ":sharer wanted to share :idea idea with you:",
 ];

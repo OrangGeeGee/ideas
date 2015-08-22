@@ -38,12 +38,16 @@ class User extends Model implements AuthenticatableContract {
 		return $this->hasOne('App\Setting');
 	}
 
+	public function whois() {
+		return WHOISUser::find($this->id);
+	}
+
 	public function hasEstonianEmailAddress() {
-		return WHOISUser::find($this->id)->hasEstonianEmailAddress();
+		return $this->whois()->hasEstonianEmailAddress();
 	}
 
 	public function getFirstName() {
-		return explode(' ', WHOISUser::find($this->id)->name)[0];
+		return explode(' ', $this->whois()->name)[0];
 	}
 
 	public function updateActivityTimestamp() {

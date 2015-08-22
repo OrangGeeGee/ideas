@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class IdeaController extends Controller {
 
   /**
@@ -58,6 +60,18 @@ class IdeaController extends Controller {
       'idea_id' => $idea->id,
       'user_id' => $user->id,
       'timestamp' => \DB::raw('NOW()')
+    ]);
+  }
+
+  public function share(\App\Idea $idea, Request $request) {
+    $recipient = \App\WHOISUser::where('email', $request->get('email'))->first();
+
+    if ( !$recipient ) {
+      return;
+    }
+
+    $idea->shares()->create([
+      'recipient_id' => $recipient->id
     ]);
   }
 
