@@ -109,6 +109,17 @@ var IdeaModalView = Backbone.View.extend({
   template: _.template($('#ideaModalTemplate').html()),
 
   events: {
+    'click .edit-action': function(event) {
+      event.preventDefault();
+      this.$('.idea-form').addClass('editing');
+    },
+    'submit .idea-form': function(event) {
+      event.preventDefault();
+      var data = $(event.target).parseAsJSON();
+
+      this.model.save(data);
+      this.$('.idea-form').removeClass('editing');
+    },
     'click .vote-action': function(event) {
       event.preventDefault();
 
@@ -147,6 +158,11 @@ var IdeaModalView = Backbone.View.extend({
     this.refreshState();
     this.model.votes.on('add remove', function() {
       this.refreshState();
+    }, this);
+
+    this.model.on('change', function() {
+      this.$('.idea-title').text(this.model.get('title'));
+      this.$('.idea-description').text(this.model.get('description'));
     }, this);
   }
 });

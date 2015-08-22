@@ -229,6 +229,28 @@ a.vote-action:hover {
   position: absolute;
 }
 
+.edit-action {
+  width: 34px;
+  cursor: pointer;
+  float: left;
+  margin-right: 5px;
+}
+
+.idea-form input,
+.idea-form.editing .idea-title,
+.idea-form textarea,
+.idea-form.editing .idea-description,
+.idea-form button,
+.idea-form.editing .edit-action {
+  display: none;
+}
+
+.idea-form.editing input,
+.idea-form.editing textarea,
+.idea-form.editing button {
+  display: block;
+}
+
 .idea-activity-section {
   background-color: white;
   overflow-x: hidden;

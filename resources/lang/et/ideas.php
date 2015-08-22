@@ -7,6 +7,8 @@ return [
   'delete' => "Kustuta idee",
   'deleteConfirmation' => "Oled sa kindel, et soovid oma idee kustutada?",
   'vote' => "Meeldib",
+  'edit' => "Muuda ideed",
+  'saveChanges' => "Salvesta muudatused",
   'removeVote' => "Kustuta hääl",
   'removeVoteConfirmation' => "Oled sa kindel, et soovid oma hääle tagasi võtta?",
   'share' => "Jaga ideed kolleegiga",

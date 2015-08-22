@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Idea;
 use Illuminate\Http\Request;
 
 class IdeaController extends Controller {
@@ -25,25 +26,41 @@ class IdeaController extends Controller {
 	}
 
   /**
+   * @param Request $request
+   * @param integer $id
+   */
+  public function update(Request $request, $id) {
+    $idea = Idea::find($id);
+
+    if ( $idea->user_id !== \Auth::user()->id ) {
+      return;
+    }
+
+    $idea->title = $request->get('title');
+    $idea->description = $request->get('description');
+    $idea->save();
+  }
+
+  /**
    * @param number $id
    * @return string
    */
   public function getTitle($id) {
     enableCORS();
-		return \App\Idea::find($id)->title;
+		return Idea::find($id)->title;
 	}
 
   /**
-   * @param \App\Idea $idea
+   * @param Idea $idea
    */
-  public function read(\App\Idea $idea) {
+  public function read(Idea $idea) {
     $idea->views()->create([]);
   }
 
   /**
-   * @param \App\Idea $idea
+   * @param Idea $idea
    */
-  public function vote(\App\Idea $idea) {
+  public function vote(Idea $idea) {
     $user = \Auth::user();
 
     # Can't vote for your own idea.
@@ -63,7 +80,7 @@ class IdeaController extends Controller {
     ]);
   }
 
-  public function share(\App\Idea $idea, Request $request) {
+  public function share(Idea $idea, Request $request) {
     $recipient = \App\WHOISUser::where('email', $request->get('email'))->first();
 
     if ( !$recipient ) {
@@ -76,9 +93,9 @@ class IdeaController extends Controller {
   }
 
   /**
-   * @param \App\Idea $idea
+   * @param Idea $idea
    */
-  public function unvote(\App\Idea $idea) {
+  public function unvote(Idea $idea) {
     \App\Vote::where([
       'user_id' => \Auth::user()->id,
       'idea_id' => $idea->id,
@@ -90,9 +107,9 @@ class IdeaController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param \App\Idea $idea
+	 * @param Idea $idea
 	 */
-	public function destroy(\App\Idea $idea)
+	public function destroy(Idea $idea)
   {
     $user = \Auth::user();
 

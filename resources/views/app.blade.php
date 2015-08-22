@@ -164,15 +164,26 @@
 
   <script type="text/html" id="ideaModalTemplate">
     <section class="idea-description-section">
-      <h2 class="idea-title"><%= attributes.title %></h2>
-      <p class="idea-description"><%= attributes.description %></p>
+      <form class="idea-form">
+        <% if ( attributes.user_id == USER_ID ) { %>
+          <img src="images/edit.png" title="{{ trans('ideas.edit') }}" class="edit-action"/>
+        <% } %>
 
-      <% if ( attributes.user_id != USER_ID && !isFinished() ) { %>
-        <a class="vote-action" href="ideas/<%= id %>/vote">
-          <span class="text"><?= trans('ideas.vote') ?></span>
-          <img src="images/thumbs-up.png"/>
-        </a>
-      <% } %>
+        <h2 class="idea-title"><%= attributes.title %></h2>
+        <input type="text" name="title" value="<%= attributes.title %>"/>
+
+        <p class="idea-description"><%= attributes.description %></p>
+        <textarea name="description"><%= attributes.description %></textarea>
+
+        <button>{{ trans('ideas.saveChanges') }}</button>
+
+        <% if ( attributes.user_id != USER_ID && !isFinished() ) { %>
+          <a class="vote-action" href="ideas/<%= id %>/vote">
+            <span class="text"><?= trans('ideas.vote') ?></span>
+            <img src="images/thumbs-up.png"/>
+          </a>
+        <% } %>
+      </form>
     </section>
 
     <section class="idea-activity-section">

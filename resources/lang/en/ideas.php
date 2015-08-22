@@ -7,6 +7,8 @@ return [
   'delete' => "Delete idea",
   'deleteConfirmation' => "Are you sure you want to delete your idea?",
   'vote' => "Like",
+  'edit' => "Edit idea",
+  'saveChanges' => "Save changes",
   'removeVote' => "Remove vote",
   'removeVoteConfirmation' => "Are you sure you want to take back your vote?",
   'share' => "Share idea",
