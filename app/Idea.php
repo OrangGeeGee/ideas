@@ -38,6 +38,10 @@ class Idea extends Model {
     return $this->hasMany('App\View');
   }
 
+  public function view() {
+    return $this->views()->create([]);
+  }
+
   public function comments() {
     return $this->hasMany('App\Comment');
   }

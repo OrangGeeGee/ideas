@@ -253,6 +253,11 @@ var IdeaView = Backbone.View.extend({
     this.$('.vote-count').text(this.model.getVoteCount());
   },
 
+  updateViewCount: function() {
+    this.$el.attr('data-view-count', this.model.views.length);
+    this.$('.view-count').text(this.model.views.length);
+  },
+
   deleteIdea: function() {
 
     if ( confirm(localize('deleteConfirmation')) ) {
@@ -271,6 +276,7 @@ var IdeaView = Backbone.View.extend({
     data.user = Users.get(data.user_id);
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
     data.voteCount = this.model.getVoteCount();
+    data.viewCount = this.model.views.length;
 
     this.$el.attr('data-idea-id', this.model.id);
     this.$el.html(this.template(data));
@@ -278,6 +284,7 @@ var IdeaView = Backbone.View.extend({
 
     this.refreshState();
     this.updateVoteCount();
+    this.updateViewCount();
     this.$el.toggleClass('popular', this.model.getVoteCount() >= 50);
     this.refreshStatus();
 
@@ -296,6 +303,9 @@ var IdeaView = Backbone.View.extend({
     this.model.votes.on('add remove', function() {
       this.updateVoteCount();
       this.refreshState();
+    }, this);
+    this.model.views.on('add', function() {
+      this.updateViewCount();
     }, this);
     this.model.statusChanges.on('add', this.refreshStatus, this);
   }

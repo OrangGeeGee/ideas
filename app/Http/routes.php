@@ -81,7 +81,7 @@ Route::resource('users', 'UserController');
 Route::post('users/settings', 'UserController@updateSettings');
 Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
-Route::get('ideas/{idea}/read', 'IdeaController@read');
+Route::post('ideas/{idea}/views', 'IdeaController@view');
 Route::post('ideas/{idea}/vote', 'IdeaController@vote');
 Route::post('ideas/{idea}/share', 'IdeaController@share');
 Route::get('ideas/{idea}/notifySecretaries', function($idea) {
@@ -102,6 +102,7 @@ Route::get('update', function() {
     'Users' => App\WHOISUser::newest($lastUpdate)->get()->toArray(),
     'UserActivity' => App\User::where('last_activity_at', '>=', $lastUpdate)->get()->toArray(),
     'Ideas' => App\Idea::latest($lastUpdate)->get()->toArray(),
+    'IdeaViews' => App\View::latest($lastUpdate)->get()->toArray(),
     'StatusChanges' => App\StatusChange::latest($lastUpdate)->get()->toArray(),
     'Votes' => App\Vote::latest($lastUpdate)->get()->toArray(),
     'CommentLikes' => App\CommentLike::latest($lastUpdate)->get()->toArray(),

@@ -96,6 +96,15 @@
   margin-top: -7px;
 }
 
+[data-view-count="0"] .entry-data li.views {
+  display: none;
+}
+
+.entry-data li.views img {
+  margin-top: -4px;
+  margin-left: -30px;
+}
+
 .entry-data li.sharing img {
   height: 17px;
 }

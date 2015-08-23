@@ -18,4 +18,5 @@ return [
   'descriptionPlaceholder' => "Kirjeldus...",
   'peopleLike' => "inimesele meeldib see",
   'charactersLeft' => "tähemärki järel",
+  'views' => "vaatamine|vaatamist",
 ];

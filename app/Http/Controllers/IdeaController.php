@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Idea;
+use App\View;
 use App\Vote;
 use Illuminate\Http\Request;
 
@@ -53,9 +54,10 @@ class IdeaController extends Controller {
 
   /**
    * @param Idea $idea
+   * @return View
    */
-  public function read(Idea $idea) {
-    $idea->views()->create([]);
+  public function view(Idea $idea) {
+    return $idea->view();
   }
 
   /**

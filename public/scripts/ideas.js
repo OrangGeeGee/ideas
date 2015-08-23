@@ -16,6 +16,7 @@ Ideas.model = Backbone.Model.extend({
     this.statusChanges = new Backbone.Collection;
     this.events = new Backbone.Collection;
     this.votes = new Backbone.Collection;
+    this.views = new Backbone.Collection;
   },
 
   vote: function(callback) {

@@ -38,6 +38,14 @@
     #new-idea .cc-counter:after {
       content: " {!! trans('ideas.charactersLeft') !!}";
     }
+
+    .view-count:after {
+      content: " {!! trans_choice('ideas.views', 2) !!}";
+    }
+
+    [data-view-count="1"] .view-count:after {
+      content: " {!! trans_choice('ideas.views', 1) !!}";
+    }
   </style>
   <!--[if IE 8]>
   <script src="scripts/html5shiv/html5shiv-3.7.3.js"></script>
@@ -237,6 +245,10 @@
           <% if ( comments.length > 1 ) { %><a href="#"><%= comments.length %> <?= trans('comments.many') ?></a><% } %>
           <% if ( !comments.length ) { %><?= trans('comments.missing') ?><% } %>
         </li>
+        <li class="views">
+          <img src="images/eye.png"/>
+          <span class="view-count"></span>
+        </li>
         <?php if ( Auth::user()->hasEstonianEmailAddress() ): ?>
           <% if ( user_id == USER_ID || events.length ) { %>
             <li class="event">
@@ -378,6 +390,7 @@
   <script src="scripts/setting.views.js"></script>
   <script src="scripts/ideas.js"></script>
   <script src="scripts/idea.views.js"></script>
+  <script src="scripts/ideaViews.js"></script>
   <script src="scripts/votes.js?20150820"></script>
   <script src="scripts/comments.js?20150820"></script>
   <script src="scripts/comment.views.js"></script>
@@ -408,11 +421,14 @@
     localize('comments.youLikeThis', '{!! trans('comments.youLikeThis') !!}');
     localize('comments.peopleLikeThis', '{!! trans('comments.peopleLikeThis') !!}');
     localize('comments.youAndOtherPeopleLikeThis', '{!! trans('comments.youAndOtherPeopleLikeThis') !!}');
+    localize('ideas.view', '{!! trans_choice('ideas.views', 1) !!}');
+    localize('ideas.views', '{!! trans_choice('ideas.views', 2) !!}');
   </script>
 
   <!-- Initial data -->
   <script>
     Ideas.add(<?= \App\Idea::all() ?>);
+    IdeaViews.add(<?= \App\View::all() ?>);
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);
     CommentLikes.add(<?= \App\CommentLike::all() ?>);
