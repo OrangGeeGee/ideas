@@ -18,10 +18,13 @@ Ideas.model = Backbone.Model.extend({
     this.votes = new Backbone.Collection;
   },
 
-  vote: function() {
+  vote: function(callback) {
     Votes.create({
       user_id: USER_ID,
       idea_id: this.id
+    }, {
+      wait: true,
+      success: callback
     });
   },
 

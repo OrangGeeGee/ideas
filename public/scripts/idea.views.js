@@ -123,12 +123,20 @@ var IdeaModalView = Backbone.View.extend({
     'click .vote-action': function(event) {
       event.preventDefault();
 
+      if ( $(event.currentTarget).is('.waiting') ) {
+        return;
+      }
+
       // TODO: Duplicated code from IdeaView.
       if ( this.model.hasBeenVotedFor() ) {
         this.model.removeVote();
       }
       else {
-        this.model.vote();
+        var $button = $(event.currentTarget).addClass('waiting');
+
+        this.model.vote(function() {
+          $button.removeClass('waiting');
+        });
       }
     }
   },
@@ -215,11 +223,19 @@ var IdeaView = Backbone.View.extend({
     'click .vote-action': function(event) {
       event.preventDefault();
 
+      if ( $(event.currentTarget).is('.waiting') ) {
+        return;
+      }
+
       if ( this.model.hasBeenVotedFor() ) {
         this.model.removeVote();
       }
       else {
-        this.model.vote();
+        var $button = $(event.currentTarget).addClass('waiting');
+
+        this.model.vote(function() {
+          $button.removeClass('waiting');
+        });
       }
     }
   },

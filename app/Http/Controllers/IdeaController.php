@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Idea;
+use App\Vote;
 use Illuminate\Http\Request;
 
 class IdeaController extends Controller {
@@ -59,6 +60,7 @@ class IdeaController extends Controller {
 
   /**
    * @param Idea $idea
+   * @param Vote
    */
   public function vote(Idea $idea) {
     $user = \Auth::user();
@@ -73,11 +75,13 @@ class IdeaController extends Controller {
       return;
     }
 
-    \App\Vote::create([
+    $vote = Vote::create([
       'idea_id' => $idea->id,
       'user_id' => $user->id,
       'timestamp' => \DB::raw('NOW()')
     ]);
+
+    return $vote;
   }
 
   public function share(Idea $idea, Request $request) {
@@ -96,11 +100,12 @@ class IdeaController extends Controller {
    * @param Idea $idea
    */
   public function unvote(Idea $idea) {
-    \App\Vote::where([
+    Vote::where([
       'user_id' => \Auth::user()->id,
       'idea_id' => $idea->id,
     ])->delete();
 
+    # TODO: Listen to model event.
     \Activities::record(\Activities::UNVOTE_IDEA, $idea->title);
   }
 

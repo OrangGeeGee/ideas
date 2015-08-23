@@ -178,17 +178,32 @@ a.vote-action img {
   left: 90% !important;
 }
 
+a.vote-action.waiting {
+  background-color: white !important;
+}
+
 .voted a.vote-action .text {
   display: none;
 }
 
-.voted a.vote-action img {
+.voted a.vote-action .thumbs-up {
   display: block;
 }
 
 a.vote-action:hover {
   background-color: #FF9A58;
   color: white;
+}
+
+.loading-icon,
+a.vote-action.waiting .text,
+.waiting .thumbs-up {
+  display: none;
+}
+
+.waiting .loading-icon {
+  display: block;
+  margin-top: 2px;
 }
 
 

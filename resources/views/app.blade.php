@@ -190,7 +190,8 @@
         <% if ( attributes.user_id != USER_ID && !isFinished() ) { %>
           <a class="vote-action" href="ideas/<%= id %>/vote">
             <span class="text"><?= trans('ideas.vote') ?></span>
-            <img src="images/thumbs-up.png"/>
+            <img class="thumbs-up" src="images/thumbs-up.png"/>
+            <img class="loading-icon" src="images/loading-animation-2.gif">
           </a>
         <% } %>
       </form>
@@ -214,7 +215,8 @@
       <% if ( user_id != USER_ID && !isFinished ) { %>
         <a class="vote-action" href="ideas/<%= id %>/vote">
           <span class="text"><?= trans('ideas.vote') ?></span>
-          <img src="images/thumbs-up.png"/>
+          <img class="thumbs-up" src="images/thumbs-up.png"/>
+          <img class="loading-icon" src="images/loading-animation-2.gif">
         </a>
       <% } %>
 
