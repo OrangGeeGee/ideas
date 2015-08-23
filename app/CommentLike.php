@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class CommentLike extends Model {
+  protected $hidden = [
+    'comment',
+    'user',
+  ];
+  protected $dates = [
+    'timestamp',
+  ];
   public $timestamps = false;
 
   public static function boot() {
@@ -29,5 +36,13 @@ class CommentLike extends Model {
     }
 
     return $query;
+  }
+
+  public function comment(){
+    return $this->belongsTo('App\Comment');
+  }
+
+  public function user(){
+    return $this->belongsTo('App\WHOISUser');
   }
 }

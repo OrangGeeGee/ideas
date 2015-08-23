@@ -5,6 +5,7 @@ require_once 'Email.php';
 use App\Vote;
 use App\Idea;
 use App\Comment;
+use App\CommentLike;
 use App\Share;
 use App\WHOISUser;
 
@@ -59,6 +60,24 @@ class Notifications {
       ->subject(localize('emails.newComment', $ideaAuthor->getLocale()))
       ->to($ideaAuthor)
       ->view('emails.comment', compact('comment'))
+      ->send();
+  }
+
+
+  /**
+   * Notify the author of the comment.
+   *
+   * @param CommentLike $comment
+   */
+  public static function likeComment(CommentLike $like) {
+    $commentAuthor = $like->comment->user;
+
+    (new Email)
+      ->subject(localize('emails.newCommentLike', $commentAuthor->getLocale(), [
+        'user' => $like->user->name,
+      ]))
+      ->to($commentAuthor)
+      ->view('emails.commentLike', compact('like'))
       ->send();
   }
 
@@ -138,6 +157,16 @@ Comment::created(function($comment) {
   }
 
   Notifications::newComment($comment);
+});
+
+CommentLike::created(function($like) {
+
+  # Check if the user doesn't want to receive notifications.
+  if ( !$like->comment->user->settings->receiveCommentLikeNotification ) {
+    return;
+  }
+
+  Notifications::likeComment($like);
 });
 
 Vote::created(function($vote) {

@@ -2,6 +2,7 @@
 
 use App\Idea;
 use App\Comment;
+use App\CommentLike;
 use App\Activity;
 use App\View;
 use App\Vote;
@@ -19,6 +20,7 @@ class Activities {
   const SHARE_IDEA = 'Shared idea %s with %s';
   const UNVOTE_IDEA = 'Removed vote from idea: "%s"';
   const ADD_COMMENT = 'Added new comment under "%s": "%s"';
+  const LIKE_COMMENT = 'Liked comment made by %s: "%s"';
 
   const SETTING_NOTIFICATION_VOTE = '%s %s vote notifications';
   const SETTING_NOTIFICATION_COMMENT = '%s %s comment notifications';
@@ -56,6 +58,10 @@ Idea::deleted(function($idea) {
 
 Comment::created(function($comment) {
   Activities::record(Activities::ADD_COMMENT, $comment->idea->title, $comment->text);
+});
+
+CommentLike::created(function($like) {
+  Activities::record(Activities::LIKE_COMMENT, $like->comment->user->name, $like->comment->text);
 });
 
 View::created(function($view) {

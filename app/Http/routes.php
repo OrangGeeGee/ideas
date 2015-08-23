@@ -90,7 +90,7 @@ Route::get('ideas/{idea}/notifySecretaries', function($idea) {
 Route::delete('ideas/{idea}/vote', 'IdeaController@unvote');
 Route::get('ideas/{idea}/delete', 'IdeaController@destroy');
 Route::resource('comments', 'CommentController');
-Route::post('comments/likes', 'CommentController@like');
+Route::post('comments/{comment}/like', 'CommentController@like');
 Route::resource('categories', 'CategoryController');
 
 Route::get('update', function() {
@@ -133,6 +133,7 @@ Route::get('activities', function() {
  */
 
 Route::model('idea', 'App\Idea');
+Route::model('comment', 'App\Comment');
 Route::model('user', 'App\User');
 
 

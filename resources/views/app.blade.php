@@ -115,6 +115,16 @@
 
       <div>
         <dt>
+          <label for="receiveCommentLikeNotification">{{ trans('settings.receiveCommentLikeNotification') }}</label>
+        <p>{{ trans('settings.receiveCommentLikeNotification.description') }}</p>
+        </dt>
+        <dd>
+          <input type="checkbox" id="receiveCommentLikeNotification" name="receiveCommentLikeNotification" <%= receiveCommentLikeNotification ? ' checked' : '' %>/>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
           <label for="receiveDailyNewsletter">{{ trans('settings.receiveDailyNewsletter') }}</label>
           <p>{{ trans('settings.receiveDailyNewsletter.description') }}</p>
         </dt>

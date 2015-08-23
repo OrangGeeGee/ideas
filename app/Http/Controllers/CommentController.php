@@ -28,8 +28,7 @@ class CommentController extends Controller {
     return $comment;
 	}
 
-	public function like(Request $request) {
-		$comment = Comment::find($request->get('comment_id'));
+	public function like(Comment $comment) {
 
 		if ( $comment->user_id == Auth::user()->id ) {
 			return;

@@ -3,6 +3,8 @@
 return [
   'newIdea' => "New idea",
   'newComment' => "New comment to your idea",
+  'newCommentLike' => ":user liked your comment",
+  'likedYourComment' => ":user liked your comment under :idea",
   'newVote' => "Your idea received a vote",
   'addedComment' => ":user added a new comment to your idea :idea:",
   'addedIdea' => "added an idea",

@@ -3,6 +3,8 @@
 return [
   'newIdea' => "Uus idee",
   'newComment' => "Uus kommentaar sinu ideele",
+  'newCommentLike' => ":user andis hääle sinu kommentaarile",
+  'likedYourComment' => ":user andis hääle sinu kommentaarile :idea all",
   'newVote' => "Sinu idee sai hääle",
   'addedComment' => ":user lisas kommentaari sinu ideele :idea:",
   'addedIdea' => "lisas idee",

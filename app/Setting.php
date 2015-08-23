@@ -6,6 +6,7 @@ class Setting extends Model {
   protected $fillable = [
     'landingPageVisited',
     'receiveCommentNotification',
+    'receiveCommentLikeNotification',
     'receiveDailyNewsletter',
     'receiveVoteNotification',
   ];

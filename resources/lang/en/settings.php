@@ -9,5 +9,7 @@ return [
   'receiveVoteNotification.description' => "Receive an email whenever somebody votes for your idea.",
   'receiveCommentNotification' => 'Notify on new comments',
   'receiveCommentNotification.description' => "Receive an email notification whenever somebody posts a comment to your idea.",
+  'receiveCommentLikeNotification' => 'Notify on comment likes',
+  'receiveCommentLikeNotification.description' => "Receive an email notification whenever somebody likes your comment.",
   'save' => 'Save',
 ];

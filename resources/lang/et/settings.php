@@ -9,5 +9,7 @@ return [
   'receiveVoteNotification.description' => "Teavita mind, kui keegi hääletab minu idee poolt.",
   'receiveCommentNotification' => 'Teavitus uuest kommentaarist',
   'receiveCommentNotification.description' => "Teavita mind, kui keegi kommenteerib minu ideed.",
+  'receiveCommentLikeNotification' => 'Teavitus uuest kommentaari häälest',
+  'receiveCommentLikeNotification.description' => "Teavita mind, kui kellelegi meeldib minu kommentaar.",
   'save' => 'Salvesta',
 ];
