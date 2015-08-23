@@ -90,6 +90,7 @@ Route::get('ideas/{idea}/notifySecretaries', function($idea) {
 Route::delete('ideas/{idea}/vote', 'IdeaController@unvote');
 Route::get('ideas/{idea}/delete', 'IdeaController@destroy');
 Route::resource('comments', 'CommentController');
+Route::post('comments/likes', 'CommentController@like');
 Route::resource('categories', 'CategoryController');
 
 Route::get('update', function() {
@@ -103,6 +104,7 @@ Route::get('update', function() {
     'Ideas' => App\Idea::latest($lastUpdate)->get()->toArray(),
     'StatusChanges' => App\StatusChange::latest($lastUpdate)->get()->toArray(),
     'Votes' => App\Vote::latest($lastUpdate)->get()->toArray(),
+    'CommentLikes' => App\CommentLike::latest($lastUpdate)->get()->toArray(),
     'Comments' => App\Comment::latest($lastUpdate)->get()->toArray()
   );
 });

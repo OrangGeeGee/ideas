@@ -12,3 +12,21 @@ var Comments = new (Backbone.Collection.extend({
     });
   }
 }));
+
+Comments.model = Backbone.Model.extend({
+  like: function() {
+    CommentLikes.create({
+      comment_id: this.id
+    }, {
+      wait: true
+    })
+  },
+
+  isLiked: function() {
+    return this.likes.where({ user_id: USER_ID }).length > 0;
+  },
+
+  initialize: function() {
+    this.likes = new Backbone.Collection;
+  }
+});

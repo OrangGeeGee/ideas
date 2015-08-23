@@ -257,6 +257,20 @@
     </div>
     <div class="entry-content">
       <p><%= text %></p>
+
+      <footer class="comment-footer">
+        <% if ( user_id != USER_ID && !isLiked ) { %>
+          <a href="#" class="comment-vote-action">{{ trans('comments.like') }}</a>
+        <% } %>
+
+        <% if ( isLiked && likes.length == 1 ) { %>
+          <span class="like-count"><%= localize('comments.youLikeThis') %></span>
+        <% } else if ( isLiked && likes.length > 1 ) { %>
+          <span class="like-count"><%= localize('comments.youAndOtherPeopleLikeThis', { likes: likes.length - 1 }) %></span>
+        <% } else if ( likes.length > 0 ) { %>
+          <span class="like-count"><%= localize('comments.peopleLikeThis', { likes: likes.length }) %></span>
+        <% } %>
+      </footer>
     </div>
   </script>
 
@@ -355,6 +369,7 @@
   <script src="scripts/votes.js?20150820"></script>
   <script src="scripts/comments.js?20150820"></script>
   <script src="scripts/comment.views.js"></script>
+  <script src="scripts/commentLikes.js"></script>
   <?php if ( env('SHADOW_URL') ): ?>
   <script src="scripts/events.js?20150820"></script>
   <?php endif ?>
@@ -377,6 +392,10 @@
     localize('deleteConfirmation', '{!! trans('ideas.deleteConfirmation') !!}');
     localize('askRecipientEmail', '{!! trans('ideas.askRecipientEmail') !!}');
     localize('thanksForSharing', '{!! trans('ideas.thanksForSharing') !!}');
+    localize('comments.like', '{!! trans('comments.like') !!}');
+    localize('comments.youLikeThis', '{!! trans('comments.youLikeThis') !!}');
+    localize('comments.peopleLikeThis', '{!! trans('comments.peopleLikeThis') !!}');
+    localize('comments.youAndOtherPeopleLikeThis', '{!! trans('comments.youAndOtherPeopleLikeThis') !!}');
   </script>
 
   <!-- Initial data -->
@@ -384,6 +403,7 @@
     Ideas.add(<?= \App\Idea::all() ?>);
     Votes.add(<?= \App\Vote::all() ?>);
     Comments.add(<?= \App\Comment::all() ?>);
+    CommentLikes.add(<?= \App\CommentLike::all() ?>);
     Users.add(<?= $users ?>);
     Settings.set(<?= \Auth::user()->settings ?>);
     Statuses.add(<?= $statuses ?>);

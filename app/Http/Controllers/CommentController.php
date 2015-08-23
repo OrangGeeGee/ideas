@@ -1,17 +1,15 @@
 <?php namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller {
-
-	public function index() {
-		return \App\Comment::all();
-	}
 
 	public function store(Request $request) {
 		$data = $request->all();
     $comment = new \App\Comment($data);
-    $user = \Auth::user();
+    $user = Auth::user();
 
     $user->comments()->save($comment);
 
@@ -28,6 +26,18 @@ class CommentController extends Controller {
 
     unset($comment->idea);
     return $comment;
+	}
+
+	public function like(Request $request) {
+		$comment = Comment::find($request->get('comment_id'));
+
+		if ( $comment->user_id == Auth::user()->id ) {
+			return;
+		}
+
+		$like = $comment->like();
+
+		return $like;
 	}
 
 }

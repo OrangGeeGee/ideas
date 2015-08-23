@@ -28,4 +28,12 @@ class Comment extends Model {
   public function user() {
     return $this->belongsTo('App\WHOISUser');
   }
+
+  public function likes() {
+    return $this->hasMany('App\CommentLike');
+  }
+
+  public function like() {
+    return $this->likes()->create([]);
+  }
 }

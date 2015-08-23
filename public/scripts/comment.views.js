@@ -77,20 +77,30 @@ var CommentView = Backbone.View.extend({
   tagName: 'li',
   template: _.template($('#commentListItemTemplate').html()),
 
+  events: {
+    'click .comment-vote-action': function(event) {
+      event.preventDefault();
+      this.model.like();
+    }
+  },
+
   render: function() {
     var data = this.model.toJSON();
     data.user = Users.get(data.user_id);
     data.statusChange = Ideas.get(data.idea_id).statusChanges.where({ comment_id: data.id })[0];
+    data.likes = this.model.likes;
+    data.isLiked = this.model.isLiked();
 
     this.$el.html(this.template(data));
     this.$el.linkify({
       target: '_blank'
     });
-    this.$('.entry-content').append(new TimestampView({ model: this.model }).$el);
+    this.$('.comment-footer').append(new TimestampView({ model: this.model }).$el);
   },
 
   initialize: function() {
     this.render();
     this.model.on('change', this.render, this);
+    this.model.likes.on('add', this.render, this);
   }
 });

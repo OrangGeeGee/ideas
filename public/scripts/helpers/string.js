@@ -53,3 +53,35 @@ String.prototype.isValid = function(dataType) {
 
   return pattern.test(this);
 };
+
+/**
+ *  Replaces variables between curly braces with the specified values.
+ *
+ *  Example:
+ *    'Hello {foo}!'.supplementWith({ foo: 'world' })
+ *    --> 'Hello world!'
+ *
+ *  Supports nested objects as well:
+ *
+ *    'Hello, Mr. {user.name}!'.supplementWith({ user: { name: 'Smith' } });
+ *    --> 'Hello, Mr. Smith!'
+ *
+ *  @param {Object} data
+ *    Will be used as the source where to look for variable values.
+ *    The method can be supplied with more than one data object, in
+ *    which case they'll be merged into one.
+ *
+ *  @return {String}
+ */
+String.prototype.supplementWith = function(data) {
+  return this.replace(/\{([\w\.]*)\}/g, function(match, variable) {
+    var keys = variable.split('.');
+    var value = data[keys.shift()];
+
+    keys.forEach(function(key) {
+      value = value[key];
+    });
+
+    return /*( typeof value !== 'undefined' && value !== null ) ? */value || '';
+  });
+};
