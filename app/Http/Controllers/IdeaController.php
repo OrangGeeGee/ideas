@@ -3,7 +3,9 @@
 use App\Idea;
 use App\View;
 use App\Vote;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller {
 
@@ -57,7 +59,14 @@ class IdeaController extends Controller {
    * @return View
    */
   public function view(Idea $idea) {
-    return $idea->view();
+    $lastView = $idea->views->filter(function($view) {
+      return $view->user_id == Auth::user()->id;
+    })->last();
+
+    # Limit one view per user per 30 minutes.
+    if ( !$lastView || $lastView->timestamp->diffInMinutes(Carbon::now()) > 30 ) {
+      return $idea->view();
+    }
   }
 
   /**
