@@ -11,4 +11,5 @@ return [
 	'youLikeThis' => "Sulle meeldib see",
 	'peopleLikeThis' => "{likes} inimesele meeldib see",
 	'youAndOtherPeopleLikeThis' => "Sulle ja veel {likes}-le inimesele meeldib see",
+	'mentionHint' => "Kolleegi mainimiseks kirjuta @KolleegiNimi",
 ];

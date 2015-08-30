@@ -11,4 +11,5 @@ return [
 	'youLikeThis' => "You like this",
 	'peopleLikeThis' => "{likes} people like this",
 	'youAndOtherPeopleLikeThis' => "You and {likes} people like this",
+	'mentionHint' => "Use @FullName syntax if you want to mention your colleague.",
 ];

@@ -59,9 +59,23 @@ var CommentFormView = Backbone.View.extend({
     });
   },
 
+  addMentioning: function() {
+    var userNames = Users.pluck('name');
+
+    userNames.forEach(function(name, index) {
+      userNames[index] = name.remove(/ /g);
+    });
+
+    this.$('textarea').atwho({
+      at: '@',
+      data: userNames
+    });
+  },
+
   render: function() {
     this.$el.html(this.template(this.model));
     this.toggleSubmitButton();
+    this.addMentioning();
 
     this.$('[name="status_id"]').val(this.model.getStatusId());
   },

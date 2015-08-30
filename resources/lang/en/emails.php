@@ -14,4 +14,5 @@ return [
   'dailyHeading' => "Idea Environment Daily",
   'sharingTitle' => ":sharer shared an idea :idea",
   'sharingDescription' => ":sharer wanted to share :idea idea with you:",
+  'mentionedInComment' => ":user posted a comment under :idea idea and mentioned you:",
 ];

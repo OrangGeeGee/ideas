@@ -9,6 +9,7 @@ class Setting extends Model {
     'receiveCommentLikeNotification',
     'receiveDailyNewsletter',
     'receiveVoteNotification',
+    'receiveMentionNotification',
   ];
   protected $hidden = [
     'user_id',

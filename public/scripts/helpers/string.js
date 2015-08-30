@@ -85,3 +85,12 @@ String.prototype.supplementWith = function(data) {
     return /*( typeof value !== 'undefined' && value !== null ) ? */value || '';
   });
 };
+
+
+/**
+ * @param {RegExp|String} pattern
+ * @return {String}
+ */
+String.prototype.remove = function(pattern) {
+  return this.replace(pattern, '');
+};

@@ -45,6 +45,16 @@ function humanizeList(array $list, $locale = 'en') {
   }
 }
 
+/**
+ * @param string $text
+ * @return array
+ */
+function getMentionedUsers($text) {
+  preg_match_all('/@([^@ ]\w+)/', $text, $mentions);
+
+  return $mentions[1];
+}
+
 
 /**
  * App routes.

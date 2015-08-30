@@ -22,6 +22,7 @@
   <link type="text/css" rel="stylesheet" href="plugins/modals/modals.css">
   <link type="text/css" rel="stylesheet" href="plugins/layers/layers.css">
   <link type="text/css" rel="stylesheet" href="plugins/introjs/introjs.css">
+  <link type="text/css" rel="stylesheet" href="plugins/atjs/jquery.atwho.css">
   <style type="text/css">
     <?php foreach ( App\Status::all() as $status ): ?>
       #ideas-list > li[data-status="{{ $status->code }}"] .entry-content h3:before {
@@ -133,6 +134,16 @@
 
       <div>
         <dt>
+          <label for="receiveMentionNotification">{{ trans('settings.receiveMentionNotification') }}</label>
+        <p>{{ trans('settings.receiveMentionNotification.description') }}</p>
+        </dt>
+        <dd>
+          <input type="checkbox" id="receiveMentionNotification" name="receiveMentionNotification" <%= receiveMentionNotification ? ' checked' : '' %>/>
+        </dd>
+      </div>
+
+      <div>
+        <dt>
           <label for="receiveDailyNewsletter">{{ trans('settings.receiveDailyNewsletter') }}</label>
           <p>{{ trans('settings.receiveDailyNewsletter.description') }}</p>
         </dt>
@@ -167,6 +178,8 @@
 
   <script type="text/html" id="commentFormTemplate">
     <textarea name="text" placeholder="<?= trans('comments.placeholder') ?>"></textarea>
+    <p class="hint">{{ trans('comments.mentionHint') }}</p>
+
     <% if ( attributes.user_id == USER_ID || Users.get(USER_ID).get('settings').canModerateStatuses ) { %>
       <div class="status-container">
         {{ trans('statuses.change') }}
@@ -353,6 +366,8 @@
   <script src="scripts/backbone/model.js"></script>
   <script src="scripts/linkify/linkify.js"></script>
   <script src="scripts/linkify/linkify-jquery.js"></script>
+  <script src="plugins/atjs/jquery.caret.js"></script>
+  <script src="plugins/atjs/jquery.atwho.js"></script>
   <script src="plugins/layers/layers.js"></script>
   <script src="scripts/helpers/layout.js"></script>
   <script src="scripts/helpers/browser.js"></script>

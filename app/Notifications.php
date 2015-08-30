@@ -8,6 +8,7 @@ use App\Comment;
 use App\CommentLike;
 use App\Share;
 use App\WHOISUser;
+use Illuminate\Support\Facades\DB;
 
 class Notifications {
 
@@ -60,6 +61,22 @@ class Notifications {
       ->subject(localize('emails.newComment', $ideaAuthor->getLocale()))
       ->to($ideaAuthor)
       ->view('emails.comment', compact('comment'))
+      ->send();
+  }
+
+
+  /**
+   * @param WHOISUser $user
+   * @param Comment $comment
+   */
+  public static function mentionUserInComment(WHOISUser $user, Comment $comment) {
+    (new Email)
+      ->subject(localize('emails.mentionedInComment', $user->getLocale(), [
+        'user' => $comment->user->name,
+        'idea' => $comment->idea->generateURL(),
+      ]))
+      ->to($user)
+      ->view('emails.mentionedInComment', compact('comment'))
       ->send();
   }
 
@@ -150,9 +167,23 @@ Idea::created(function($idea) {
 });
 
 Comment::created(function($comment) {
+  $author = $comment->idea->user;
+  $notifyAboutComment = $author->settings->receiveCommentNotification;
+
+  foreach ( getMentionedUsers($comment->text) as $mentionedName ) {
+    $mentionedUser = WHOISUser::where(DB::raw('replace(name, " ", "")'), $mentionedName)->first();
+
+    # No need to send a double notification to the mentioned user (one
+    # for being mentioned and one for having a new comment on the idea).
+    if ( $mentionedUser->id == $author->id && $notifyAboutComment || !$mentionedUser->settings->receiveMentionNotification ) {
+      continue;
+    }
+
+    Notifications::mentionUserInComment($mentionedUser, $comment);
+  }
 
   # Check if the user doesn't want to receive notifications.
-  if ( !$comment->idea->user->settings->receiveCommentNotification ) {
+  if ( !$notifyAboutComment) {
     return;
   }
 

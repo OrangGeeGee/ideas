@@ -11,5 +11,7 @@ return [
   'receiveCommentNotification.description' => "Teavita mind, kui keegi kommenteerib minu ideed.",
   'receiveCommentLikeNotification' => 'Teavitus uuest kommentaari häälest',
   'receiveCommentLikeNotification.description' => "Teavita mind, kui kellelegi meeldib minu kommentaar.",
+  'receiveMentionNotification' => 'Teavitus minu mainimisest',
+  'receiveMentionNotification.description' => "Teavita mind, kui keegi mainib mind oma kommentaaris.",
   'save' => 'Salvesta',
 ];

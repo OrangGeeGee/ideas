@@ -14,4 +14,5 @@ return [
   'dailyHeading' => "Ideekeskkonna uudised",
   'sharingTitle' => ":sharer saatis edasi idee :idea",
   'sharingDescription' => ":sharer tahtis sinuga jagada ideed :idea:",
+  'mentionedInComment' => ":user mainis sind :idea idee all:",
 ];
