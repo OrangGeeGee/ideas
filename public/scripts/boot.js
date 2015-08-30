@@ -17,8 +17,8 @@ $(function() {
 
   Layout.initialize();
 
-  // Show Swedish Hackathon category for Swedes by default.
-  if ( activeUser.get('email').endsWith(['.se', '.com']) ) {
+  // Show Hackathon category for non-Estonians.
+  if ( !activeUser.get('email').endsWith('.ee') ) {
     $('#category').val(3).trigger('change');
   }
 
