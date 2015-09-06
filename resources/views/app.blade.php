@@ -280,6 +280,16 @@
             <a href="ideas/<%= id %>/delete"><?= trans('ideas.delete') ?></a>
           </li>
         <% } %>
+        <% if ( user_id != USER_ID ) { %>
+          <li class="subscription">
+            <img src="images/subscription.png"/>
+            <% if ( hasBeenSubscribedTo ) { %>
+              <?= trans('ideas.subscribed') ?> <a href="ideas/<%= id %>/subscribe" class="unsubscribe"><?= trans('ideas.unsubscribe') ?></a>
+            <% } else { %>
+              <a href="ideas/<%= id %>/subscribe" class="subscribe" title="<?= trans('ideas.subscribeHint') ?>"><?= trans('ideas.subscribe') ?></a>
+            <% } %>
+          </li>
+        <% } %>
       </ul>
     </footer>
   </script>
@@ -405,6 +415,7 @@
   <script src="scripts/setting.views.js"></script>
   <script src="scripts/ideas.js"></script>
   <script src="scripts/idea.views.js"></script>
+  <script src="scripts/idea.subscriptions.js"></script>
   <script src="scripts/ideaViews.js"></script>
   <script src="scripts/votes.js?20150820"></script>
   <script src="scripts/comments.js?20150820"></script>
@@ -438,6 +449,7 @@
     localize('comments.youAndOtherPeopleLikeThis', '{!! trans('comments.youAndOtherPeopleLikeThis') !!}');
     localize('ideas.view', '{!! trans_choice('ideas.views', 1) !!}');
     localize('ideas.views', '{!! trans_choice('ideas.views', 2) !!}');
+    localize('ideas.unsubscribeConfirmation', '{!! trans('ideas.unsubscribeConfirmation') !!}');
   </script>
 
   <!-- Initial data -->
@@ -451,6 +463,7 @@
     Settings.set(<?= \Auth::user()->settings ?>);
     Statuses.add(<?= $statuses ?>);
     StatusChanges.add(<?= \App\StatusChange::all() ?>);
+    Subscriptions.add(<?= \App\IdeaSubscription::all() ?>);
   </script>
 
   <!-- Boot process -->

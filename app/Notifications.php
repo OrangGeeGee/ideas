@@ -52,13 +52,30 @@ class Notifications {
   public static function newComment(Comment $comment) {
     $ideaAuthor = $comment->idea->user;
 
-    # Don't notify the author if the new comment was made by him/her.
-    if ( $comment->user->id == $ideaAuthor->id ) {
+    foreach ( $comment->idea->subscriptions as $subscription ) {
+
+      if ( $subscription->user_id == $comment->user->id ) {
+        continue;
+      }
+
+      (new Email)
+        ->subject(localize('emails.newComment', $ideaAuthor->getLocale(), [
+          'idea' => $comment->idea->title,
+        ]))
+        ->to($subscription->user)
+        ->view('emails.comment', compact('comment'))
+        ->send();
+    }
+
+    # Don't notify the author if the new comment was made by him/her or if the user has disabled this notification.
+    if ( $comment->user->id == $ideaAuthor->id || !$comment->user->settings->receiveCommentNotification ) {
       return;
     }
 
     (new Email)
-      ->subject(localize('emails.newComment', $ideaAuthor->getLocale()))
+      ->subject(localize('emails.newComment', $ideaAuthor->getLocale(), [
+        'idea' => $comment->idea->title
+      ]))
       ->to($ideaAuthor)
       ->view('emails.comment', compact('comment'))
       ->send();
@@ -180,11 +197,6 @@ Comment::created(function($comment) {
     }
 
     Notifications::mentionUserInComment($mentionedUser, $comment);
-  }
-
-  # Check if the user doesn't want to receive notifications.
-  if ( !$notifyAboutComment) {
-    return;
   }
 
   Notifications::newComment($comment);

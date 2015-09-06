@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Idea;
+use App\IdeaSubscription;
 use App\View;
 use App\Vote;
 use Carbon\Carbon;
@@ -107,10 +108,37 @@ class IdeaController extends Controller {
     ]);
   }
 
+
+  /**
+   * @param Idea $idea
+   * @return IdeaSubscription|void
+   */
+  public function subscribe(Idea $idea) {
+    $user = Auth::user();
+
+    if ( $idea->user_id == $user->id || $idea->userHasSubscribed() ) {
+      return;
+    }
+
+    $subscription = $idea->subscribe();
+
+    return $subscription;
+  }
+
+
+  /**
+   * @param Idea $idea
+   */
+  public function unsubscribe(Idea $idea) {
+    $idea->getUserSubscription()->delete();
+  }
+
   /**
    * @param Idea $idea
    */
   public function unvote(Idea $idea) {
+
+    # TODO: Delete by vote ID.
     Vote::where([
       'user_id' => \Auth::user()->id,
       'idea_id' => $idea->id,

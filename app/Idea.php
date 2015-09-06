@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Idea extends Model {
   use SoftDeletes;
@@ -46,6 +47,10 @@ class Idea extends Model {
     return $this->hasMany('App\Comment');
   }
 
+  public function subscriptions() {
+    return $this->hasMany('App\IdeaSubscription');
+  }
+
   public function hasBeenVotedFor() {
     return $this->votes()->where('user_id', \Auth::user()->id)->count() > 0;
   }
@@ -75,5 +80,31 @@ class Idea extends Model {
 
   public function generateURL() {
     return env('APP_URL') . "#ideas/$this->id";
+  }
+
+
+  /**
+   * @return IdeaSubscription
+   */
+  public function subscribe() {
+    return $this->subscriptions()->create([
+      'user_id' => Auth::user()->id,
+    ]);
+  }
+
+
+  /**
+   * @return IdeaSubscription
+   */
+  public function getUserSubscription() {
+    return $this->subscriptions()->where('user_id', Auth::user()->id)->first();
+  }
+
+
+  /**
+   * @return bool
+   */
+  public function userHasSubscribed() {
+    return !!$this->getUserSubscription();
   }
 }

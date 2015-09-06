@@ -19,4 +19,9 @@ return [
   'peopleLike' => "inimesele meeldib see",
   'charactersLeft' => "tähemärki järel",
   'views' => "vaatamine|vaatamist",
+  'subscribe' => "Teavita mind kommentaaridest",
+  'subscribeHint' => "Saadab sulle kirja, kui keegi seda ideed kommentaarib",
+  'subscribed' => "Teavitus tellitud",
+  'unsubscribe' => "Tühista",
+  'unsubscribeConfirmation' => "Oled sa kindel, et soovid teavituse tühistada?",
 ];

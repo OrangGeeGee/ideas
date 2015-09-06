@@ -1,6 +1,7 @@
 <?php
 
 use App\Idea;
+use App\IdeaSubscription;
 use App\Comment;
 use App\CommentLike;
 use App\Activity;
@@ -17,8 +18,10 @@ class Activities {
   const OPEN_IDEA = 'Opened idea: "%s"';
   const DELETE_IDEA = 'Deleted idea: "%s"';
   const VOTE_IDEA = 'Voted for idea: "%s"';
-  const SHARE_IDEA = 'Shared idea %s with %s';
   const UNVOTE_IDEA = 'Removed vote from idea: "%s"';
+  const SUBSCRIBE_IDEA = 'Subscribed to idea: "%s"';
+  const UNSUBSCRIBE_IDEA = 'Unsubscribed from idea: "%s"';
+  const SHARE_IDEA = 'Shared idea %s with %s';
   const ADD_COMMENT = 'Added new comment under "%s": "%s"';
   const LIKE_COMMENT = 'Liked comment made by %s: "%s"';
 
@@ -92,4 +95,12 @@ Setting::updated(function($setting) {
 
 Share::created(function($share) {
   Activities::record(Activities::SHARE_IDEA, $share->idea->title, $share->recipient->name);
+});
+
+IdeaSubscription::created(function($subscription) {
+  Activities::record(Activities::SUBSCRIBE_IDEA, $subscription->idea->title);
+});
+
+IdeaSubscription::deleting(function($subscription) {
+  Activities::record(Activities::UNSUBSCRIBE_IDEA, $subscription->idea->title);
 });

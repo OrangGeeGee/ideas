@@ -2,11 +2,11 @@
 
 return [
   'newIdea' => "Uus idee",
-  'newComment' => "Uus kommentaar sinu ideele",
+  'newComment' => "Uus kommentaar ideele :idea",
   'newCommentLike' => ":user andis hääle sinu kommentaarile",
   'likedYourComment' => ":user andis hääle sinu kommentaarile :idea all",
   'newVote' => "Sinu idee sai hääle",
-  'addedComment' => ":user lisas kommentaari sinu ideele :idea:",
+  'addedComment' => ":user lisas kommentaari ideele :idea:",
   'addedIdea' => "lisas idee",
   'commentedOn' => "lisas kommentaari",
   'voted' => "hääletas idee poolt.|hääletasid idee poolt.",

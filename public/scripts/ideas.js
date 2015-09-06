@@ -17,6 +17,7 @@ Ideas.model = Backbone.Model.extend({
     this.events = new Backbone.Collection;
     this.votes = new Backbone.Collection;
     this.views = new Backbone.Collection;
+    this.subscriptions = new Backbone.Collection;
   },
 
   vote: function(callback) {
@@ -47,6 +48,22 @@ Ideas.model = Backbone.Model.extend({
         user_id: USER_ID
       })[0].destroy();
     }
+  },
+
+  subscribe: function() {
+    Subscriptions.create({
+      idea_id: this.id
+    }, {
+      wait: true
+    });
+  },
+
+  unsubscribe: function() {
+    Subscriptions.getByIdea(this).destroy();
+  },
+
+  userHasSubscribed: function() {
+    return this.subscriptions.where({ user_id: USER_ID }).length > 0;
   },
 
   generateLink: function() {

@@ -93,11 +93,13 @@ Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
 Route::post('ideas/{idea}/views', 'IdeaController@view');
 Route::post('ideas/{idea}/vote', 'IdeaController@vote');
+Route::delete('ideas/{idea}/vote', 'IdeaController@unvote');
 Route::post('ideas/{idea}/share', 'IdeaController@share');
+Route::post('ideas/{idea}/subscription', 'IdeaController@subscribe');
+Route::delete('ideas/{idea}/subscription', 'IdeaController@unsubscribe');
 Route::get('ideas/{idea}/notifySecretaries', function($idea) {
   Notifications::notifySecretaries($idea);
 });
-Route::delete('ideas/{idea}/vote', 'IdeaController@unvote');
 Route::get('ideas/{idea}/delete', 'IdeaController@destroy');
 Route::resource('comments', 'CommentController');
 Route::post('comments/{comment}/like', 'CommentController@like');

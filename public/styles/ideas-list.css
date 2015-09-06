@@ -109,6 +109,10 @@
   height: 17px;
 }
 
+.entry-data li.subscription img {
+  height: 20px;
+}
+
 /** Single column layout */
 @media (max-width: 700px) {
   #ideas-list > li {

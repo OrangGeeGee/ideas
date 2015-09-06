@@ -220,6 +220,14 @@ var IdeaView = Backbone.View.extend({
       event.preventDefault();
       this.deleteIdea();
     },
+    'click .subscribe': function(event) {
+      event.preventDefault();
+      this.subscribe();
+    },
+    'click .unsubscribe': function(event) {
+      event.preventDefault();
+      this.unsubscribe();
+    },
     'click .vote-action': function(event) {
       event.preventDefault();
 
@@ -267,6 +275,17 @@ var IdeaView = Backbone.View.extend({
     }
   },
 
+  subscribe: function() {
+    this.model.subscribe();
+  },
+
+  unsubscribe: function() {
+
+    if ( confirm(localize('ideas.unsubscribeConfirmation')) ) {
+      this.model.unsubscribe();
+    }
+  },
+
   render: function() {
     var view = this;
     var data = this.model.toJSON();
@@ -277,6 +296,7 @@ var IdeaView = Backbone.View.extend({
     data.hasBeenVotedFor = this.model.hasBeenVotedFor();
     data.voteCount = this.model.getVoteCount();
     data.viewCount = this.model.views.length;
+    data.hasBeenSubscribedTo = this.model.userHasSubscribed();
 
     this.$el.attr('data-idea-id', this.model.id);
     this.$el.html(this.template(data));
@@ -308,6 +328,7 @@ var IdeaView = Backbone.View.extend({
       this.updateViewCount();
     }, this);
     this.model.statusChanges.on('add', this.refreshStatus, this);
+    this.model.subscriptions.on('add remove', this.render, this);
   }
 });
 

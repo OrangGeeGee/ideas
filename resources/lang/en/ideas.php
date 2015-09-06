@@ -19,4 +19,9 @@ return [
   'peopleLike' => "people like this",
   'charactersLeft' => "characters left",
   'views' => "view|views",
+  'subscribe' => "Subscribe to new comments",
+  'subscribeHint' => "Notifies you via email whenever somebody posts a new comment under this idea",
+  'subscribed' => "Subscribed",
+  'unsubscribe' => "Unsubscribe",
+  'unsubscribeConfirmation' => "Are you sure you want to unsubscribe?",
 ];
