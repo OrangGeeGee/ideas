@@ -72,7 +72,7 @@
         <input type="text" id="searchField" placeholder="<?= trans('filters.searchPlaceholder') ?>"/>
         <select id="category">
           <?php foreach ( App\Category::all() as $category ): ?>
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}">{{ trans('categories.category'.$category->id) }}</option>
           <?php endforeach ?>
         </select>
         <select id="sorting">
