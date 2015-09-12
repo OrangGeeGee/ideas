@@ -98,6 +98,14 @@ var CommentView = Backbone.View.extend({
     }
   },
 
+  embedYoutubeLinks: function() {
+    var videoId = getYoutubeVideoId(this.model.get('text'));
+
+    if ( videoId ) {
+      this.$('.entry-content').append(generateEmbeddedYoutubeVideo(videoId));
+    }
+  },
+
   render: function() {
     var data = this.model.toJSON();
     data.user = Users.get(data.user_id);
@@ -110,6 +118,7 @@ var CommentView = Backbone.View.extend({
       target: '_blank'
     });
     this.$('.comment-footer').append(new TimestampView({ model: this.model }).$el);
+    this.embedYoutubeLinks();
   },
 
   initialize: function() {

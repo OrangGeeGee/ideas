@@ -18,3 +18,10 @@
   color: #777;
   font-size: 10px;
 }
+
+.youtube-video {
+  display: block;
+  width: 100%;
+  border: none;
+  margin-top: 10px;
+}

@@ -365,6 +365,7 @@
   <script src="scripts/helpers/object.js"></script>
   <script src="scripts/helpers/array.js"></script>
   <script src="scripts/helpers/string.js"></script>
+  <script src="scripts/helpers.js"></script>
   <script src="scripts/jquery/jquery-1.10.2.min.js"></script>
   <script src="scripts/jquery/jquery.helpers.js"></script>
   <script src="scripts/moment/moment-2.4.0.min.js"></script>
