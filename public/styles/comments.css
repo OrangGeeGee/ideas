@@ -3,6 +3,12 @@
   font-size: 14px;
 }
 
+.comment-form input[type="file"] {
+  display: block;
+  margin: -10px 0 10px;
+  font-size: 12px;
+}
+
 .comment-footer {
   color: #777;
   font-size: 12px;
@@ -24,4 +30,18 @@
   width: 100%;
   border: none;
   margin-top: 10px;
+}
+
+.comment-attachments-list {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.comment-attachments-list a {
+  display: block;
+}
+
+.comment-attachments-list img {
+  display: block;
+  max-width: 100%;
 }

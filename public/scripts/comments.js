@@ -14,6 +14,8 @@ var Comments = new (Backbone.Collection.extend({
 }));
 
 Comments.model = Backbone.Model.extend({
+  url: 'comments',
+
   like: function() {
     CommentLikes.create({
       comment_id: this.id

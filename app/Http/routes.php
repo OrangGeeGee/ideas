@@ -87,7 +87,14 @@ Route::get('/', function() {
 	return View::make('app', $data);
 });
 
+
+/**
+ * Resource routes.
+ * ----------------------------------------------------------------------------
+ */
+
 Route::resource('users', 'UserController');
+
 Route::post('users/settings', 'UserController@updateSettings');
 Route::resource('ideas', 'IdeaController');
 Route::get('ideas/{idea}/title', 'IdeaController@getTitle');
@@ -101,9 +108,14 @@ Route::get('ideas/{idea}/notifySecretaries', function($idea) {
   Notifications::notifySecretaries($idea);
 });
 Route::get('ideas/{idea}/delete', 'IdeaController@destroy');
+
 Route::resource('comments', 'CommentController');
 Route::post('comments/{comment}/like', 'CommentController@like');
+Route::post('comments/{comment}/upload', 'CommentController@upload');
+
 Route::resource('categories', 'CategoryController');
+
+Route::post('image', 'ImageController@upload');
 
 Route::get('update', function() {
   $user = Auth::user();
@@ -118,7 +130,7 @@ Route::get('update', function() {
     'StatusChanges' => App\StatusChange::latest($lastUpdate)->get()->toArray(),
     'Votes' => App\Vote::latest($lastUpdate)->get()->toArray(),
     'CommentLikes' => App\CommentLike::latest($lastUpdate)->get()->toArray(),
-    'Comments' => App\Comment::latest($lastUpdate)->get()->toArray()
+    'Comments' => App\Comment::latest($lastUpdate)->with('images')->get()->toArray()
   );
 });
 

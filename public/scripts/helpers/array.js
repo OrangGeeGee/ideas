@@ -9,6 +9,22 @@ Array.prototype.first = function() {
 
 
 /**
+ * @return {*}
+ */
+Array.prototype.last = function() {
+  return this[this.length - 1];
+};
+
+
+/**
+ * @return {*}
+ */
+Array.prototype.contains = function(item) {
+  return this.indexOf(item) !== -1;
+};
+
+
+/**
  * @param {*} item
  * @return {Array}
  */

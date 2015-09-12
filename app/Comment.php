@@ -29,6 +29,10 @@ class Comment extends Model {
     return $this->belongsTo('App\WHOISUser');
   }
 
+  public function images() {
+    return $this->belongsToMany('App\Image');
+  }
+
   public function likes() {
     return $this->hasMany('App\CommentLike');
   }

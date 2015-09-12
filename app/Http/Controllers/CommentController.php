@@ -13,6 +13,12 @@ class CommentController extends Controller {
 
     $user->comments()->save($comment);
 
+		if ( isset($data['image_id']) ) {
+			$comment->images()->attach([
+				'id' => $data['image_id'],
+			]);
+		}
+
 		$idea = $comment->idea;
 		$statusId = $request->input('status_id', $idea->status_id);
 
@@ -25,6 +31,8 @@ class CommentController extends Controller {
 		}
 
     unset($comment->idea);
+		$comment->load('images');
+
     return $comment;
 	}
 

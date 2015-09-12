@@ -8,12 +8,14 @@ var CommentFormView = Backbone.View.extend({
 
   events: {
     submit: 'submit',
+    'change :file': 'toggleSubmitButton',
     'keyup :input': 'toggleSubmitButton'
   },
 
   toggleSubmitButton: function() {
     var data = this.$el.parseAsJSON();
-    this.$(':submit').prop('disabled', !data.text);
+
+    this.$(':submit').prop('disabled', !data.text && !data.image);
   },
 
   enableForm: function() {
@@ -26,17 +28,12 @@ var CommentFormView = Backbone.View.extend({
     this.$(':input').attr('disabled', 'disabled');
   },
 
-  submit: function(event) {
-    event.preventDefault();
-    var data = this.$el.parseAsJSON();
-    data.idea_id = this.model.id;
-
-    this.disableForm();
+  createComment: function(data) {
     Comments.create(data, {
       wait: true,
       success: function(comment) {
         this.enableForm();
-        this.$('[name="text"]').val('');
+        this.$('[name="text"], :file').val('');
         this.toggleSubmitButton();
 
         // Generate status change manually before the real data
@@ -57,6 +54,47 @@ var CommentFormView = Backbone.View.extend({
         }
       }.bind(this)
     });
+  },
+
+  fileExtensionAllowed: function(extension) {
+    return ['png', 'jpg', 'jpeg', 'bmp', 'gif'].contains(extension);
+  },
+
+  submit: function(event) {
+    event.preventDefault();
+    var data = this.$el.parseAsJSON();
+    data.idea_id = this.model.id;
+
+    this.disableForm();
+
+    if ( data.image ) {
+      var formData = new FormData();
+      var image = this.el.image.files[0];
+      formData.append('image', image);
+
+      if ( !this.fileExtensionAllowed(image.name.getFileExtension()) ) {
+        alert(localize('images.fileExtensionNotAllowed'));
+        this.enableForm();
+        return;
+      }
+
+      $.ajax({
+        url: 'image',
+        cache: false,
+        contentType: false,
+        processData: false,
+        async: false,
+        data: formData,
+        type: 'post',
+        success: function(response) {
+          data.image_id = response.id;
+          this.createComment(data);
+        }.bind(this)
+      });
+    }
+    else {
+      this.createComment(data);
+    }
   },
 
   addMentioning: function() {
@@ -119,11 +157,49 @@ var CommentView = Backbone.View.extend({
     });
     this.$('.comment-footer').append(new TimestampView({ model: this.model }).$el);
     this.embedYoutubeLinks();
+
+    if ( this.model.get('images').length ) {
+      var attachmentListView = new CommentAttachmentsListView({ collection: this.model.get('images') });
+      this.$('.entry-content').append(attachmentListView.$el);
+    }
   },
 
   initialize: function() {
     this.render();
     this.model.on('change', this.render, this);
     this.model.likes.on('add', this.render, this);
+  }
+});
+
+
+var CommentAttachmentsListView = Backbone.View.extend({
+  tagName: 'ul',
+  className: 'comment-attachments-list',
+
+  renderAttachment: function(model) {
+    var view = new CommentAttachmentView({ model: model });
+    this.$el.append(view.$el);
+  },
+
+  render: function() {
+    this.collection.forEach(this.renderAttachment, this);
+  },
+
+  initialize: function() {
+    this.render();
+  }
+});
+
+
+var CommentAttachmentView = Backbone.View.extend({
+  template: _.template($('#commentAttachmentTemplate').html()),
+  tagName: 'li',
+
+  render: function() {
+    this.$el.html(this.template(this.model));
+  },
+
+  initialize: function() {
+    this.render();
   }
 });

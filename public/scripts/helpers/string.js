@@ -94,3 +94,11 @@ String.prototype.supplementWith = function(data) {
 String.prototype.remove = function(pattern) {
   return this.replace(pattern, '');
 };
+
+
+/**
+ * @return {String}
+ */
+String.prototype.getFileExtension = function() {
+  return this.split('.').last();
+};

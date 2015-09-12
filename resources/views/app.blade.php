@@ -190,6 +190,9 @@
         </select>
       </div>
     <% } %>
+
+    <input type="file" name="image"/>
+
     <input type="submit" value="<?= trans('comments.add') ?>"/>
   </script>
 
@@ -319,6 +322,12 @@
         <% } %>
       </footer>
     </div>
+  </script>
+
+  <script type="text/html" id="commentAttachmentTemplate">
+    <a href="uploads/<%= id %>" target="_blank">
+      <img src="uploads/<%= id %>"/>
+    </a>
   </script>
 
   <script type="text/html" id="eventListItemTemplate">
@@ -451,6 +460,7 @@
     localize('ideas.view', '{!! trans_choice('ideas.views', 1) !!}');
     localize('ideas.views', '{!! trans_choice('ideas.views', 2) !!}');
     localize('ideas.unsubscribeConfirmation', '{!! trans('ideas.unsubscribeConfirmation') !!}');
+    localize('images.fileExtensionNotAllowed', '{!! trans('images.fileExtensionNotAllowed') !!}');
   </script>
 
   <!-- Initial data -->
@@ -458,7 +468,7 @@
     Ideas.add(<?= \App\Idea::all() ?>);
     IdeaViews.add(<?= \App\View::all() ?>);
     Votes.add(<?= \App\Vote::all() ?>);
-    Comments.add(<?= \App\Comment::all() ?>);
+    Comments.add(<?= \App\Comment::with('images')->get() ?>);
     CommentLikes.add(<?= \App\CommentLike::all() ?>);
     Users.add(<?= $users ?>);
     Settings.set(<?= \Auth::user()->settings ?>);
