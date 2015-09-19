@@ -91,6 +91,16 @@
     <?= View::make('landing-' . App::getLocale()) ?>
   </script>
 
+  <?php if ( isset($latestRelease) ): ?>
+    <script type="text/html" id="newReleaseModalTemplate">
+      {!! $latestRelease->getNotes() !!}
+
+      <div class="button-bar">
+        <a href="#" class="button">{{ trans('app.okay') }}</a>
+      </div>
+    </script>
+  <?php endif ?>
+
   <script type="text/html" id="layerTemplate">
     <div class="layer">
       <div class="layer-inner" style="background-image: linear-gradient(rgba(255, 119, 0, 0.5), orange 50%), url(<?= App\WHOISUser::find(Auth::user()->id)->profileImageURL ?>);">
@@ -455,6 +465,7 @@
   <!-- Client side localization -->
   <script src="scripts/localization.js"></script>
   <script>
+    localize('app.hasBeenUpdated', '{!! trans('app.hasBeenUpdated') !!}');
     localize('removeVoteConfirmation', '{!! trans('ideas.removeVoteConfirmation') !!}');
     localize('deleteConfirmation', '{!! trans('ideas.deleteConfirmation') !!}');
     localize('askRecipientEmail', '{!! trans('ideas.askRecipientEmail') !!}');

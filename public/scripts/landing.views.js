@@ -22,3 +22,23 @@ var LandingModalView = Backbone.View.extend({
     this.render();
   }
 });
+
+var NewReleaseModalView = Backbone.View.extend({
+
+  render: function() {
+    var template = _.template($('#newReleaseModalTemplate').html());
+    var modal = Modals.open('newReleaseModal');
+
+    modal.setTitle(localize('app.hasBeenUpdated'));
+    modal.setContent(template());
+
+    modal.$.on('click', '.button-bar a', function(event) {
+      event.preventDefault();
+      modal.close();
+    });
+  },
+
+  initialize: function() {
+    this.render();
+  }
+});

@@ -33,4 +33,10 @@ $(function() {
       new LandingModalView();
     }
   }
+
+  // Check if there's been a new release.
+  // TODO: Introduce an elegant solution.
+  else if ( $('#newReleaseModalTemplate').length ) {
+    new NewReleaseModalView();
+  }
 });

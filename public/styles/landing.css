@@ -9,45 +9,52 @@
 
 
 /** Features list */
-#featuresList {
+.features-list {
   list-style: none;
-  margin: 20px 0 40px;
+  margin: 20px 0 40px -20px;
+  display: flex;
+  flex-flow: row wrap;
 }
 
-#featuresList > li {
-  padding-left: 45px;
-  background: no-repeat top left;
+.features-list > li {
+  margin: 0 0 20px 20px;
+  float: left;
+  width: 46%;
 }
 
-#featuresList > li + li {
-  margin-top: 20px;
+.features-list .feature-icon {
+  max-width: 64px;
+  display: block;
+  margin: 0 auto 10px;
 }
 
-#featuresList li:first-child {
-  background-image: url(../images/light-bulb.svg);
-}
-
-#featuresList li:first-child + li {
-  background-image: url(../images/rocket.svg);
-}
-
-#featuresList li:first-child + li + li {
-  background-image: url(../images/people.svg);
-}
-
-#featuresList h3 {
+.features-list h3 {
   font-size: 24px;
-  margin-left: -1px;
+  margin-bottom: 5px;
+}
+
+#landingModal .features-list > li {
+  width: 30%;
 }
 
 
-/** Call-to-action */
-#landingModal .button-bar {
+/** Buttons */
+.modal-window .button-bar {
   text-align: center;
 }
 
-#landingModal .button-bar .button {
+.modal-window .button-bar .button {
   border-radius: 0;
   padding: 10px 20px;
   font-size: 20px;
+}
+
+
+/** New release modal */
+#newReleaseModal {
+  text-align: center;
+}
+
+#newReleaseModal .features-list > li {
+  align-self: center;
 }

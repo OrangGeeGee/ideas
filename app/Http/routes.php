@@ -84,6 +84,13 @@ Route::get('/', function() {
     }
   });
 
+  $latestRelease = App\Release::orderBy('date', 'desc')->first();
+
+  if ( $latestRelease->date > $user->last_activity_at ) {
+    $data['latestRelease'] = $latestRelease;
+    $user->updateActivityTimestamp();
+  }
+
 	return View::make('app', $data);
 });
 
