@@ -8,7 +8,20 @@ var CommentFormView = Backbone.View.extend({
 
   events: {
     submit: 'submit',
-    'change :file': 'toggleSubmitButton',
+    'change :file': function() {
+      var $span = this.$('.upload-button-container span');
+      var file = this.el.image.files[0];
+      var filename = file.name.truncate(30, '...');
+
+      if ( file.size / 1024 / 1024 > 2 ) {
+        alert(localize('images.sizeWarning'));
+        this.el.image.value = '';
+        filename = $span.data('originalText');
+      }
+
+      $span.text(filename);
+      this.toggleSubmitButton();
+    },
     'keyup :input': 'toggleSubmitButton'
   },
 

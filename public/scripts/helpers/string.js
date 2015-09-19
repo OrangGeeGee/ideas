@@ -102,3 +102,18 @@ String.prototype.remove = function(pattern) {
 String.prototype.getFileExtension = function() {
   return this.split('.').last();
 };
+
+
+/**
+ * @param {Number} maxLength
+ * @param {String} [endWith]
+ * @return {String}
+ */
+String.prototype.truncate = function(maxLength, endWith) {
+
+  if ( this.length > maxLength ) {
+    return this.substring(0, maxLength) + (endWith || '');
+  }
+
+  return this;
+};

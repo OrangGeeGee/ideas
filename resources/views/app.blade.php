@@ -191,7 +191,13 @@
       </div>
     <% } %>
 
-    <input type="file" name="image"/>
+    <div class="upload-button-container">
+      <label>
+        <input type="file" name="image"/>
+        <img src="images/cloud-with-up-arrow.png"/>
+        <span data-original-text="Upload image">Upload image</span>
+      </label>
+    </div>
 
     <input type="submit" value="<?= trans('comments.add') ?>"/>
   </script>
@@ -461,6 +467,7 @@
     localize('ideas.views', '{!! trans_choice('ideas.views', 2) !!}');
     localize('ideas.unsubscribeConfirmation', '{!! trans('ideas.unsubscribeConfirmation') !!}');
     localize('images.fileExtensionNotAllowed', '{!! trans('images.fileExtensionNotAllowed') !!}');
+    localize('images.sizeWarning', '{!! trans('images.sizeWarning') !!}');
   </script>
 
   <!-- Initial data -->

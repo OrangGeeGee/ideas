@@ -3,10 +3,8 @@
   font-size: 14px;
 }
 
-.comment-form input[type="file"] {
-  display: block;
-  margin: -10px 0 10px;
-  font-size: 12px;
+.comment-form .status-container {
+  margin-bottom: 5px;
 }
 
 .comment-footer {
@@ -30,6 +28,29 @@
   width: 100%;
   border: none;
   margin-top: 10px;
+}
+
+.upload-button-container {
+  margin-bottom: 10px;
+}
+
+.upload-button-container label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.upload-button-container:hover {
+  text-decoration: underline;
+}
+
+.upload-button-container input[type="file"] {
+  display: none;
+}
+
+.upload-button-container img {
+  width: 32px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 .comment-attachments-list {
