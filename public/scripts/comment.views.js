@@ -9,20 +9,24 @@ var CommentFormView = Backbone.View.extend({
   events: {
     submit: 'submit',
     'change :file': function() {
-      var $span = this.$('.upload-button-container span');
       var file = this.el.image.files[0];
       var filename = file.name.truncate(30, '...');
 
       if ( file.size / 1024 / 1024 > 2 ) {
         alert(localize('images.sizeWarning'));
         this.el.image.value = '';
-        filename = $span.data('originalText');
+        filename = '';
       }
 
-      $span.text(filename);
+      this.updateUploadButtonText(filename);
       this.toggleSubmitButton();
     },
     'keyup :input': 'toggleSubmitButton'
+  },
+
+  updateUploadButtonText: function(text) {
+    var $span = this.$('.upload-button-container span');
+    $span.text(text || $span.data('originalText'));
   },
 
   toggleSubmitButton: function() {
@@ -47,6 +51,7 @@ var CommentFormView = Backbone.View.extend({
       success: function(comment) {
         this.enableForm();
         this.$('[name="text"], :file').val('');
+        this.updateUploadButtonText();
         this.toggleSubmitButton();
 
         // Generate status change manually before the real data
