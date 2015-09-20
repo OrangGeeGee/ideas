@@ -1,4 +1,5 @@
 
+#newReleaseModal,
 #landingModal {
   font-size: 14px;
 }
@@ -29,7 +30,7 @@
 }
 
 .features-list h3 {
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 5px;
 }
 
@@ -41,6 +42,7 @@
 /** Buttons */
 .modal-window .button-bar {
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .modal-window .button-bar .button {
@@ -53,8 +55,4 @@
 /** New release modal */
 #newReleaseModal {
   text-align: center;
-}
-
-#newReleaseModal .features-list > li {
-  align-self: center;
 }
