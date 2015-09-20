@@ -84,12 +84,27 @@ var ActivityListCommentView = Backbone.View.extend({
   className: 'comment',
   template: _.template($('#activityListCommentTemplate').html()),
 
+  embedYoutubeLinks: function() {
+    var videoId = getYoutubeVideoId(this.model.get('text'));
+
+    if ( videoId ) {
+      this.$('.entry-content').append(generateEmbeddedYoutubeVideo(videoId));
+    }
+  },
+
   render: function() {
     this.$el.html(this.template(this.model));
     this.$el.linkify({
       target: '_blank'
     });
     this.$('.entry-content').append(new TimestampView({ model: this.model }).$el);
+
+    if ( this.model.get('images').length ) {
+      var attachmentListView = new CommentAttachmentsListView({ collection: this.model.get('images') });
+      this.$('.entry-content').append(attachmentListView.$el);
+    }
+
+    this.embedYoutubeLinks();
   },
 
   initialize: function() {
