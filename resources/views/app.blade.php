@@ -381,7 +381,7 @@
       <span class="user-name"><%= Users.get(attributes.user_id).get('name') %></span>
     </div>
     <div class="entry-content">
-      <p><%= attributes.text %></p>
+      <p><%= attributes.text.truncate(140, '...') %></p>
       <%= Ideas.get(attributes.idea_id).generateLink() %>
     </div>
   </script>
