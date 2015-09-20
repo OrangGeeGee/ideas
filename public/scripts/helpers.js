@@ -5,11 +5,11 @@
  * @return {String}
  */
 function getYoutubeVideoId(url) {
-  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/m;
   var match = url.match(regExp);
 
   if  ( match && match[2].length == 11 ) {
-    return match;
+    return match[2];
   }
 }
 
