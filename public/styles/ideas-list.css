@@ -292,6 +292,7 @@ a.vote-action.waiting .text,
 
 .idea-description {
   white-space: pre-line;
+  word-wrap: break-word;
 }
 
 .idea-activity-section form + .activity-list {
