@@ -36,7 +36,7 @@ $(function() {
 
   // Check if there's been a new release.
   // TODO: Introduce an elegant solution.
-  else if ( $('#newReleaseModalTemplate').length ) {
+  else if ( $('#newReleaseModalTemplate').length && !Modals.active ) {
     new NewReleaseModalView();
   }
 });
