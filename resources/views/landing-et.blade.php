@@ -3,17 +3,17 @@
 
 <ul class="features-list">
   <li>
-    <img class="feature-icon" src="images/light-bulb.svg"/>
+    <img class="feature-icon" src="images/light-bulb.png"/>
     <h3>Milliseid ideid võib esitada?</h3>
     <p>Põhifookus on pangaga seonduvatel ideedel, olgu selleks siis mõni uus toode klientidele või mõni huvitav lahendus, kuidas omatöötajatel elu paremaks teha. Keegi Sinu fantaasiale piire ette ei sea.</p>
   </li>
   <li>
-    <img class="feature-icon" src="images/rocket.svg"/>
+    <img class="feature-icon" src="images/rocket.png"/>
     <h3>Mis mu ideedest edasi saab?</h3>
     <p>Pärast esitamist on idee kõigile nähtav ning Sinu kolleegidel on võimalus anda sellele tagasisidet, kas kommenteerides või hääletades.</p>
   </li>
   <li>
-    <img class="feature-icon" src="images/people.svg"/>
+    <img class="feature-icon" src="images/group.png"/>
     <h3>Mis eesmärk on hääletamisel?</h3>
     <p>Hääletamine aitab eristada ideid, mis on enamiku arvates olulisem. Üks kuni kaks korda aastas toimub Hackathon (kodumaisema nimetusega Angaar), mille raames valitakse digitaalse natuuriga ideedest välja populaarsemad ning tehakse ära.</p>
   </li>

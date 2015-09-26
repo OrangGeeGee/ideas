@@ -43,7 +43,7 @@
   cursor: pointer;
 }
 
-.upload-button-container:hover {
+.upload-button-container:hover span {
   text-decoration: underline;
 }
 
