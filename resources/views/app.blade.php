@@ -205,7 +205,7 @@
       <label>
         <input type="file" name="image"/>
         <img src="images/cloud-with-up-arrow.png"/>
-        <span data-original-text="Upload image">Upload image</span>
+        <span data-original-text="{{ trans('images.upload') }}">{{ trans('images.upload') }}</span>
       </label>
     </div>
 
