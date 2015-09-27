@@ -64,6 +64,11 @@ class IdeaController extends Controller {
       return $view->user_id == Auth::user()->id;
     })->last();
 
+    # Idea author's own views don't count.
+    if ( $idea->user->id == Auth::user()->id ) {
+      return;
+    }
+
     # Limit one view per user per 30 minutes.
     if ( !$lastView || $lastView->timestamp->diffInMinutes(Carbon::now()) > 30 ) {
       return $idea->view();
