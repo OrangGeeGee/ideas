@@ -31,7 +31,7 @@ String.prototype.endsWith = function(snippet) {
     }).length > 0;
   }
 
-  return this.substr(-snippet.length) == snippet;
+  return this.slice(-snippet.length) == snippet;
 };
 
 
