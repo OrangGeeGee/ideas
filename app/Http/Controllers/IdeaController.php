@@ -47,12 +47,12 @@ class IdeaController extends Controller {
   }
 
   /**
-   * @param number $id
+   * @param Idea $id
    * @return string
    */
-  public function getTitle($id) {
+  public function getTitle($idea) {
     enableCORS();
-		return Idea::find($id)->title;
+		return $idea->title;
 	}
 
   /**
