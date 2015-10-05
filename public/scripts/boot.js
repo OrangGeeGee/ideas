@@ -6,6 +6,10 @@ $(function() {
   new OnlineUsersListView;
   new FilteringView;
   new ActivityListView().$el.appendTo('#activitySection');
+
+  // Set the default sorting mode.
+  Ideas.sortByDate();
+
   new IdeaListView({ collection: Ideas }).$el.appendTo('#container');
 
   var activeUser = Users.get(USER_ID);
