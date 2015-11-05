@@ -50,7 +50,7 @@ function humanizeList(array $list, $locale = 'en') {
  * @return array
  */
 function getMentionedUsers($text) {
-  preg_match_all('/@([^@ ]\w+)/', $text, $mentions);
+  preg_match_all('/@([^@ ]\w+)/u', $text, $mentions);
 
   return $mentions[1];
 }

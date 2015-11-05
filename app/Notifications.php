@@ -190,6 +190,10 @@ Comment::created(function($comment) {
   foreach ( getMentionedUsers($comment->text) as $mentionedName ) {
     $mentionedUser = WHOISUser::where(DB::raw('replace(name, " ", "")'), $mentionedName)->first();
 
+    if ( !$mentionedUser ) {
+      continue;
+    }
+
     # No need to send a double notification to the mentioned user (one
     # for being mentioned and one for having a new comment on the idea).
     if ( $mentionedUser->id == $author->id && $notifyAboutComment || !$mentionedUser->settings->receiveMentionNotification ) {
