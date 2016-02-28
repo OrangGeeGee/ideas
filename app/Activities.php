@@ -42,6 +42,10 @@ class Activities {
       'timestamp' => DB::raw('NOW()'),
     ];
 
+    if ( isset($_SERVER['HTTP_REFERER']) ) {
+      $data['referer'] = $_SERVER['HTTP_REFERER'];
+    }
+
     try {
       $userAgentData = parse_user_agent();
       $data = array_merge($data, $userAgentData);
